@@ -4,6 +4,9 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **Wellstar** | Tableau Dashboards (WLS) | In Progress | A+ | Data extraction ongoing. FY26 schema. |
 | **Wellstar** | WLS Vendor Gap Fill | In Progress | A | Missing: eligible pop, unique users, utilization rate, SLA, NPS, cost per vendor |
+| **Wellstar** | Provider Comp Dashboard (WLS) | Pending | A | New dashboard build — provider compensation data |
+| **Wellstar** | Comp Dashboard (WLS) | Pending | A | New dashboard build — compensation analytics |
+| **Wellstar** | Benefits Dashboard (WLS) | Pending | A | New dashboard build — benefits utilization data |
 | **Nuriy** | Grant Reference Doc | Done | A | `nuriy-grant-reference.md` created. Confirm EIN, entity type, incorporation state, founding date with Aaliya before any submission. |
 | **Nuriy** | Grant Blitz (5+ grants) | In Progress | A | Reference doc ready. Application requirements mapped. Fill via 1Password. |
 | **Nuriy** | Seed-to-Table Pitch | Ready | A | Early April deadline. Deck/narrative prep needed. |
