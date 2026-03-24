@@ -23,7 +23,7 @@ const panels: Record<string, React.FC> = {
 
 export default function Index() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [activePanel, setActivePanel] = useState('tasks');
+  const [activePanel, setActivePanel] = useState('today');
 
   if (!authenticated) {
     return <PasswordGate onAuthenticated={() => setAuthenticated(true)} />;
