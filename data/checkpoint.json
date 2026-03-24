@@ -1,0 +1,29 @@
+{
+  "updated_at": "2026-03-24T13:45:00-07:00",
+  "pending_tasks": [
+    "USER_CORE.md path fix",
+    "GDG email reply (blocked by Zoho auth)",
+    "Lovable 3-change prompt",
+    "Azure $100k credit redemption (before May 19)",
+    "Model cost optimization: switch 4 agents from GPT-4.1 to Claude Haiku"
+  ],
+  "completed_today": [
+    "Zoho IMAP fixed (Keychain restored, auth verified)",
+    "Telegram silence bug fixed (:10/:40 gates, heartbeat decoupled)",
+    "Script migration to canonical path (/Users/claw/.openclaw/workspace/scripts/)",
+    "sync_workspaces.sh created (bi-directional, newest-wins)",
+    "README pushed to nuriygold/openclaw-workspace",
+    "3am/3pm daily sync crons added to Mac crontab",
+    "Azure credit depletion check: recurring every Wednesday 9am",
+    "Azure $100k reminder: one-time June 21, 2026 9am ET"
+  ],
+  "canonical_scripts_path": "/Users/claw/.openclaw/workspace/scripts/",
+  "gateway_port": 18789,
+  "inbox_count": 119,
+  "flagged_emails": [
+    "ID 117 - Firecrawl payment failed ($20.52 unsuccessful)",
+    "ID 115 - Shopify new device login",
+    "ID 113 - Brave Search API login attempt",
+    "ID 112 - Brave Search API login attempt"
+  ]
+}
