@@ -1,3 +1,5 @@
+import localTaskPoolMd from '../../data/task-pool.md?raw';
+
 const GITHUB_RAW_URL =
   'https://raw.githubusercontent.com/nuriygold/clawpower/main/data/task-pool.md';
 
@@ -10,10 +12,14 @@ export interface TaskPoolItem {
 }
 
 export async function fetchTaskPoolFromGitHub(): Promise<TaskPoolItem[]> {
-  const res = await fetch(GITHUB_RAW_URL, { cache: 'no-store' });
-  if (!res.ok) throw new Error(`GitHub fetch failed: ${res.status}`);
-  const text = await res.text();
-  return parseTaskPoolMarkdown(text);
+  try {
+    const res = await fetch(GITHUB_RAW_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`GitHub fetch failed: ${res.status}`);
+    const text = await res.text();
+    return parseTaskPoolMarkdown(text);
+  } catch {
+    return parseTaskPoolMarkdown(localTaskPoolMd);
+  }
 }
 
 function parseTaskPoolMarkdown(text: string): TaskPoolItem[] {
