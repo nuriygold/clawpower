@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-03-24T13:29:20Z",
+  "agents": [
+    {
+      "name": "main",
+      "role": "Chief of Staff",
+      "service": "ai.openclaw.gateway",
+      "status": "running",
+      "pid": "23013",
+      "port": 18789
+    },
+    {
+      "name": "tunnel",
+      "role": "Cloudflare Tunnel",
+      "service": "com.openclaw.tunnel",
+      "status": "running",
+      "pid": "12018",
+      "port": 18790
+    },
+    {
+      "name": "cors-proxy",
+      "role": "CORS Proxy",
+      "service": "com.openclaw.cors-proxy",
+      "status": "running",
+      "pid": "11406",
+      "port": 18790
+    },
+    {
+      "name": "dashboard-exec",
+      "role": "Dashboard Exec Agent",
+      "service": "com.openclaw.dashboard-exec-agent",
+      "status": "stopped",
+      "pid": "",
+      "port": 8787
+    },
+    {
+      "name": "telegram-log",
+      "role": "Telegram Executive Log",
+      "service": "com.aaliya.telegram-executive-log",
+      "status": "stopped",
+      "pid": "-",
+      "port": null
+    }
+  ]
+}
