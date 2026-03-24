@@ -1,87 +1,134 @@
 {
-  "fetched_at": "2026-03-24T23:01:48Z",
-  "account": "adrian@nuriy.com",
-  "count": 10,
-  "emails": [
-    {
-      "id": "119",
-      "subject": "Apple Services: $24.99\u00a0USD",
-      "from": "PayPal",
-      "date": "2026-03-24 13:38-07:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "118",
-      "subject": "\ud83d\udcd6 Update on the Flash Sale Rules in the LIVE Room",
-      "from": "TikTok Shop",
-      "date": "2026-03-24 20:14+00:00",
-      "flags": [],
-      "flagged": false
-    },
+  "generated_at": "2026-03-24T23:01:48Z",
+  "pending_decisions": [
     {
       "id": "117",
-      "subject": "$20.52 payment to Firecrawl was unsuccessful again",
+      "received_at": "2026-03-24T10:54:00+00:00",
       "from": "Firecrawl",
-      "date": "2026-03-24 10:54+00:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "116",
-      "subject": "SuperJeweler.com Inc (US) has invited you to join their program",
-      "from": "Awin",
-      "date": "2026-03-24 10:43+00:00",
-      "flags": [],
-      "flagged": false
+      "subject": "$20.52 payment to Firecrawl was unsuccessful again",
+      "body_snippet": "Your $20.52 payment to Firecrawl was unsuccessful again. Please update your payment method to avoid service interruption.",
+      "proposal": {
+        "action": "resolve_payment_failure",
+        "draft_response": "Action needed: Log in to Firecrawl dashboard and update the payment method on file. Check if the card ending used is still valid or if a new card needs to be added. This is the second failure \u2014 service may be suspended soon.",
+        "reasoning": "Recurring payment failure to a dev/API dependency. Second attempt failed \u2014 risk of service disruption. Needs immediate payment method update or card verification.",
+        "confidence": "high"
+      },
+      "status": "awaiting_decision",
+      "domain": "ops",
+      "priority": "A"
     },
     {
       "id": "115",
-      "subject": "A new device has logged in to your Shopify account",
+      "received_at": "2026-03-24T01:35:00+00:00",
       "from": "Shopify",
-      "date": "2026-03-24 01:35+00:00",
-      "flags": [],
-      "flagged": true
-    },
-    {
-      "id": "114",
-      "subject": "New login from iOS (Mobile Safari)",
-      "from": "Link",
-      "date": "2026-03-24 00:18+00:00",
-      "flags": [],
-      "flagged": false
+      "subject": "A new device has logged in to your Shopify account",
+      "body_snippet": "A new device has logged in to your Shopify account. If this was not you, please secure your account immediately.",
+      "proposal": {
+        "action": "verify_login_and_secure",
+        "draft_response": "Verify: Check Shopify admin > Settings > Security > Login sessions to confirm whether this device login is recognized. If unrecognized, revoke the session and rotate the password immediately. Cross-reference with the Brave Search API login alerts from the same night (2026-03-24 00:16-00:17) \u2014 possible coordinated access.",
+        "reasoning": "Flagged by triage system. Shopify account security event coinciding with multiple Brave Search API login attempts on the same night raises concern about credential compromise.",
+        "confidence": "high"
+      },
+      "status": "awaiting_decision",
+      "domain": "ops",
+      "priority": "A"
     },
     {
       "id": "113",
-      "subject": "Brave Search API login attempt",
+      "received_at": "2026-03-24T00:17:00+00:00",
       "from": "Brave Search API",
-      "date": "2026-03-24 00:17+00:00",
-      "flags": [],
-      "flagged": true
+      "subject": "Brave Search API login attempt",
+      "body_snippet": "A login attempt was made to your Brave Search API account. If this was not you, please secure your account.",
+      "proposal": {
+        "action": "investigate_unauthorized_access",
+        "draft_response": "Review: Two login attempts to Brave Search API occurred at 00:17 on 2026-03-24, shortly after a new user was created (00:16) and an email verification was sent. Combined with the Shopify new device login at 01:35, this pattern suggests either Adrian onboarded Brave Search API that night OR there is a credential-stuffing attempt across accounts. Confirm intent and rotate credentials if unexpected.",
+        "reasoning": "Flagged. Two rapid login attempts + new account creation in a 1-minute window is suspicious. Correlates with Shopify new device login 1 hour later. Could be a coordinated account takeover attempt.",
+        "confidence": "high"
+      },
+      "status": "awaiting_decision",
+      "domain": "ops",
+      "priority": "A"
     },
     {
-      "id": "112",
-      "subject": "Brave Search API login attempt",
-      "from": "Brave Search API",
-      "date": "2026-03-24 00:17+00:00",
-      "flags": [],
-      "flagged": true
+      "id": "116",
+      "received_at": "2026-03-24T10:43:00+00:00",
+      "from": "Awin",
+      "subject": "SuperJeweler.com Inc (US) has invited you to join their program",
+      "body_snippet": "SuperJeweler.com Inc (US) has invited you to join their affiliate program on Awin. Review the program details and accept or decline.",
+      "proposal": {
+        "action": "review_affiliate_opportunity",
+        "draft_response": "Review SuperJeweler affiliate terms on Awin dashboard. SuperJeweler is a mid-tier US jewelry retailer \u2014 potential affiliate revenue for Nuriy content if commission rates are competitive (typically 3-8% for jewelry). Accept if terms are favorable and align with Nuriy brand positioning. Decline if it conflicts with direct competitor relationships.",
+        "reasoning": "Awin affiliate invite from a US jewelry retailer. Relevant to Nuriy business development. Low effort to evaluate \u2014 check commission %, cookie window, and brand fit before deciding.",
+        "confidence": "medium"
+      },
+      "status": "awaiting_decision",
+      "domain": "nuriy",
+      "priority": "B"
+    },
+    {
+      "id": "118",
+      "received_at": "2026-03-24T20:14:00+00:00",
+      "from": "TikTok Shop",
+      "subject": "Update on the Flash Sale Rules in the LIVE Room",
+      "body_snippet": "TikTok Shop has updated the Flash Sale Rules for LIVE Room selling. Review the new rules to ensure compliance and maintain your seller status.",
+      "proposal": {
+        "action": "review_and_acknowledge",
+        "draft_response": "Review the updated TikTok Shop LIVE Room Flash Sale rules in the TikTok Seller Center. Ensure Nuriy live stream team is briefed on any rule changes before next scheduled LIVE event. Note any new restrictions on pricing, discount caps, or product eligibility.",
+        "reasoning": "TikTok Shop policy updates must be acknowledged to avoid LIVE Room violations. No immediate action required but team should be informed before next live sale event.",
+        "confidence": "medium"
+      },
+      "status": "awaiting_decision",
+      "domain": "nuriy",
+      "priority": "B"
+    },
+    {
+      "id": "119",
+      "received_at": "2026-03-24T13:38:00-07:00",
+      "from": "PayPal",
+      "subject": "Apple Services: $24.99 USD",
+      "body_snippet": "PayPal notification: $24.99 USD payment for Apple Services has been processed.",
+      "proposal": {
+        "action": "log_and_dismiss",
+        "draft_response": "No action needed \u2014 routine Apple subscription charge ($24.99) processed via PayPal. Verify this matches expected Apple One or iCloud subscription. Log to ops expense tracker if not already auto-categorized.",
+        "reasoning": "Standard recurring Apple Services charge. No anomaly unless amount or frequency is unexpected. Low priority.",
+        "confidence": "high"
+      },
+      "status": "awaiting_decision",
+      "domain": "ops",
+      "priority": "C"
+    },
+    {
+      "id": "114",
+      "received_at": "2026-03-24T00:18:00+00:00",
+      "from": "Link",
+      "subject": "New login from iOS (Mobile Safari)",
+      "body_snippet": "A new login to your Link account was detected from iOS (Mobile Safari). Review if this was you.",
+      "proposal": {
+        "action": "verify_login",
+        "draft_response": "Confirm: Check if this Link (by Stripe) login from iOS Mobile Safari was Adrian or a team member. Time is 00:18 on 2026-03-24 \u2014 same cluster as Brave Search API activity. If unrecognized, revoke session and rotate credentials.",
+        "reasoning": "Login notification from Link (Stripe payment links) during the same late-night activity window as Brave Search API alerts. Worth verifying but lower priority than flagged events.",
+        "confidence": "medium"
+      },
+      "status": "awaiting_decision",
+      "domain": "ops",
+      "priority": "B"
     },
     {
       "id": "111",
+      "received_at": "2026-03-24T00:16:00+00:00",
+      "from": "Brave Search API",
       "subject": "Brave Search API new user created",
-      "from": "Brave Search API",
-      "date": "2026-03-24 00:16+00:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "110",
-      "subject": "Brave Search API verify your email",
-      "from": "Brave Search API",
-      "date": "2026-03-24 00:16+00:00",
-      "flags": [],
-      "flagged": false
+      "body_snippet": "A new user account has been created on Brave Search API.",
+      "proposal": {
+        "action": "confirm_account_creation",
+        "draft_response": "Confirm: Was a new Brave Search API account created intentionally at 00:16 on 2026-03-24? If yes, save API credentials to secrets.json. If no, this is an unauthorized account creation \u2014 contact Brave Search API support immediately.",
+        "reasoning": "New account creation followed immediately by two login attempts (#113, #112) and an email verification. Most likely intentional onboarding, but needs confirmation given the flagged login attempts.",
+        "confidence": "medium"
+      },
+      "status": "awaiting_decision",
+      "domain": "ops",
+      "priority": "B"
     }
-  ]
+  ],
+  "decided": []
 }
