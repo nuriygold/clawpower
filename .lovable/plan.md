@@ -1,72 +1,58 @@
 
 
-## Wire GitHub JSON Data into Dashboard Panels
+## Add "Today" Tab to the Dashboard
 
-### Overview
-Replace the broken API-backed panels (Agents, Cron Jobs, Email Queue, iCloud Sync) with GitHub raw content fetches, matching the Task Pool pattern. Add a persistent System Status bar at the top.
+### What it does
+Adds a new "Today" panel as the default landing view. It surfaces a focused, at-a-glance summary of what matters right now -- active tasks, upcoming deadlines, system health, and recent email triage items -- so you don't have to click through each panel.
 
-### Data Layer
+### Layout
 
-**New file: `src/lib/github-data.ts`**
-- Base URL: `https://raw.githubusercontent.com/nuriygold/clawpower/main/data/`
-- Four fetch functions: `fetchAgentsGH()`, `fetchCronsGH()`, `fetchEmailQueueGH()`, `fetchSystemGH()`
-- Each does a plain `fetch()` with `cache: 'no-store'`, parses JSON, falls back to local `data/*.json` imports (same pattern as task pool)
-- Local fallbacks via Vite `?raw` imports of the JSON files in `data/`
+```text
++------------------------------------------+
+| TODAY - March 24, 2026                   |
++------------------------------------------+
+| [Priority Tasks]          | [System]     |
+| - In Progress (A/A+)     | Gateway: OK  |
+| - Ready (A/A+)           | iCloud: OK   |
+|                           | Uptime: 14d  |
++---------------------------+--------------+
+| [Email Triage]            | [Cron Health]|
+| 3 pending decisions       | 5/5 running  |
+| Next: from John @ 9:14am | 0 failed     |
++---------------------------+--------------+
+```
 
-### Panel Changes
+### Sections inside the Today panel
 
-**1. New component: `src/components/panels/SystemStatusBar.tsx`**
-- Fetches `system.json` via `useQuery` with 60s polling
-- Compact single-line bar with dark background at top of main content area
-- Shows: Gateway status dot + HTTP code, iCloud Sync dot + folder count, Mac uptime, last sync timestamp
-- Sits above the active panel in `Index.tsx`
+1. **Priority Tasks** -- Filters task pool to show only `In Progress` + `Ready` items with priority `A` or `A+`, sorted by priority then domain. Compact card list (task name, domain badge, status badge). Click any task to jump to Task Pool with that filter.
 
-**2. Rewrite `src/components/panels/AgentStatus.tsx`**
-- Fetch from `fetchAgentsGH()` instead of `fetchAgents()`
-- Data shape: `{ agents: [{ name, role, service, port, pid, status }] }`
-- Group gateway agents (service = `ai.openclaw.gateway`) under an "OpenClaw Gateway" header card with shared status
-- Remaining agents as individual cards in a 2-3 column grid
-- Status dot: green if `status === 'running'`, red if `stopped`
-- Show PID and port in small gray text
-- "Last synced: X min ago" indicator
+2. **Email Triage Summary** -- Shows count of pending decisions from email-triage data. Lists the 3 most recent pending items (from, subject, time ago). Click to jump to Email Triage panel.
 
-**3. Rewrite `src/components/panels/CronJobs.tsx`**
-- Fetch from `fetchCronsGH()` instead of `fetchCronJobs()`
-- Data shape: `{ crontab: [{schedule, command}], launchagents: [{label, pid, last_exit}] }`
-- Two side-by-side subsections:
-  - **Crontab**: table with Schedule (raw + human-readable, e.g. "Every 5 min"), Command (truncated 50 chars)
-  - **LaunchAgents**: table with Label, Status (green if pid non-null, red if null), Last Exit Code
-- "Last synced: X min ago" indicator
+3. **System Health** -- Pulls from `fetchSystemGH()`. Shows gateway status, iCloud sync status, Mac uptime in a compact card. Mirrors the status bar but slightly more detailed.
 
-**4. Rewrite `src/components/panels/EmailQueue.tsx`**
-- Fetch from `fetchEmailQueueGH()` instead of `fetchEmailQueue()`
-- Data shape: `{ accounts: [{address, provider, status}], triage_log_recent: [...], imap_state: {...}, notes: string }`
-- Three account pills: amber for `pending_migration`, green for `active`
-- Scrollable monospace log box showing last 5 lines of `triage_log_recent`
-- IMAP state key-value list if present
-- Notes displayed below
-- Remove the old per-email mark-done logic (no longer applicable)
+4. **Cron/Agent Health** -- Pulls from `fetchAgentsGH()` and `fetchCronsGH()`. Shows running agent count, any stopped agents flagged red, LaunchAgent failures.
 
-**5. Rewrite `src/components/panels/ICloudSync.tsx`**
-- Fetch from `fetchSystemGH()`, extract `icloud_sync` section
-- Show real data: status, PID, account, folder count, destination path
+### Files to create/modify
 
-**6. Update `src/pages/Index.tsx`**
-- Import and render `SystemStatusBar` above the active panel inside the main content area
-- Layout order when viewing panels: System Status Bar (persistent) → active panel content
+**New: `src/components/panels/Today.tsx`**
+- New panel component with 4 summary cards in a 2x2 responsive grid
+- Uses `useQuery` for all 4 data sources (task pool, email triage, system, agents/crons) with 60s polling
+- Each card has a "View all" link that calls `onNavigate` to switch panels
 
-### Files Modified
-- `src/lib/github-data.ts` (new)
-- `src/components/panels/SystemStatusBar.tsx` (new)
-- `src/components/panels/AgentStatus.tsx` (rewrite)
-- `src/components/panels/CronJobs.tsx` (rewrite)
-- `src/components/panels/EmailQueue.tsx` (rewrite)
-- `src/components/panels/ICloudSync.tsx` (rewrite)
-- `src/pages/Index.tsx` (add status bar)
+**Modified: `src/pages/Index.tsx`**
+- Add `today: Today` to the panels map
+- Change default `activePanel` state from `'tasks'` to `'today'`
+- Pass `onNavigate={setActivePanel}` prop to `Today` component
 
-### Technical Details
-- All queries use `useQuery` with `refetchInterval: 60000` and local JSON fallback on error
-- Cron human-readable parsing: simple map for common patterns (`*/5 * * * *` → "Every 5 min")
-- `formatDistanceToNow` from date-fns for "Last synced" timestamps
-- No new dependencies needed
+**Modified: `src/components/AppSidebar.tsx`**
+- Add `{ id: 'today', title: 'Today', icon: CalendarDays }` as the first sidebar item
+
+**Modified: `src/components/panels/Today.tsx` (the new file)**
+- Accepts `onNavigate: (id: string) => void` prop so cards can link to full panels
+
+### Technical details
+- Reuses existing fetch functions: `fetchTaskPoolFromGitHub`, `fetchEmailTriageGH`, `fetchSystemGH`, `fetchAgentsGH`, `fetchCronsGH`
+- All queries share the same cache keys as other panels, so no duplicate fetches
+- `date-fns` `format` for the date header, `formatDistanceToNow` for timestamps
+- Responsive: 2-column grid on desktop, stacked on mobile
 
