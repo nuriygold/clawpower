@@ -42,6 +42,7 @@
 | **Ops** | Explore Expert Network Access (MS Startups) | Pending | B | 1-on-1 sessions with mentors — fundraising, GTM, product |
 | **Ops** | Explore Partner Benefits Marketplace (MS Startups) | Pending | B | No-code tools, analytics, and other partner discounts — review full list at portal.startups.microsoft.com |
 | **Finance** | Redeem Azure $100k Credit (MS Startups) | Pending | A | Wait for $5k sponsorship to deplete first. Deadline: June 21, 2026. SR# 2603240010004221 |
+| **Ops** | Model cost optimization — switch OpenClaw agents to Claude on Azure | Pending | A | All 4 agents currently on azure-openai-responses/gpt-4.1 (~$88/day). Deploy Claude Haiku 4.5 via Azure AI Foundry, update agent model configs in OpenClaw to cut token costs 60-70% while keeping Azure credits |
 
 ---
 
