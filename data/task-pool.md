@@ -7,6 +7,7 @@
 | **Wellstar** | Provider Comp Dashboard (WLS) | Pending | A | New dashboard build — provider compensation data |
 | **Wellstar** | Comp Dashboard (WLS) | Pending | A | New dashboard build — compensation analytics |
 | **Wellstar** | Benefits Dashboard (WLS) | Pending | A | New dashboard build — benefits utilization data |
+| **Wellstar** | Main Dashboard (WLS) | Pending | A | Master summary dashboard |
 | **Nuriy** | Grant Reference Doc | Done | A | `nuriy-grant-reference.md` created. Confirm EIN, entity type, incorporation state, founding date with Aaliya before any submission. |
 | **Nuriy** | Grant Blitz (5+ grants) | In Progress | A | Reference doc ready. Application requirements mapped. Fill via 1Password. |
 | **Nuriy** | Seed-to-Table Pitch | Ready | A | Requires followup today. Early April deadline. Deck/narrative prep needed. |
@@ -23,3 +24,44 @@
 | **Creative** | Parenting Thought Piece | Backlog | C | "Strong Women..." |
 | **Ops** | Customize Claude | Pending | A | Added 2026-03-24 |
 | **PSE** | Share PSE Weeks 5&6 brief with Tina | Done | A | DONE 2026-03-24 |
+
+---
+
+## Wellstar Dashboard Progress
+
+> Sub-steps for each Tableau dashboard build. Check off as each phase completes.
+
+### Provider Comp Dashboard
+- [ ] Data collected
+- [ ] Data parsed
+- [ ] Alteryx flow completed
+- [ ] Tableau worksheets completed
+- [ ] Tableau dashboard completed
+
+### Comp Dashboard
+- [ ] Data collected
+- [ ] Data parsed
+- [ ] Alteryx flow completed
+- [ ] Tableau worksheets completed
+- [ ] Tableau dashboard completed
+
+### WLS Dashboard (Main Tableau)
+- [ ] Data collected
+- [ ] Data parsed
+- [ ] Alteryx flow completed
+- [ ] Tableau worksheets completed
+- [ ] Tableau dashboard completed
+
+### Benefits Dashboard
+- [ ] Data collected
+- [ ] Data parsed
+- [ ] Alteryx flow completed
+- [ ] Tableau worksheets completed
+- [ ] Tableau dashboard completed
+
+### Main Dashboard
+- [ ] Data collected
+- [ ] Data parsed
+- [ ] Alteryx flow completed
+- [ ] Tableau worksheets completed
+- [ ] Tableau dashboard completed
