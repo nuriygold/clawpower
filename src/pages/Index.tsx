@@ -50,7 +50,7 @@ export default function Index() {
           </header>
           <SystemStatusBar />
           <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
-            <ActiveComponent />
+            <ActiveComponent onNavigate={setActivePanel} />
           </main>
         </div>
       </div>
