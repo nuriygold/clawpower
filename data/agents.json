@@ -1,45 +1,69 @@
 {
-  "generated_at": "2026-03-24T13:29:20Z",
+  "generated_at": "2026-03-24T13:31:09Z",
   "agents": [
     {
       "name": "main",
       "role": "Chief of Staff",
       "service": "ai.openclaw.gateway",
-      "status": "running",
+      "port": 18789,
       "pid": "23013",
-      "port": 18789
+      "status": "running"
+    },
+    {
+      "name": "ops-agent",
+      "role": "Ops Agent",
+      "service": "ai.openclaw.gateway",
+      "port": 18789,
+      "pid": "23013",
+      "status": "running"
+    },
+    {
+      "name": "grant-agent",
+      "role": "Grant Agent",
+      "service": "ai.openclaw.gateway",
+      "port": 18789,
+      "pid": "23013",
+      "status": "running"
+    },
+    {
+      "name": "memory-agent",
+      "role": "Memory Agent",
+      "service": "ai.openclaw.gateway",
+      "port": 18789,
+      "pid": "23013",
+      "status": "running"
     },
     {
       "name": "tunnel",
       "role": "Cloudflare Tunnel",
       "service": "com.openclaw.tunnel",
-      "status": "running",
+      "port": 18790,
       "pid": "12018",
-      "port": 18790
+      "status": "running"
     },
     {
       "name": "cors-proxy",
       "role": "CORS Proxy",
       "service": "com.openclaw.cors-proxy",
-      "status": "running",
+      "port": 18790,
       "pid": "11406",
-      "port": 18790
+      "status": "running"
     },
     {
       "name": "dashboard-exec",
       "role": "Dashboard Exec Agent",
       "service": "com.openclaw.dashboard-exec-agent",
-      "status": "stopped",
-      "pid": "",
-      "port": 8787
+      "port": 8787,
+      "pid": null,
+      "status": "stopped"
     },
     {
       "name": "telegram-log",
       "role": "Telegram Executive Log",
       "service": "com.aaliya.telegram-executive-log",
-      "status": "stopped",
-      "pid": "-",
-      "port": null
+      "port": null,
+      "pid": null,
+      "status": "stopped"
     }
   ]
 }
