@@ -1,86 +1,142 @@
-{
-  "generated_at": "2026-03-24T00:00:00Z",
-  "pending_decisions": [
-    {
-      "id": "triage-001",
-      "received_at": "2026-03-21T00:00:00Z",
-      "from": "zach@gdg.community",
-      "subject": "Updated Invitation – GDG Gen AI Study Group",
-      "body_snippet": "Invitation and session updates for the GDG Gen AI Study Group. Multiple sessions planned covering generative AI topics. Seeking participation from local companies and tech leaders.",
-      "proposal": {
-        "action": "reply_accept_with_interest",
-        "draft_response": "Subject: Re: Updated Invitation – GDG Gen AI Study Group\n\nHi Zach,\n\nThanks for the invite and the multiple session updates. Please confirm if there are key sessions you'd like Nuriy leadership or technical staff to prioritize. We're interested in both collaboration and sharing insights relevant to the jewelry/AI sustainability space.\n\nBest,\nAdrian (Claw)\nNuriy",
-        "reasoning": "GDG partnership aligns with Nuriy's AI/sustainability positioning. Low-cost visibility opportunity. Response is non-committal but warm — keeps door open without over-committing executive time.",
-        "confidence": "high"
-      },
-      "status": "awaiting_decision",
-      "domain": "nuriy",
-      "priority": "B"
-    },
-    {
-      "id": "triage-002",
-      "received_at": "2026-03-21T00:00:00Z",
-      "from": "no-reply@stripe.com",
-      "subject": "Payment Failure Notice – Action Required",
-      "body_snippet": "A $50.00 payment to Rork, Inc. was marked unsuccessful by Stripe. Action may be required to resolve the payment failure and maintain continuity with this vendor.",
-      "proposal": {
-        "action": "reply_investigate_and_reassure",
-        "draft_response": "Subject: Payment Failure Notice – Action Required\n\nHi Team at Rork, Inc.,\n\nWe noticed a $50.00 payment to your account was marked unsuccessful by Stripe. Please let us know if there was an issue on our end, or if you need supporting documentation. Maintaining strong payment continuity supports our ongoing partnership and collaboration.\n\nBest regards,\nAdrian Cole\nNuriy Operations",
-        "reasoning": "Stripe failure on a $50 vendor payment to Rork (mobile app builder). Low dollar amount but relationship-sensitive. Draft reassures Rork while buying time to investigate root cause on Stripe dashboard. Recommend also checking payment method on file.",
-        "confidence": "high"
-      },
-      "status": "awaiting_decision",
-      "domain": "ops",
-      "priority": "A"
-    },
-    {
-      "id": "triage-003",
-      "received_at": "2026-03-20T00:00:00Z",
-      "from": "Nwankwo908@gmail.com",
-      "subject": "Re: Nuriy – Exploring a potential role",
-      "body_snippet": "OC (prospective co-founder contact) has been in conversation about Nuriy's direction. Adrian has drafted a co-founder offer outreach for executive approval before sending.",
-      "proposal": {
-        "action": "send_outbound_offer",
-        "draft_response": "Subject: Opportunity to Join Nuriy as Co-Founder\n\nHi OC,\n\nI hope this note finds you well. Nuriy is at a pivotal moment as we build the future of trust and transparency in the jewelry industry.\n\nWe're reaching out personally because we believe you could play a critical role as a co-founder. Our vision merges operational excellence, scalable technology, and sustainability leadership, and your background makes you an ideal partner for this mission.\n\nWe are ready to offer up to 20% equity for the right strategic co-founder to join our journey and help lead Nuriy forward.\n\nIf you're open to a conversation—about product, technology, or just seeing if there's real alignment—I'd love to set up a time to connect. Let's talk about how we can make an outsized impact together.\n\nLooking forward to hearing from you.\n\nBest,\nAdrian Cole (Claw)\nExecutive Assistant, Nuriy\nadrian@nuriy.com",
-        "reasoning": "OC has been identified as a high-potential co-founder candidate. 20% equity offer is significant — requires explicit exec sign-off before sending. Draft is ready in email-outbox. This is a strategic, irreversible communication.",
-        "confidence": "medium"
-      },
-      "status": "awaiting_decision",
-      "domain": "nuriy",
-      "priority": "A"
-    },
-    {
-      "id": "triage-004",
-      "received_at": "2026-03-20T00:00:00Z",
-      "from": "grants@sba.gov",
-      "subject": "[PLACEHOLDER] SBA Grant Opportunity – Small Business Innovation",
-      "body_snippet": "Placeholder: Grant inquiry related to Nuriy Funding Audit (Grants) task in task pool. Awaiting actual email retrieval from Zoho inbox.",
-      "proposal": {
-        "action": "placeholder_review_grant_requirements",
-        "draft_response": "Pending Zoho IMAP connection to retrieve actual email and draft response.",
-        "reasoning": "Funding Audit (Grants) is Priority B in the master task pool. Once IMAP is live, Adrian should pull and triage any grant-related inbound for Nuriy.",
-        "confidence": "low"
-      },
-      "status": "awaiting_decision",
-      "domain": "nuriy",
-      "priority": "B"
-    },
-    {
-      "id": "triage-005",
-      "received_at": "2026-03-19T00:00:00Z",
-      "from": "hello@nuriy.com",
-      "subject": "[PLACEHOLDER] Customer Inquiry – hello@nuriy.com forward",
-      "body_snippet": "Placeholder: Inbound customer inquiry forwarded from hello@nuriy.com (GoDaddy) to adrian@nuriy.com (Zoho). Email migration from GoDaddy to Zoho is in Ready state per ops task pool.",
-      "proposal": {
-        "action": "placeholder_route_to_appropriate_owner",
-        "draft_response": "Pending: Email migration from GoDaddy (hello@nuriy.com via imap.secureserver.net) to Zoho must complete before reliable forwarding. Migration task is in Ready state.",
-        "reasoning": "Email Migration (GoDaddy→Zoho) is Priority A in ops task pool. Until migration completes, hello@nuriy.com inbound may be unreliable.",
-        "confidence": "low"
-      },
-      "status": "awaiting_decision",
-      "domain": "nuriy",
-      "priority": "B"
-    }
-  ],
-  "decided": []
-}
+[
+  {
+    "id": 119,
+    "subject": "Apple Services: $24.99 USD",
+    "from": "PayPal <service@paypal.com>",
+    "date": "Tue, 24 Mar 2026 13:38:06 -0700",
+    "flagged": false
+  },
+  {
+    "id": 118,
+    "subject": "📖 Update on the Flash Sale Rules in the LIVE Room",
+    "from": "TikTok Shop <sellersupport@shop.tiktok.com>",
+    "date": "Tue, 24 Mar 2026 20:14:29 +0000 (UTC)",
+    "flagged": false
+  },
+  {
+    "id": 117,
+    "subject": "$20.52 payment to Firecrawl was unsuccessful again",
+    "from": "Firecrawl <failed-payments+acct_1P3RlhJYkjvwioyk@stripe.com>",
+    "date": "Tue, 24 Mar 2026 10:54:22 +0000",
+    "flagged": true
+  },
+  {
+    "id": 116,
+    "subject": "SuperJeweler.com Inc (US) has invited you to join their program",
+    "from": "Awin <help@awin.com>",
+    "date": "Tue, 24 Mar 2026 10:43:01 +0000",
+    "flagged": false
+  },
+  {
+    "id": 115,
+    "subject": "A new device has logged in to your Shopify account",
+    "from": "Shopify <mailer@shopify.com>",
+    "date": "Tue, 24 Mar 2026 01:35:40 +0000 (UTC)",
+    "flagged": true
+  },
+  {
+    "id": 114,
+    "subject": "New login from iOS (Mobile Safari)",
+    "from": "Link <notifications@link.com>",
+    "date": "Tue, 24 Mar 2026 00:18:46 +0000",
+    "flagged": false
+  },
+  {
+    "id": 113,
+    "subject": "Brave Search API login attempt",
+    "from": "Brave Search API <search-api@brave.com>",
+    "date": "Tue, 24 Mar 2026 00:17:48 +0000",
+    "flagged": true
+  },
+  {
+    "id": 112,
+    "subject": "Brave Search API login attempt",
+    "from": "Brave Search API <search-api@brave.com>",
+    "date": "Tue, 24 Mar 2026 00:17:02 +0000",
+    "flagged": true
+  },
+  {
+    "id": 111,
+    "subject": "Brave Search API new user created",
+    "from": "Brave Search API <search-api@brave.com>",
+    "date": "Tue, 24 Mar 2026 00:16:47 +0000",
+    "flagged": false
+  },
+  {
+    "id": 110,
+    "subject": "Brave Search API verify your email",
+    "from": "Brave Search API <search-api@brave.com>",
+    "date": "Tue, 24 Mar 2026 00:16:36 +0000",
+    "flagged": false
+  },
+  {
+    "id": 109,
+    "subject": "[Important] Smart Disputes will be enabled for your platform in June 2026",
+    "from": "Stripe <notifications@stripe.com>",
+    "date": "Mon, 23 Mar 2026 21:25:59 +0000",
+    "flagged": false
+  },
+  {
+    "id": 108,
+    "subject": "New Sign-in to Screens Connect",
+    "from": "\"Edovia Inc.\" <support@edovia.com>",
+    "date": "Mon, 23 Mar 2026 16:58:47 +0000",
+    "flagged": false
+  },
+  {
+    "id": 107,
+    "subject": "Your Screens Connect account is now active. Don't forget to sign in!",
+    "from": "\"Edovia Inc.\" <support@edovia.com>",
+    "date": "Mon, 23 Mar 2026 16:58:37 +0000",
+    "flagged": false
+  },
+  {
+    "id": 106,
+    "subject": "Verify the contact email address for your Screens Connect Account.",
+    "from": "\"Edovia Inc.\" <support@edovia.com>",
+    "date": "Mon, 23 Mar 2026 16:58:21 +0000",
+    "flagged": false
+  },
+  {
+    "id": 105,
+    "subject": "New 1Password sign-in alert",
+    "from": "1Password <hello@1password.com>",
+    "date": "Mon, 23 Mar 2026 15:15:33 +0000",
+    "flagged": false
+  },
+  {
+    "id": 104,
+    "subject": "🛟 3rd attempt: Firecrawl payment didn't work",
+    "from": "Eric Ciarla <eric@billing.firecrawl.dev>",
+    "date": "Mon, 23 Mar 2026 14:54:30 +0000",
+    "flagged": false
+  },
+  {
+    "id": 103,
+    "subject": "Your receipt from Anthropic, PBC #2815-8081-2874",
+    "from": "\"Anthropic, PBC\" <invoice+statements@mail.anthropic.com>",
+    "date": "Mon, 23 Mar 2026 14:46:24 +0000",
+    "flagged": false
+  },
+  {
+    "id": 102,
+    "subject": "New 1Password sign-in alert",
+    "from": "1Password <hello@1password.com>",
+    "date": "Mon, 23 Mar 2026 14:27:19 +0000",
+    "flagged": false
+  },
+  {
+    "id": 101,
+    "subject": "Your receipt from Anthropic, PBC #2759-4189-9697",
+    "from": "\"Anthropic, PBC\" <invoice+statements@mail.anthropic.com>",
+    "date": "Mon, 23 Mar 2026 13:46:21 +0000",
+    "flagged": false
+  },
+  {
+    "id": 100,
+    "subject": "Welcome to the Pro plan",
+    "from": "Anthropic <no-reply-QHmYdyCDJgDCJjBTZ_zErg@mail.anthropic.com>",
+    "date": "Mon, 23 Mar 2026 13:45:00 +0000 (UTC)",
+    "flagged": false
+  }
+]
