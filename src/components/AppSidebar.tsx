@@ -1,5 +1,5 @@
 import {
-  ListTodo, Clock, Bot, Mail, Activity, Cloud, Terminal
+  ListTodo, Clock, Bot, Mail, Activity, Cloud, Terminal, FileCheck
 } from 'lucide-react';
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
@@ -8,6 +8,7 @@ import {
 
 const items = [
   { id: 'tasks', title: 'Task Pool', icon: ListTodo },
+  { id: 'triage', title: 'Email Triage', icon: FileCheck },
   { id: 'cron', title: 'Cron Jobs', icon: Clock },
   { id: 'agents', title: 'Agents', icon: Bot },
   { id: 'email', title: 'Email Queue', icon: Mail },
