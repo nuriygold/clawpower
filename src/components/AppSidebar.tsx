@@ -1,5 +1,5 @@
 import {
-  ListTodo, Clock, Bot, Mail, Activity, Cloud, Terminal, FileCheck
+  ListTodo, Clock, Bot, Mail, Activity, Cloud, Terminal, FileCheck, CalendarDays
 } from 'lucide-react';
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
