@@ -44,6 +44,7 @@ export default function Index() {
               <span className="text-xs text-muted-foreground">Live</span>
             </div>
           </header>
+          <SystemStatusBar />
           <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
             <ActiveComponent />
           </main>
