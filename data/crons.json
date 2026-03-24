@@ -1,9 +1,17 @@
 {
-  "generated_at": "2026-03-24T21:30:02Z",
+  "generated_at": "2026-03-24T21:35:02Z",
   "crontab": [
     {
       "schedule": "*/5 * * * *",
       "command": "/Users/claw/openclaw/workspace/sync_openclaw_config.sh >> /Users/claw/openclaw/workspace/logs/config-sync.log 2>&1"
+    },
+    {
+      "schedule": "0 15 * * *",
+      "command": "/Users/claw/openclaw/workspace/sync_openclaw_config.sh >> /Users/claw/openclaw/workspace/logs/sync-openclaw.log 2>&1"
+    },
+    {
+      "schedule": "0 3 * * *",
+      "command": "/Users/claw/openclaw/workspace/sync_openclaw_config.sh >> /Users/claw/openclaw/workspace/logs/sync-openclaw.log 2>&1"
     }
   ],
   "launchagents": [
