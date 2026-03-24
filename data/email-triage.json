@@ -1,142 +1,87 @@
-[
-  {
-    "id": 119,
-    "subject": "Apple Services: $24.99 USD",
-    "from": "PayPal <service@paypal.com>",
-    "date": "Tue, 24 Mar 2026 13:38:06 -0700",
-    "flagged": false
-  },
-  {
-    "id": 118,
-    "subject": "📖 Update on the Flash Sale Rules in the LIVE Room",
-    "from": "TikTok Shop <sellersupport@shop.tiktok.com>",
-    "date": "Tue, 24 Mar 2026 20:14:29 +0000 (UTC)",
-    "flagged": false
-  },
-  {
-    "id": 117,
-    "subject": "$20.52 payment to Firecrawl was unsuccessful again",
-    "from": "Firecrawl <failed-payments+acct_1P3RlhJYkjvwioyk@stripe.com>",
-    "date": "Tue, 24 Mar 2026 10:54:22 +0000",
-    "flagged": true
-  },
-  {
-    "id": 116,
-    "subject": "SuperJeweler.com Inc (US) has invited you to join their program",
-    "from": "Awin <help@awin.com>",
-    "date": "Tue, 24 Mar 2026 10:43:01 +0000",
-    "flagged": false
-  },
-  {
-    "id": 115,
-    "subject": "A new device has logged in to your Shopify account",
-    "from": "Shopify <mailer@shopify.com>",
-    "date": "Tue, 24 Mar 2026 01:35:40 +0000 (UTC)",
-    "flagged": true
-  },
-  {
-    "id": 114,
-    "subject": "New login from iOS (Mobile Safari)",
-    "from": "Link <notifications@link.com>",
-    "date": "Tue, 24 Mar 2026 00:18:46 +0000",
-    "flagged": false
-  },
-  {
-    "id": 113,
-    "subject": "Brave Search API login attempt",
-    "from": "Brave Search API <search-api@brave.com>",
-    "date": "Tue, 24 Mar 2026 00:17:48 +0000",
-    "flagged": true
-  },
-  {
-    "id": 112,
-    "subject": "Brave Search API login attempt",
-    "from": "Brave Search API <search-api@brave.com>",
-    "date": "Tue, 24 Mar 2026 00:17:02 +0000",
-    "flagged": true
-  },
-  {
-    "id": 111,
-    "subject": "Brave Search API new user created",
-    "from": "Brave Search API <search-api@brave.com>",
-    "date": "Tue, 24 Mar 2026 00:16:47 +0000",
-    "flagged": false
-  },
-  {
-    "id": 110,
-    "subject": "Brave Search API verify your email",
-    "from": "Brave Search API <search-api@brave.com>",
-    "date": "Tue, 24 Mar 2026 00:16:36 +0000",
-    "flagged": false
-  },
-  {
-    "id": 109,
-    "subject": "[Important] Smart Disputes will be enabled for your platform in June 2026",
-    "from": "Stripe <notifications@stripe.com>",
-    "date": "Mon, 23 Mar 2026 21:25:59 +0000",
-    "flagged": false
-  },
-  {
-    "id": 108,
-    "subject": "New Sign-in to Screens Connect",
-    "from": "\"Edovia Inc.\" <support@edovia.com>",
-    "date": "Mon, 23 Mar 2026 16:58:47 +0000",
-    "flagged": false
-  },
-  {
-    "id": 107,
-    "subject": "Your Screens Connect account is now active. Don't forget to sign in!",
-    "from": "\"Edovia Inc.\" <support@edovia.com>",
-    "date": "Mon, 23 Mar 2026 16:58:37 +0000",
-    "flagged": false
-  },
-  {
-    "id": 106,
-    "subject": "Verify the contact email address for your Screens Connect Account.",
-    "from": "\"Edovia Inc.\" <support@edovia.com>",
-    "date": "Mon, 23 Mar 2026 16:58:21 +0000",
-    "flagged": false
-  },
-  {
-    "id": 105,
-    "subject": "New 1Password sign-in alert",
-    "from": "1Password <hello@1password.com>",
-    "date": "Mon, 23 Mar 2026 15:15:33 +0000",
-    "flagged": false
-  },
-  {
-    "id": 104,
-    "subject": "🛟 3rd attempt: Firecrawl payment didn't work",
-    "from": "Eric Ciarla <eric@billing.firecrawl.dev>",
-    "date": "Mon, 23 Mar 2026 14:54:30 +0000",
-    "flagged": false
-  },
-  {
-    "id": 103,
-    "subject": "Your receipt from Anthropic, PBC #2815-8081-2874",
-    "from": "\"Anthropic, PBC\" <invoice+statements@mail.anthropic.com>",
-    "date": "Mon, 23 Mar 2026 14:46:24 +0000",
-    "flagged": false
-  },
-  {
-    "id": 102,
-    "subject": "New 1Password sign-in alert",
-    "from": "1Password <hello@1password.com>",
-    "date": "Mon, 23 Mar 2026 14:27:19 +0000",
-    "flagged": false
-  },
-  {
-    "id": 101,
-    "subject": "Your receipt from Anthropic, PBC #2759-4189-9697",
-    "from": "\"Anthropic, PBC\" <invoice+statements@mail.anthropic.com>",
-    "date": "Mon, 23 Mar 2026 13:46:21 +0000",
-    "flagged": false
-  },
-  {
-    "id": 100,
-    "subject": "Welcome to the Pro plan",
-    "from": "Anthropic <no-reply-QHmYdyCDJgDCJjBTZ_zErg@mail.anthropic.com>",
-    "date": "Mon, 23 Mar 2026 13:45:00 +0000 (UTC)",
-    "flagged": false
-  }
-]
+{
+  "fetched_at": "2026-03-24T23:00:54Z",
+  "account": "adrian@nuriy.com",
+  "count": 10,
+  "emails": [
+    {
+      "id": "119",
+      "subject": "Apple Services: $24.99\u00a0USD",
+      "from": "PayPal",
+      "date": "2026-03-24 13:38-07:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "118",
+      "subject": "\ud83d\udcd6 Update on the Flash Sale Rules in the LIVE Room",
+      "from": "TikTok Shop",
+      "date": "2026-03-24 20:14+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "117",
+      "subject": "$20.52 payment to Firecrawl was unsuccessful again",
+      "from": "Firecrawl",
+      "date": "2026-03-24 10:54+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "116",
+      "subject": "SuperJeweler.com Inc (US) has invited you to join their program",
+      "from": "Awin",
+      "date": "2026-03-24 10:43+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "115",
+      "subject": "A new device has logged in to your Shopify account",
+      "from": "Shopify",
+      "date": "2026-03-24 01:35+00:00",
+      "flags": [],
+      "flagged": true
+    },
+    {
+      "id": "114",
+      "subject": "New login from iOS (Mobile Safari)",
+      "from": "Link",
+      "date": "2026-03-24 00:18+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "113",
+      "subject": "Brave Search API login attempt",
+      "from": "Brave Search API",
+      "date": "2026-03-24 00:17+00:00",
+      "flags": [],
+      "flagged": true
+    },
+    {
+      "id": "112",
+      "subject": "Brave Search API login attempt",
+      "from": "Brave Search API",
+      "date": "2026-03-24 00:17+00:00",
+      "flags": [],
+      "flagged": true
+    },
+    {
+      "id": "111",
+      "subject": "Brave Search API new user created",
+      "from": "Brave Search API",
+      "date": "2026-03-24 00:16+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "110",
+      "subject": "Brave Search API verify your email",
+      "from": "Brave Search API",
+      "date": "2026-03-24 00:16+00:00",
+      "flags": [],
+      "flagged": false
+    }
+  ]
+}
