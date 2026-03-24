@@ -1,62 +1,83 @@
-import { Mail, Check } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { PanelWrapper } from './PanelWrapper';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchEmailQueue, markEmailDone } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
+import { fetchEmailQueueGH, type GHEmailQueueData } from '@/lib/github-data';
+import { formatDistanceToNow } from 'date-fns';
+
+const statusColors: Record<string, string> = {
+  active: 'bg-success/20 text-success',
+  pending_migration: 'bg-warning/20 text-warning',
+};
+
+const statusLabels: Record<string, string> = {
+  active: 'Active',
+  pending_migration: 'Pending Migration',
+};
 
 export function EmailQueue() {
-  const queryClient = useQueryClient();
-  const { data: emails = [], isError } = useQuery({
-    queryKey: ['email-queue'],
-    queryFn: fetchEmailQueue,
-    refetchInterval: 30000,
+  const { data, isError, dataUpdatedAt } = useQuery<GHEmailQueueData>({
+    queryKey: ['email-queue-gh'],
+    queryFn: fetchEmailQueueGH,
+    refetchInterval: 60000,
   });
 
-  const handleDone = async (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    try {
-      await markEmailDone(id);
-      queryClient.invalidateQueries({ queryKey: ['email-queue'] });
-    } catch {}
-  };
+  const accounts = data?.accounts ?? [];
+  const logs = data?.triage_log_recent ?? [];
+  const imapState = data?.imap_state ?? {};
+  const imapKeys = Object.keys(imapState);
+  const syncLabel = dataUpdatedAt
+    ? `Last synced: ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`
+    : '';
 
   return (
     <PanelWrapper title="Email Queue" icon={<Mail className="h-5 w-5 text-primary" />} error={isError}>
-      <div className="space-y-2 max-h-96 overflow-y-auto">
-        {emails.map((email: any) => (
+      {syncLabel && <p className="text-xs text-muted-foreground/60 mb-3">{syncLabel}</p>}
+
+      {/* Account pills */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {accounts.map((a) => (
           <div
-            key={email.id}
-            className={`flex items-center justify-between rounded-md border p-3 transition-colors ${
-              email.unread ? 'bg-accent/5 border-accent/30' : 'bg-muted/20'
-            }`}
+            key={a.address}
+            className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium ${statusColors[a.status] || 'bg-muted text-muted-foreground'}`}
           >
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-foreground truncate">{email.subject}</p>
-              <div className="flex gap-3 text-xs text-muted-foreground mt-0.5">
-                <span>{email.sender}</span>
-                <span>{email.received}</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 shrink-0 ml-3">
-              {email.priority && (
-                <span className="text-xs px-1.5 py-0.5 rounded bg-warning/20 text-warning font-medium">
-                  {email.priority}
-                </span>
-              )}
-              <span className="text-xs text-muted-foreground">{email.action_status}</span>
-              {email.action_status !== 'done' && (
-                <button
-                  onClick={(e) => handleDone(email.id, e)}
-                  className="p-1 rounded hover:bg-success/20 text-success transition-colors"
-                  title="Mark done"
-                >
-                  <Check className="h-4 w-4" />
-                </button>
-              )}
-            </div>
+            <span>{a.address}</span>
+            <span className="opacity-60">({a.provider})</span>
+            <span className="font-semibold">{statusLabels[a.status] || a.status}</span>
           </div>
         ))}
-        {emails.length === 0 && <p className="text-sm text-muted-foreground text-center py-4">No emails in queue</p>}
       </div>
+
+      {/* Triage log */}
+      {logs.length > 0 && (
+        <div className="mb-4">
+          <h3 className="font-mono text-xs font-semibold text-foreground mb-2">Recent Triage Activity</h3>
+          <div className="rounded-md bg-background border p-3 max-h-40 overflow-y-auto">
+            <pre className="font-mono text-xs text-muted-foreground whitespace-pre-wrap">
+              {logs.slice(-5).join('\n')}
+            </pre>
+          </div>
+        </div>
+      )}
+
+      {/* IMAP State */}
+      {imapKeys.length > 0 && (
+        <div className="mb-4">
+          <h3 className="font-mono text-xs font-semibold text-foreground mb-2">IMAP State</h3>
+          <div className="grid gap-1 text-xs">
+            {imapKeys.map((k) => (
+              <div key={k} className="flex gap-2">
+                <span className="text-muted-foreground">{k}:</span>
+                <span className="font-mono text-foreground">{imapState[k]}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Notes */}
+      {data?.notes && (
+        <p className="text-xs text-muted-foreground italic">{data.notes}</p>
+      )}
     </PanelWrapper>
   );
 }

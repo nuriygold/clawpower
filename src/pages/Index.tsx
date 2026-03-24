@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/AppSidebar';
 import { PasswordGate } from '@/components/PasswordGate';
+import { SystemStatusBar } from '@/components/panels/SystemStatusBar';
 import { TaskPool } from '@/components/panels/TaskPool';
 import { CronJobs } from '@/components/panels/CronJobs';
 import { AgentStatus } from '@/components/panels/AgentStatus';

@@ -1,53 +1,95 @@
-import { useState } from 'react';
-import { Clock, ChevronDown, ChevronRight } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { PanelWrapper } from './PanelWrapper';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCronJobs } from '@/lib/api';
-
-const statusDot: Record<string, string> = {
-  success: 'bg-success',
-  ok: 'bg-success',
-  failed: 'bg-destructive',
-  never: 'bg-muted-foreground',
-};
+import { fetchCronsGH, cronToHuman, type GHCronsData } from '@/lib/github-data';
+import { formatDistanceToNow } from 'date-fns';
 
 export function CronJobs() {
-  const [expandedJob, setExpandedJob] = useState<string | null>(null);
-  const { data: jobs = [], isError } = useQuery({
-    queryKey: ['cron-jobs'],
-    queryFn: fetchCronJobs,
-    refetchInterval: 30000,
+  const { data, isError, dataUpdatedAt } = useQuery<GHCronsData>({
+    queryKey: ['crons-gh'],
+    queryFn: fetchCronsGH,
+    refetchInterval: 60000,
   });
+
+  const crontab = data?.crontab ?? [];
+  const launchagents = data?.launchagents ?? [];
+  const syncLabel = dataUpdatedAt
+    ? `Last synced: ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`
+    : '';
 
   return (
     <PanelWrapper title="Cron Jobs" icon={<Clock className="h-5 w-5 text-primary" />} error={isError}>
-      <div className="grid gap-3 sm:grid-cols-2">
-        {jobs.map((job: any) => (
-          <div
-            key={job.name}
-            className="rounded-md border bg-muted/20 p-3 cursor-pointer hover:bg-muted/40 transition-colors"
-            onClick={() => setExpandedJob(expandedJob === job.name ? null : job.name)}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className={`h-2 w-2 rounded-full ${statusDot[job.status] || statusDot.never}`} />
-                <span className="font-medium text-sm text-foreground">{job.name}</span>
-              </div>
-              {expandedJob === job.name ? <ChevronDown className="h-3 w-3 text-muted-foreground" /> : <ChevronRight className="h-3 w-3 text-muted-foreground" />}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">{job.schedule}</p>
-            <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
-              <span>Last: {job.last_run || '—'}</span>
-              <span>Next: {job.next_run || '—'}</span>
-            </div>
-            {expandedJob === job.name && (
-              <pre className="mt-3 p-2 rounded bg-background text-xs text-muted-foreground font-mono overflow-x-auto max-h-32 overflow-y-auto">
-                {job.last_log || 'No log output.'}
-              </pre>
-            )}
+      {syncLabel && <p className="text-xs text-muted-foreground/60 mb-3">{syncLabel}</p>}
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        {/* Crontab */}
+        <div>
+          <h3 className="font-mono text-xs font-semibold text-foreground mb-2">Crontab</h3>
+          <div className="rounded-md border overflow-hidden">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-muted/30 text-muted-foreground">
+                  <th className="text-left px-3 py-1.5 font-medium">Schedule</th>
+                  <th className="text-left px-3 py-1.5 font-medium">Command</th>
+                </tr>
+              </thead>
+              <tbody>
+                {crontab.map((c, i) => (
+                  <tr key={i} className="border-t border-border/50">
+                    <td className="px-3 py-2 whitespace-nowrap">
+                      <span className="font-mono text-foreground">{c.schedule}</span>
+                      <span className="text-muted-foreground ml-2">({cronToHuman(c.schedule)})</span>
+                    </td>
+                    <td className="px-3 py-2 font-mono text-muted-foreground truncate max-w-[200px]" title={c.command}>
+                      {c.command.length > 50 ? c.command.slice(0, 50) + '…' : c.command}
+                    </td>
+                  </tr>
+                ))}
+                {crontab.length === 0 && (
+                  <tr><td colSpan={2} className="px-3 py-4 text-center text-muted-foreground">No crontab entries</td></tr>
+                )}
+              </tbody>
+            </table>
           </div>
-        ))}
-        {jobs.length === 0 && <p className="text-sm text-muted-foreground col-span-2 text-center py-4">No cron jobs</p>}
+        </div>
+
+        {/* LaunchAgents */}
+        <div>
+          <h3 className="font-mono text-xs font-semibold text-foreground mb-2">LaunchAgents</h3>
+          <div className="rounded-md border overflow-hidden">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-muted/30 text-muted-foreground">
+                  <th className="text-left px-3 py-1.5 font-medium">Label</th>
+                  <th className="text-left px-3 py-1.5 font-medium">Status</th>
+                  <th className="text-left px-3 py-1.5 font-medium">Exit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {launchagents.map((la) => {
+                  const running = la.pid != null;
+                  return (
+                    <tr key={la.label} className="border-t border-border/50">
+                      <td className={`px-3 py-2 font-mono ${running ? 'text-success' : 'text-destructive'}`}>
+                        {la.label}
+                      </td>
+                      <td className="px-3 py-2">
+                        <span className="flex items-center gap-1.5">
+                          <span className={`h-2 w-2 rounded-full ${running ? 'bg-success' : 'bg-destructive'}`} />
+                          <span className="text-muted-foreground">{running ? `Running (${la.pid})` : 'Stopped'}</span>
+                        </span>
+                      </td>
+                      <td className="px-3 py-2 font-mono text-muted-foreground">{la.last_exit}</td>
+                    </tr>
+                  );
+                })}
+                {launchagents.length === 0 && (
+                  <tr><td colSpan={3} className="px-3 py-4 text-center text-muted-foreground">No launch agents</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </PanelWrapper>
   );
