@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-03-24T13:29:20Z",
+  "gateway": {
+    "url": "http://127.0.0.1:18789",
+    "tunnel_url": "https://replacement-having-arrival-apache.trycloudflare.com",
+    "http_status": "200",
+    "status": "online"
+  },
+  "icloud_sync": {
+    "status": "running",
+    "pid": "13472",
+    "photo_folder_count": 279,
+    "account": "bashiraaliya@gmail.com",
+    "destination": "/Volumes/PhotoSSD/Library of Photos/Full Library/iCloud Photos/"
+  },
+  "mac": {
+    "hostname": "Claws-Mac-mini",
+    "uptime": "4 days"
+  }
+}
