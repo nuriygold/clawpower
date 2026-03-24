@@ -10,8 +10,10 @@ import { EmailQueue } from '@/components/panels/EmailQueue';
 import { ActivityFeed } from '@/components/panels/ActivityFeed';
 import { ICloudSync } from '@/components/panels/ICloudSync';
 import { EmailTriage } from '@/components/panels/EmailTriage';
+import { Today } from '@/components/panels/Today';
 
-const panels: Record<string, React.FC> = {
+const panels: Record<string, React.FC<any>> = {
+  today: Today,
   tasks: TaskPool,
   triage: EmailTriage,
   cron: CronJobs,
