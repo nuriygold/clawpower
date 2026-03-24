@@ -9,9 +9,11 @@ import { AgentStatus } from '@/components/panels/AgentStatus';
 import { EmailQueue } from '@/components/panels/EmailQueue';
 import { ActivityFeed } from '@/components/panels/ActivityFeed';
 import { ICloudSync } from '@/components/panels/ICloudSync';
+import { EmailTriage } from '@/components/panels/EmailTriage';
 
 const panels: Record<string, React.FC> = {
   tasks: TaskPool,
+  triage: EmailTriage,
   cron: CronJobs,
   agents: AgentStatus,
   email: EmailQueue,

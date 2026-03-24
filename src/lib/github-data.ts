@@ -94,6 +94,37 @@ export const fetchEmailQueueGH = () =>
 export const fetchSystemGH = () =>
   fetchGHJson<GHSystemData>('system.json', localSystemJson);
 
+// Email Triage
+import localEmailTriageJson from '../../data/email-triage.json?raw';
+
+export interface GHTriageProposal {
+  action: string;
+  draft_response: string;
+  reasoning: string;
+  confidence: string;
+}
+
+export interface GHTriageItem {
+  id: string;
+  received_at: string;
+  from: string;
+  subject: string;
+  body_snippet: string;
+  proposal: GHTriageProposal;
+  status: string;
+  domain: string;
+  priority: string;
+}
+
+export interface GHEmailTriageData {
+  generated_at: string;
+  pending_decisions: GHTriageItem[];
+  decided: GHTriageItem[];
+}
+
+export const fetchEmailTriageGH = () =>
+  fetchGHJson<GHEmailTriageData>('email-triage.json', localEmailTriageJson);
+
 /** Convert a simple cron expression to human-readable text */
 export function cronToHuman(expr: string): string {
   const map: Record<string, string> = {
