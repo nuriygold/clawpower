@@ -9,14 +9,14 @@
 | **Wellstar** | Benefits Dashboard (WLS) | Pending | A | New dashboard build — benefits utilization data |
 | **Nuriy** | Grant Reference Doc | Done | A | `nuriy-grant-reference.md` created. Confirm EIN, entity type, incorporation state, founding date with Aaliya before any submission. |
 | **Nuriy** | Grant Blitz (5+ grants) | In Progress | A | Reference doc ready. Application requirements mapped. Fill via 1Password. |
-| **Nuriy** | Seed-to-Table Pitch | Ready | A | Early April deadline. Deck/narrative prep needed. |
+| **Nuriy** | Seed-to-Table Pitch | Ready | A | Requires followup today. Early April deadline. Deck/narrative prep needed. |
 | **Nuriy** | CreateX Co-Founder Search | Ready | A | Georgia Tech affiliation. 15-20% equity. LinkedIn outreach. |
-| **Nuriy** | Shopify 14-Day Turnaround | Pending Review | A | Needs store URL + admin access for deep audit. |
+| **Nuriy** | Shopify 14-Day Turnaround | Pending | A | Awaiting clarification |
 | **Ops** | Email Migration (GoDaddy→Zoho) | Ready | A | Secrets verified. Script pending. |
 | **Ops** | Email Audit (bashiraaliya@gmail) | Queued | B | Scope TBD. |
 | **Ops** | Email Audit (bashir.exec@gmail) | Queued | B | Scope TBD. |
-| **Ops** | Cancel Google One (Bashir Aaliya) | Queued | B | Account action. |
-| **Ops** | Linear Board Sync | In Progress | A | All tasks being pushed. |
+| **Ops** | Cancel Google One (Bashir Aaliya) | Done | B | Cancelled April 14 |
+| **Ops** | Linear Board Sync | Blocked | A | Blocked by OpenClaw — needs resolution |
 | **Ops** | supreme-umbrella Repo Audit | Queued | B | Gemini live app. Voice distortion. PR requested. |
 | **Ops** | 1Password Integration | Done | A | `op` CLI accessible. |
 | **Personal** | Freebie/Perks Research | In Progress | C | Deeper themed giveaways needed. |
