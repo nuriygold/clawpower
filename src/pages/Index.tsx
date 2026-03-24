@@ -10,8 +10,10 @@ import { EmailQueue } from '@/components/panels/EmailQueue';
 import { ActivityFeed } from '@/components/panels/ActivityFeed';
 import { ICloudSync } from '@/components/panels/ICloudSync';
 import { EmailTriage } from '@/components/panels/EmailTriage';
+import { Today } from '@/components/panels/Today';
 
-const panels: Record<string, React.FC> = {
+const panels: Record<string, React.FC<any>> = {
+  today: Today,
   tasks: TaskPool,
   triage: EmailTriage,
   cron: CronJobs,
@@ -23,7 +25,7 @@ const panels: Record<string, React.FC> = {
 
 export default function Index() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [activePanel, setActivePanel] = useState('tasks');
+  const [activePanel, setActivePanel] = useState('today');
 
   if (!authenticated) {
     return <PasswordGate onAuthenticated={() => setAuthenticated(true)} />;
@@ -48,7 +50,7 @@ export default function Index() {
           </header>
           <SystemStatusBar />
           <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
-            <ActiveComponent />
+            <ActiveComponent onNavigate={setActivePanel} />
           </main>
         </div>
       </div>
