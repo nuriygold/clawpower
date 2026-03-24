@@ -23,6 +23,7 @@
 | **Personal** | Freebie/Perks Research | In Progress | C | Deeper themed giveaways needed. |
 | **Creative** | Parenting Thought Piece | Backlog | C | "Strong Women..." |
 | **Ops** | Customize Claude | Pending | A | Added 2026-03-24 |
+| **Ops** | Claude-bot Build | In Progress | A | Build OpenClaw bot that mirrors Claude's chat behavior — plan complete, implementation pending |
 | **PSE** | Share PSE Weeks 5&6 brief with Tina | Done | A | DONE 2026-03-24 |
 
 ---
