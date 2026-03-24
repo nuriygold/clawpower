@@ -26,6 +26,23 @@
 | **Ops** | Claude-bot Build | In Progress | A | Build OpenClaw bot that mirrors Claude's chat behavior — plan complete, implementation pending |
 | **PSE** | Share PSE Weeks 5&6 brief with Tina | Done | A | DONE 2026-03-24 |
 
+## Microsoft for Startups — Benefits to Activate
+
+| Category | Task | Status | Priority | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Ops** | Explore GitHub Enterprise (MS Startups) | Pending | A | Activate 20 seats free for 1 year — go to portal.startups.microsoft.com |
+| **Ops** | Explore Microsoft 365 Business Premium (MS Startups) | Pending | A | Free seats available — activate via Founders Hub |
+| **Ops** | Explore Visual Studio Enterprise (MS Startups) | Pending | B | Dev tooling benefit — check seat count and eligibility |
+| **Ops** | Explore Dynamics 365 (MS Startups) | Pending | B | CRM/ERP modules available — evaluate which apply to Nuriy |
+| **Ops** | Explore Power Platform (MS Startups) | Pending | B | Power BI, Power Automate, Power Apps — activate and explore |
+| **Ops** | Explore LinkedIn Premium Bundle (MS Startups) | Pending | A | 75% off LinkedIn Premium Business, Recruiter Lite, Sales Navigator for 4 months |
+| **Ops** | Explore Stripe $25k Fee-Free Processing (MS Startups) | Pending | A | $25,000 in fee-free payment processing — activate via Founders Hub partner benefits |
+| **Ops** | Explore GitHub Copilot (MS Startups) | Pending | A | AI coding assistant — check if included in GitHub Enterprise benefit |
+| **Ops** | Explore Azure 24/7 Standard Support (MS Startups) | Pending | B | Free standard support tier — activate for bashiraaliya@gmail.com account |
+| **Ops** | Explore Expert Network Access (MS Startups) | Pending | B | 1-on-1 sessions with mentors — fundraising, GTM, product |
+| **Ops** | Explore Partner Benefits Marketplace (MS Startups) | Pending | B | No-code tools, analytics, and other partner discounts — review full list at portal.startups.microsoft.com |
+| **Finance** | Redeem Azure $100k Credit (MS Startups) | Pending | A | Wait for $5k sponsorship to deplete first. Deadline: June 21, 2026. SR# 2603240010004221 |
+
 ---
 
 ## Wellstar Dashboard Progress
