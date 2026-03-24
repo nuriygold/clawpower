@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-03-24T13:29:20Z",
+  "crontab": [
+    {"schedule": "*/5 * * * *", "command": "/Users/claw/openclaw/workspace/sync_openclaw_config.sh >> /Users/claw/openclaw/workspace/logs/config-sync.log 2>&1"}
+  ],
+  "launchagents": [
+    {"label": "com.openclaw.cors-proxy", "pid": "11406", "last_exit": "0"},
+    {"label": "com.openclaw.tunnel", "pid": "12018", "last_exit": "0"},
+    {"label": "com.aaliya.telegram-executive-log", "pid": "-", "last_exit": "127"},
+    {"label": "ai.openclaw.gateway", "pid": "23013", "last_exit": "0"}
+  ]
+}
