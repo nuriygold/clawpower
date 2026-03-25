@@ -1,8 +1,48 @@
 {
-  "fetched_at": "2026-03-25T04:40:05Z",
+  "fetched_at": "2026-03-25T12:25:06Z",
   "account": "adrian@nuriy.com",
   "count": 10,
   "emails": [
+    {
+      "id": "128",
+      "subject": "Fwd: Follow-up notification | RE: Activating Azure - TrackingID#2603240010004221",
+      "from": "Aaliya Bashir",
+      "date": "2026-03-25 07:12-04:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "127",
+      "subject": "Facing Violations? Join Our Support Community",
+      "from": "TikTok Shop",
+      "date": "2026-03-25 07:20+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "126",
+      "subject": "Fwd: Your LegalZoom Receipt for Order #90682067",
+      "from": "Aaliya Bashir",
+      "date": "2026-03-25 01:34-04:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "125",
+      "subject": "Fwd: Transaction Receipt from Dunlap Bennett & Ludwig PLLC for $699.00 (USD)",
+      "from": "Aaliya Bashir",
+      "date": "2026-03-25 01:31-04:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "124",
+      "subject": "Fwd: \ud83c\udfc6 Scaling Solo | Applications Now Open",
+      "from": "Aaliya Bashir",
+      "date": "2026-03-25 01:21-04:00",
+      "flags": [],
+      "flagged": false
+    },
     {
       "id": "123",
       "subject": "Fwd: Your balance is at or below zero",
@@ -40,46 +80,6 @@
       "subject": "Apple Services: $24.99\u00a0USD",
       "from": "PayPal",
       "date": "2026-03-24 13:38-07:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "118",
-      "subject": "\ud83d\udcd6 Update on the Flash Sale Rules in the LIVE Room",
-      "from": "TikTok Shop",
-      "date": "2026-03-24 20:14+00:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "117",
-      "subject": "$20.52 payment to Firecrawl was unsuccessful again",
-      "from": "Firecrawl",
-      "date": "2026-03-24 10:54+00:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "116",
-      "subject": "SuperJeweler.com Inc (US) has invited you to join their program",
-      "from": "Awin",
-      "date": "2026-03-24 10:43+00:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "115",
-      "subject": "A new device has logged in to your Shopify account",
-      "from": "Shopify",
-      "date": "2026-03-24 01:35+00:00",
-      "flags": [],
-      "flagged": true
-    },
-    {
-      "id": "114",
-      "subject": "New login from iOS (Mobile Safari)",
-      "from": "Link",
-      "date": "2026-03-24 00:18+00:00",
       "flags": [],
       "flagged": false
     }
