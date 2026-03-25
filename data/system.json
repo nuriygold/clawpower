@@ -1,0 +1,7 @@
+{
+  "generated_at": "2026-03-25T16:58:30Z",
+  "mac":{"hostname":"Claws-Mac-mini","os":"macos 26.2 (arm64)","ip":"192.168.0.179"},
+  "gateway":{"url":"http://127.0.0.1:18789","status":"running","pid":2006,"latency_ms":30},
+  "icloud":{"nuriy_account":{"status":"complete","completed_at":"2026-03-23T12:21:00Z"},"aaliya_account":{"status":"in_progress","last_seen_folder":"2020-03"}},
+  "openclaw":{"version":"2026.3.23-2","agents":4,"active_sessions":10}
+}
