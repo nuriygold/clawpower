@@ -1,69 +1,15 @@
 {
-  "generated_at": "2026-03-24T22:00:01Z",
+  "generated_at": "2026-03-25T16:58:30Z",
+  "gateway": {
+    "url": "http://127.0.0.1:18789",
+    "status": "running",
+    "pid": 2006,
+    "hostname": "Claws-Mac-mini"
+  },
   "agents": [
-    {
-      "name": "main",
-      "role": "Chief of Staff",
-      "service": "ai.openclaw.gateway",
-      "port": 18789,
-      "pid": "53907",
-      "status": "running"
-    },
-    {
-      "name": "ops-agent",
-      "role": "Ops Agent",
-      "service": "ai.openclaw.gateway",
-      "port": 18789,
-      "pid": "53907",
-      "status": "running"
-    },
-    {
-      "name": "grant-agent",
-      "role": "Grant Agent",
-      "service": "ai.openclaw.gateway",
-      "port": 18789,
-      "pid": "53907",
-      "status": "running"
-    },
-    {
-      "name": "memory-agent",
-      "role": "Memory Agent",
-      "service": "ai.openclaw.gateway",
-      "port": 18789,
-      "pid": "53907",
-      "status": "running"
-    },
-    {
-      "name": "tunnel",
-      "role": "Cloudflare Tunnel",
-      "service": "com.openclaw.tunnel",
-      "port": 18790,
-      "pid": "12018",
-      "status": "running"
-    },
-    {
-      "name": "cors-proxy",
-      "role": "CORS Proxy",
-      "service": "com.openclaw.cors-proxy",
-      "port": 18790,
-      "pid": "11406",
-      "status": "running"
-    },
-    {
-      "name": "dashboard-exec",
-      "role": "Dashboard Exec Agent",
-      "service": "com.openclaw.dashboard-exec-agent",
-      "port": 8787,
-      "pid": null,
-      "status": "stopped"
-    },
-    {
-      "name": "telegram-log",
-      "role": "Telegram Executive Log",
-      "service": "com.aaliya.telegram-executive-log",
-      "port": null,
-      "pid": null,
-      "status": "stopped"
-    }
+    {"id":"main","model":"azure-openai-responses/gpt-4.1","heartbeat":"30m","status":"active"},
+    {"id":"grant-agent","model":"azure-openai-responses/gpt-4.1","heartbeat":"disabled","status":"idle"},
+    {"id":"memory-agent","model":"azure-openai-responses/gpt-4.1","heartbeat":"disabled","status":"idle"},
+    {"id":"ops-agent","model":"azure-openai-responses/gpt-4.1","heartbeat":"disabled","status":"idle"}
   ]
 }
