@@ -1,19 +1,17 @@
 {
-  "updated": "2026-03-25T17:27:33.286Z",
+  "updated": "2026-03-25T23:11:14.800Z",
   "os": "macos 26.2 (arm64)",
   "node": "25.8.0",
-  "gateway": "running",
+  "gateway": "reachable",
+  "gateway_latency_ms": 13,
   "tailscale": "off",
   "channel": "stable",
-  "security": {
-    "critical": 0,
-    "warn": 3,
-    "info": 1
-  },
-  "sessions": 10,
-  "memory_files": 24,
+  "sessions": 1,
+  "default_model": "gpt-4.1",
   "heartbeat_main": "30m",
   "heartbeat_grant": "disabled",
   "heartbeat_memory": "disabled",
-  "heartbeat_ops": "disabled"
+  "heartbeat_ops": "disabled",
+  "syncs_paused": true,
+  "audit_in_progress": true
 }
