@@ -1,73 +1,59 @@
 {
-  "updated": "2026-03-25T17:27:33.286Z",
+  "updated": "2026-03-25T23:11:14.800Z",
+  "note": "Multiple tasks disabled — investigation in progress",
   "crons": [
     {
       "taskId": "morning-email-management",
-      "description": "Daily 7 AM ET email triage + Telegram summary",
-      "schedule": "0 4 * * *",
-      "enabled": true,
+      "enabled": false,
       "lastRunAt": "2026-03-25T16:57:23.632Z",
-      "nextRunAt": "2026-03-26T11:06:35.000Z"
+      "schedule": "0 4 * * *"
     },
     {
       "taskId": "ops-agent-email-triage",
-      "description": "Hourly email triage — classify, draft, queue, log",
-      "schedule": "0 * * * *",
-      "enabled": true,
-      "lastRunAt": "2026-03-25T17:22:01.482Z",
-      "nextRunAt": "2026-03-25T18:02:14.000Z"
+      "enabled": false,
+      "lastRunAt": "2026-03-25T21:02:17.871Z",
+      "schedule": "0 * * * *"
     },
     {
       "taskId": "social-media-brief-biweekly",
-      "description": "Bi-weekly social media content brief — Mondays 9am",
-      "schedule": "0 9 * * 1",
       "enabled": true,
-      "nextRunAt": "2026-03-30T16:02:37.000Z"
-    },
-    {
-      "taskId": "azure-credit-depletion-check",
-      "description": "Weekly Wednesday Azure $5k credit check",
-      "schedule": "0 9 * * 3",
-      "enabled": true,
-      "lastRunAt": "2026-03-25T16:42:00.110Z",
-      "nextRunAt": "2026-04-01T16:04:09.000Z"
+      "nextRunAt": "2026-03-30T16:02:37.000Z",
+      "schedule": "0 9 * * 1"
     },
     {
       "taskId": "azure-100k-credit-reminder",
-      "description": "Reminder: redeem $100k Azure for Startups credit",
-      "schedule": "one-time",
-      "fireAt": "2026-06-21T13:00:00.000Z",
-      "enabled": true
+      "enabled": true,
+      "fireAt": "2026-06-21T13:00:00.000Z"
     },
     {
-      "taskId": "system-watchdog-escalation",
-      "description": "Every-5-min watchdog: gateway + agent health → Telegram alert",
-      "schedule": "*/5 * * * *",
-      "enabled": true,
-      "lastRunAt": "2026-03-25T17:01:09.379Z",
-      "nextRunAt": "2026-03-25T17:31:33.000Z"
-    },
-    {
-      "taskId": "daily-system-digest",
-      "description": "Daily 8am Telegram digest: errors, blocked jobs, agent health",
-      "schedule": "0 8 * * *",
-      "enabled": true,
-      "nextRunAt": "2026-03-26T15:01:32.000Z"
+      "taskId": "azure-credit-depletion-check",
+      "enabled": false,
+      "lastRunAt": "2026-03-25T16:42:00.110Z",
+      "schedule": "0 9 * * 3"
     },
     {
       "taskId": "push-task-pool-github",
-      "description": "Daily sync of task-pool.md to clawpower GitHub",
-      "schedule": "0 9 * * *",
-      "enabled": true,
+      "enabled": false,
       "lastRunAt": "2026-03-25T17:21:04.261Z",
-      "nextRunAt": "2026-03-26T16:07:15.000Z"
+      "schedule": "0 9 * * *"
+    },
+    {
+      "taskId": "system-watchdog-escalation",
+      "enabled": false,
+      "lastRunAt": "2026-03-25T21:24:03.954Z",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "taskId": "daily-system-digest",
+      "enabled": true,
+      "nextRunAt": "2026-03-26T15:01:32.000Z",
+      "schedule": "0 8 * * *"
     },
     {
       "taskId": "dashboard-data-generators",
-      "description": "Every 30 min: build + push agents/system/crons JSON",
-      "schedule": "*/30 * * * *",
-      "enabled": true,
-      "nextRunAt": "2026-03-25T17:33:21.000Z"
+      "enabled": false,
+      "lastRunAt": "2026-03-25T19:19:03.673Z",
+      "schedule": "*/30 * * * *"
     }
   ]
 }
