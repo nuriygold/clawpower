@@ -1,34 +1,72 @@
 {
-  "generated_at": "2026-03-24T22:00:01Z",
-  "crontab": [
+  "updated": "2026-03-25T17:07:54.343Z",
+  "crons": [
     {
-      "schedule": "*/5 * * * *",
-      "command": "/Users/claw/openclaw/workspace/sync_openclaw_config.sh >> /Users/claw/openclaw/workspace/logs/config-sync.log 2>&1"
+      "taskId": "morning-email-management",
+      "description": "Daily 7 AM ET email triage, draft replies, archive, and Telegram summary for adrian@nuriy.com and hello@nuriy.com",
+      "schedule": "At 04:07 AM, every day",
+      "cronExpression": "0 4 * * *",
+      "enabled": true,
+      "nextRunAt": "2026-03-26T11:06:35.000Z",
+      "lastRunAt": "2026-03-25T16:57:23.632Z"
     },
     {
-      "schedule": "0 15 * * *",
-      "command": "/Users/claw/openclaw/workspace/sync_openclaw_config.sh >> /Users/claw/openclaw/workspace/logs/sync-openclaw.log 2>&1"
+      "taskId": "ops-agent-email-triage",
+      "description": "Hourly email triage for adrian@nuriy.com and hello@nuriy.com — classify, draft, queue, log",
+      "schedule": "At 2 minutes past the hour, every hour",
+      "cronExpression": "0 * * * *",
+      "enabled": true,
+      "nextRunAt": "2026-03-25T18:02:14.000Z",
+      "lastRunAt": "2026-03-25T16:57:20.091Z"
     },
     {
-      "schedule": "0 3 * * *",
-      "command": "/Users/claw/openclaw/workspace/sync_openclaw_config.sh >> /Users/claw/openclaw/workspace/logs/sync-openclaw.log 2>&1"
-    }
-  ],
-  "launchagents": [
-    {
-      "label": "com.openclaw.cors-proxy",
-      "pid": "11406",
-      "last_exit": "0"
+      "taskId": "social-media-brief-biweekly",
+      "description": "Create & send bi-weekly social media content brief to social media manager",
+      "schedule": "At 09:03 AM, only on Monday",
+      "cronExpression": "0 9 * * 1",
+      "enabled": true,
+      "nextRunAt": "2026-03-30T16:02:37.000Z"
     },
     {
-      "label": "com.openclaw.tunnel",
-      "pid": "12018",
-      "last_exit": "0"
+      "taskId": "azure-100k-credit-reminder",
+      "description": "Reminder to redeem $100k Azure for Startups credit — current $5k must be depleted first",
+      "schedule": "One-time: 6/21/2026, 6:00:00 AM",
+      "fireAt": "2026-06-21T13:00:00.000Z",
+      "enabled": true
     },
     {
-      "label": "ai.openclaw.gateway",
-      "pid": "53907",
-      "last_exit": "0"
+      "taskId": "azure-credit-depletion-check",
+      "description": "Weekly Wednesday check — confirm Azure $5k credit depleting on schedule",
+      "schedule": "At 09:04 AM, only on Wednesday",
+      "cronExpression": "0 9 * * 3",
+      "enabled": true,
+      "nextRunAt": "2026-04-01T16:04:09.000Z",
+      "lastRunAt": "2026-03-25T16:42:00.110Z"
+    },
+    {
+      "taskId": "system-watchdog-escalation",
+      "description": "Every-5-min watchdog: checks OpenClaw gateway + agent health, fires Telegram alert on silence or failure",
+      "schedule": "Every 5 minutes",
+      "cronExpression": "*/5 * * * *",
+      "enabled": true,
+      "nextRunAt": "2026-03-25T17:11:33.000Z",
+      "lastRunAt": "2026-03-25T17:01:09.379Z"
+    },
+    {
+      "taskId": "daily-system-digest",
+      "description": "Daily 8am digest: aggregates errors, blocked jobs, agent health, sends concise Telegram summary",
+      "schedule": "At 08:02 AM, every day",
+      "cronExpression": "0 8 * * *",
+      "enabled": true,
+      "nextRunAt": "2026-03-26T15:01:32.000Z"
+    },
+    {
+      "taskId": "dashboard-data-generators",
+      "description": "Every 30 min: generates agents.json, system.json, crons.json for the OpenClaw dashboard",
+      "schedule": "Every 30 minutes",
+      "cronExpression": "*/30 * * * *",
+      "enabled": true,
+      "nextRunAt": "2026-03-25T17:33:21.000Z"
     }
   ]
 }
