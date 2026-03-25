@@ -1,6 +1,10 @@
 {
-  "generated_at": "2026-03-25T16:58:30Z",
-  "note": "Live triage data populated by ops-agent hourly.",
-  "pending":[],
-  "decided":[]
+  "updated": "2026-03-25T17:27:33.286Z",
+  "source": "morning-email-management run 2026-03-25T16:57:23Z",
+  "account": "adrian@nuriy.com",
+  "count": 11,
+  "flagged": 0,
+  "action_needed": 3,
+  "automated": 8,
+  "summary": "3 action-needed emails with drafts saved to email-drafts/. 8 automated (GDG calendar, TikTok Shop). No flagged security items."
 }
