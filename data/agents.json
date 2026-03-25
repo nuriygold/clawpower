@@ -1,58 +1,48 @@
 {
-  "updated": "2026-03-25T17:27:33.286Z",
+  "updated": "2026-03-25T23:11:14.800Z",
   "gateway": {
-    "status": "running",
-    "pid": 2006,
+    "status": "reachable",
+    "latency_ms": 13,
+    "pid": 11527,
     "host": "Claws-Mac-mini",
-    "ip": "192.168.0.179",
-    "latency_ms": 11
+    "ip": "192.168.0.179"
   },
   "agents": [
     {
       "id": "main",
-      "model": "azure-openai-responses/gpt-4.1",
+      "model": "gpt-4.1",
       "heartbeat": "30m",
-      "session_age": "just now",
-      "tokens_used": "194k/1048k",
-      "cached_pct": 99,
+      "session_age": "12m ago",
       "status": "active"
     },
     {
       "id": "grant-agent",
-      "model": "azure-openai-responses/gpt-4.1",
+      "model": "gpt-4.1",
       "heartbeat": "disabled",
-      "session_age": "15m ago",
-      "tokens_used": "90k/1048k",
-      "cached_pct": 99,
       "status": "idle"
     },
     {
       "id": "memory-agent",
-      "model": "azure-openai-responses/gpt-4.1",
+      "model": "gpt-4.1",
       "heartbeat": "disabled",
-      "session_age": null,
-      "tokens_used": null,
       "status": "idle"
     },
     {
       "id": "ops-agent",
-      "model": "azure-openai-responses/gpt-4.1",
+      "model": "gpt-4.1",
       "heartbeat": "disabled",
-      "session_age": null,
-      "tokens_used": null,
       "status": "idle"
     }
   ],
-  "sessions_active": 10,
+  "sessions_active": 1,
   "telegram": {
     "enabled": true,
     "state": "OK"
   },
-  "memory": {
-    "files": 24,
-    "chunks": 69,
-    "vector": "ready",
-    "fts": "ready"
+  "security": {
+    "critical": 1,
+    "warn": 3,
+    "info": 1
   },
   "update_available": "2026.3.24"
 }
