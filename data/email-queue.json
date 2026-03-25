@@ -1,34 +1,6 @@
 {
-  "generated_at": "2026-03-24T22:00:01Z",
-  "accounts": [
-    {
-      "address": "hello@nuriy.com",
-      "provider": "Zoho",
-      "status": "pending_migration"
-    },
-    {
-      "address": "bashiraaliya@gmail.com",
-      "provider": "Gmail",
-      "status": "active"
-    },
-    {
-      "address": "bashir.exec@gmail.com",
-      "provider": "Gmail",
-      "status": "active"
-    }
-  ],
-  "triage_log_recent": [
-    "[2026-03-09 16:30:37] Sent telegram triage update: 404",
-    "[Wellstar Inbox Triage @ 2026-03-09 16:30:37]",
-    "Urgent: 0",
-    "Needs Response: 11",
-    "Top Needs Response:",
-    "- Fwd: \ud83d\udc49 Your Next Chief of Staff \u2014 No Hire Required",
-    "- Fwd: [ACTION REQUIRED] How did GenAI study group for Busines",
-    "- Fwd: Technical Business Analyst _Atlanta, GA 30334 (Hybrid)_"
-  ],
-  "imap_state": {
-    "error": "parse_failed"
-  },
-  "notes": "himalaya Zoho auth intermittent \u2014 GoDaddy migration pending"
+  "generated_at": "2026-03-25T16:58:30Z",
+  "accounts":[{"email":"adrian@nuriy.com","provider":"zoho","status":"active"},{"email":"hello@nuriy.com","provider":"zoho","status":"active"},{"email":"hello@nuriy.com","provider":"godaddy-m365","status":"migrating"}],
+  "triage_agent":"ops-agent",
+  "outbox_job":"Universal Email Outbox (every 15 min)"
 }
