@@ -1,9 +1,8 @@
 {
-  "generated_at": "2026-03-26T02:07:37Z",
+  "generated_at": "2026-03-26T03:04:35Z",
   "accounts": ["adrian@nuriy.com", "hello@nuriy.com"],
   "triage_status": "last run 2026-03-26T01:46:05Z",
-  "last_fetch": "2026-03-26T02:07:37Z",
   "emails_triaged": 0,
   "flagged": 0,
-  "note": "SMTP auth off - himalaya config being migrated to IMAP-only mode"
+  "note": "SMTP auth off - migrating to IMAP-only"
 }
