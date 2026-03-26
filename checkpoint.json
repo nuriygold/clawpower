@@ -1,0 +1,34 @@
+{
+  "checkpoint_date": "2026-03-26",
+  "session": 3,
+  "timestamp_edt": "2026-03-26 evening",
+  "agent": "Adrian Cole (Claw)",
+  "gateway_status": "healthy",
+  "gateway_version": "2026.3.24",
+  "active_model": "gpt-5-mini",
+  "telegram_status": "OK -- allowlist mode, ID 8413445013",
+  "completed_this_session": [
+    "Gateway confirmed healthy (0 critical, 1 warn non-issue)",
+    "secrets.json root copy confirmed as fix -- all 9 scripts hardcode ~/.openclaw/secrets.json",
+    "nuriy-context skill rebuilt with full identity docs baked in",
+    ".skill file packaged at /Users/claw/openclaw/workspace/skills/nuriy-context.skill",
+    "memory/2026-03-26.md session 3 update written and synced Leg2->Leg1",
+    "auto-memory updated: triplet secrets policy + nuriy-context skill reference",
+    "secrets.json JSON syntax error fixed (missing commas on line 21) and both copies synced"
+  ],
+  "pending": [
+    "Dead file moves batches 2-7",
+    "LovHack Season 2 -- concept + register (deadline Sat Mar 28 6pm PDT)",
+    "Auth0 Authorized to Act -- register (deadline Apr 7)",
+    "Georgia Power $300 -- due Mon Mar 30",
+    "Tax returns -- due Apr 15",
+    "Install nuriy-context.skill in Cowork",
+    "git add -A && git commit -m 'checkpoint 2026-03-26 session3' && git push (Mac Terminal)"
+  ],
+  "secrets_policy": {
+    "canonical": "~/.openclaw/workspace/secrets.json",
+    "runtime_copy": "~/.openclaw/secrets.json",
+    "note": "Both required. All scripts hardcode root path. Update workspace copy first, then cp to root."
+  },
+  "step_4_required": "Run from Mac Terminal: cd /Users/claw/openclaw/workspace && git add -A && git commit -m 'checkpoint 2026-03-26 session3' && git push"
+}
