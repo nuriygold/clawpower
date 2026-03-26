@@ -1,59 +1,17 @@
 {
-  "updated": "2026-03-25T23:11:14.800Z",
-  "note": "Multiple tasks disabled — investigation in progress",
-  "crons": [
-    {
-      "taskId": "morning-email-management",
-      "enabled": false,
-      "lastRunAt": "2026-03-25T16:57:23.632Z",
-      "schedule": "0 4 * * *"
-    },
-    {
-      "taskId": "ops-agent-email-triage",
-      "enabled": false,
-      "lastRunAt": "2026-03-25T21:02:17.871Z",
-      "schedule": "0 * * * *"
-    },
-    {
-      "taskId": "social-media-brief-biweekly",
-      "enabled": true,
-      "nextRunAt": "2026-03-30T16:02:37.000Z",
-      "schedule": "0 9 * * 1"
-    },
-    {
-      "taskId": "azure-100k-credit-reminder",
-      "enabled": true,
-      "fireAt": "2026-06-21T13:00:00.000Z"
-    },
-    {
-      "taskId": "azure-credit-depletion-check",
-      "enabled": false,
-      "lastRunAt": "2026-03-25T16:42:00.110Z",
-      "schedule": "0 9 * * 3"
-    },
-    {
-      "taskId": "push-task-pool-github",
-      "enabled": false,
-      "lastRunAt": "2026-03-25T17:21:04.261Z",
-      "schedule": "0 9 * * *"
-    },
-    {
-      "taskId": "system-watchdog-escalation",
-      "enabled": false,
-      "lastRunAt": "2026-03-25T21:24:03.954Z",
-      "schedule": "*/5 * * * *"
-    },
-    {
-      "taskId": "daily-system-digest",
-      "enabled": true,
-      "nextRunAt": "2026-03-26T15:01:32.000Z",
-      "schedule": "0 8 * * *"
-    },
-    {
-      "taskId": "dashboard-data-generators",
-      "enabled": false,
-      "lastRunAt": "2026-03-25T19:19:03.673Z",
-      "schedule": "*/30 * * * *"
-    }
+  "generated_at": "2026-03-26T02:07:37Z",
+  "total": 9,
+  "enabled": 8,
+  "disabled": 1,
+  "tasks": [
+    {"taskId": "morning-email-management", "description": "Daily 7 AM ET email triage", "cronExpression": "0 4 * * *", "enabled": false, "lastRunAt": "2026-03-25T16:57:23.632Z"},
+    {"taskId": "ops-agent-email-triage", "description": "Hourly email triage", "cronExpression": "0 * * * *", "enabled": true, "nextRunAt": "2026-03-26T03:02:14.000Z", "lastRunAt": "2026-03-26T01:46:05.135Z"},
+    {"taskId": "social-media-brief-biweekly", "description": "Bi-weekly social media content brief", "cronExpression": "0 9 * * 1", "enabled": true, "nextRunAt": "2026-03-30T16:02:37.000Z"},
+    {"taskId": "azure-100k-credit-reminder", "description": "Reminder to redeem $100k Azure credit", "fireAt": "2026-06-21T13:00:00.000Z", "enabled": true},
+    {"taskId": "azure-credit-depletion-check", "description": "Daily Azure $5k credit check", "cronExpression": "52 9 * * *", "enabled": true, "nextRunAt": "2026-03-26T16:56:09.000Z", "lastRunAt": "2026-03-26T01:46:05.161Z"},
+    {"taskId": "push-task-pool-github", "description": "Daily sync task-pool.md to clawpower", "cronExpression": "0 9 * * *", "enabled": true, "nextRunAt": "2026-03-26T16:07:15.000Z", "lastRunAt": "2026-03-25T17:21:04.261Z"},
+    {"taskId": "system-watchdog-escalation", "description": "Hourly gateway + agent watchdog", "cronExpression": "0 * * * *", "enabled": true, "nextRunAt": "2026-03-26T03:03:33.000Z", "lastRunAt": "2026-03-26T01:44:05.163Z"},
+    {"taskId": "daily-system-digest", "description": "Daily 8am system digest", "cronExpression": "0 8 * * *", "enabled": true, "nextRunAt": "2026-03-26T15:01:32.000Z"},
+    {"taskId": "dashboard-data-generators", "description": "Every 60 min: dashboard data generation", "cronExpression": "0 * * * *", "enabled": true, "nextRunAt": "2026-03-26T03:03:21.000Z", "lastRunAt": "2026-03-25T19:19:03.673Z"}
   ]
 }
