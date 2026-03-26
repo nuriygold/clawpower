@@ -1,4 +1,4 @@
-import { Clock } from 'lucide-react';
+import { Clock, CheckCircle, XCircle } from 'lucide-react';
 import { PanelWrapper } from './PanelWrapper';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCronsGH, cronToHuman, type GHCronsData } from '@/lib/github-data';
@@ -24,6 +24,7 @@ export function CronJobs() {
 
   const crontab = data?.crontab ?? [];
   const launchagents = data?.launchagents ?? [];
+  const tasks = data?.tasks ?? [];
   const syncLabel = dataUpdatedAt
     ? `Last synced: ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`
     : '';
@@ -33,15 +34,15 @@ export function CronJobs() {
       {syncLabel && <p className="text-xs text-muted-foreground/60 mb-3">{syncLabel}</p>}
 
       <div className="grid gap-4 lg:grid-cols-2">
-        {/* Crontab */}
+        {/* Crontab or Tasks */}
         <div>
-          <h3 className="font-mono text-xs font-semibold text-foreground mb-2">Crontab</h3>
+          <h3 className="font-mono text-xs font-semibold text-foreground mb-2">Scheduled Tasks</h3>
           <div className="rounded-md border overflow-hidden">
             <table className="w-full text-xs">
               <thead>
                 <tr className="bg-muted/30 text-muted-foreground">
                   <th className="text-left px-3 py-1.5 font-medium">Schedule</th>
-                  <th className="text-left px-3 py-1.5 font-medium">Command</th>
+                  <th className="text-left px-3 py-1.5 font-medium">Task</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,8 +57,36 @@ export function CronJobs() {
                     </td>
                   </tr>
                 ))}
-                {crontab.length === 0 && (
-                  <tr><td colSpan={2} className="px-3 py-4 text-center text-muted-foreground">No crontab entries</td></tr>
+                {tasks.map((t) => (
+                  <tr key={t.taskId} className="border-t border-border/50">
+                    <td className="px-3 py-2 whitespace-nowrap">
+                      {t.cronExpression ? (
+                        <>
+                          <span className="font-mono text-foreground">{t.cronExpression}</span>
+                          <span className="text-muted-foreground ml-2">({cronToHuman(t.cronExpression)})</span>
+                        </>
+                      ) : (
+                        <span className="text-muted-foreground italic">—</span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-muted-foreground max-w-[200px]">
+                      <div className="flex items-center gap-1.5">
+                        {t.enabled
+                          ? <CheckCircle className="h-3 w-3 text-success shrink-0" />
+                          : <XCircle className="h-3 w-3 text-muted-foreground/40 shrink-0" />
+                        }
+                        <span className={`font-mono truncate ${t.enabled ? 'text-foreground' : 'text-muted-foreground/40 line-through'}`} title={t.description || t.taskId}>
+                          {t.taskId}
+                        </span>
+                      </div>
+                      {t.description && (
+                        <p className="text-[10px] text-muted-foreground/60 mt-0.5 truncate" title={t.description}>{t.description}</p>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+                {crontab.length === 0 && tasks.length === 0 && (
+                  <tr><td colSpan={2} className="px-3 py-4 text-center text-muted-foreground">No scheduled tasks</td></tr>
                 )}
               </tbody>
             </table>

@@ -45,6 +45,30 @@ export function SystemStatusBar() {
         </>
       )}
 
+      {data.smtp && (
+        <>
+          <span className="text-border">│</span>
+          <span className="flex items-center gap-1.5">
+            <span className={`h-1.5 w-1.5 rounded-full ${data.smtp.status === 'ON' ? 'bg-success' : 'bg-muted-foreground'}`} />
+            SMTP {data.smtp.status}
+          </span>
+        </>
+      )}
+
+      {data.security && data.security.critical > 0 && (
+        <>
+          <span className="text-border">│</span>
+          <span className="text-destructive">{data.security.critical} critical alert{data.security.critical !== 1 ? 's' : ''}</span>
+        </>
+      )}
+
+      {data.model && (
+        <>
+          <span className="text-border">│</span>
+          <span className="font-mono">{data.model}</span>
+        </>
+      )}
+
       <span className="ml-auto text-muted-foreground/60">Synced {synced}</span>
     </div>
   );

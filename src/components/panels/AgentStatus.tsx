@@ -40,6 +40,7 @@ export function AgentStatus() {
               <AgentChip key={a.name} agent={a} />
             ))}
           </div>
+
         </div>
       )}
 
@@ -48,14 +49,15 @@ export function AgentStatus() {
         {otherAgents.map((a) => (
           <div key={a.name} className="rounded-md border bg-muted/20 p-3">
             <div className="flex items-center gap-2 mb-1">
-              <span className={`h-2.5 w-2.5 rounded-full ${a.status === 'running' ? 'bg-success' : 'bg-destructive'}`} />
+              <span className={`h-2.5 w-2.5 rounded-full ${a.status === 'running' || a.status === 'active' ? 'bg-success' : 'bg-destructive'}`} />
               <span className="font-mono font-semibold text-sm text-foreground">{a.name}</span>
             </div>
-            <p className="text-xs text-muted-foreground">{a.role}</p>
+            <p className="text-xs text-muted-foreground">{a.role ?? a.model ?? '—'}</p>
             <div className="flex gap-3 text-xs text-muted-foreground mt-1">
               {a.pid && <span>PID {a.pid}</span>}
               {a.port && <span>:{a.port}</span>}
-              {!a.pid && <span className="text-destructive">stopped</span>}
+              {a.sessions != null && <span>{a.sessions} session{a.sessions !== 1 ? 's' : ''}</span>}
+              {!a.pid && !a.sessions && <span className="text-destructive">stopped</span>}
             </div>
           </div>
         ))}
@@ -70,7 +72,7 @@ function AgentChip({ agent }: { agent: GHAgent }) {
   return (
     <div className="rounded border bg-muted/10 px-3 py-1.5 text-xs">
       <span className="font-mono font-medium text-foreground">{agent.name}</span>
-      <span className="text-muted-foreground ml-2">{agent.role}</span>
+      {(agent.role ?? agent.model) && <span className="text-muted-foreground ml-2">{agent.role ?? agent.model}</span>}
     </div>
   );
 }
