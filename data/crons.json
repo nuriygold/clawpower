@@ -1,17 +1,1 @@
-{
-  "generated_at": "2026-03-26T04:16:52Z",
-  "total": 9,
-  "enabled": 8,
-  "disabled": 1,
-  "tasks": [
-    {"taskId": "morning-email-management", "cronExpression": "0 4 * * *", "enabled": false, "lastRunAt": "2026-03-25T16:57:23.632Z"},
-    {"taskId": "ops-agent-email-triage", "cronExpression": "0 * * * *", "enabled": true, "lastRunAt": "2026-03-26T01:46:05.135Z"},
-    {"taskId": "social-media-brief-biweekly", "cronExpression": "0 9 * * 1", "enabled": true, "nextRunAt": "2026-03-30T16:02:37.000Z"},
-    {"taskId": "azure-100k-credit-reminder", "fireAt": "2026-06-21T13:00:00.000Z", "enabled": true},
-    {"taskId": "azure-credit-depletion-check", "cronExpression": "52 9 * * *", "enabled": true, "lastRunAt": "2026-03-26T01:46:05.161Z"},
-    {"taskId": "push-task-pool-github", "cronExpression": "0 9 * * *", "enabled": true, "lastRunAt": "2026-03-25T17:21:04.261Z"},
-    {"taskId": "system-watchdog-escalation", "cronExpression": "0 * * * *", "enabled": true, "lastRunAt": "2026-03-26T01:44:05.163Z"},
-    {"taskId": "daily-system-digest", "cronExpression": "0 8 * * *", "enabled": true},
-    {"taskId": "dashboard-data-generators", "cronExpression": "0 * * * *", "enabled": true, "lastRunAt": "2026-03-25T19:19:03.673Z"}
-  ]
-}
+{"generated_at":"2026-03-26T02:57:00Z","total":10,"enabled":9,"disabled":1,"tasks":[{"taskId":"daily-morning-brief","description":"4am daily brief — Rudolph/Nuriy/Wellstar/email → Telegram","cronExpression":"0 4 * * *","enabled":true},{"taskId":"morning-email-management","description":"Retired — replaced by daily-morning-brief","enabled":false},{"taskId":"ops-agent-email-triage","cronExpression":"0 * * * *","enabled":true},{"taskId":"daily-system-digest","cronExpression":"0 8 * * *","enabled":true},{"taskId":"dashboard-data-generators","cronExpression":"0 * * * *","enabled":true},{"taskId":"system-watchdog-escalation","cronExpression":"0 * * * *","enabled":true},{"taskId":"push-task-pool-github","cronExpression":"0 9 * * *","enabled":true},{"taskId":"social-media-brief-biweekly","cronExpression":"0 9 * * 1","enabled":true},{"taskId":"azure-100k-credit-reminder","enabled":true},{"taskId":"azure-credit-depletion-check","cronExpression":"52 9 * * *","enabled":true}]}
