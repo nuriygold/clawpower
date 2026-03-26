@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-03-26T02:07:37Z",
+  "generated_at": "2026-03-26T03:04:35Z",
   "account": "adrian@nuriy.com",
   "queue_depth": 3,
   "drafts": [
-    {"file": "20260325-170953-Fwd__Technical_Business_Analyst__At-draft.txt", "date": "2026-03-25T17:09:53Z", "subject": "Fwd: Technical Business Analyst At...", "status": "draft"},
-    {"file": "20260325-170953-Fwd___ACTION_REQUIRED__How_did_GenA-draft.txt", "date": "2026-03-25T17:09:53Z", "subject": "Fwd: ACTION REQUIRED: How did GenA...", "status": "draft"},
-    {"file": "20260325-170953-Fwd____Your_Next_Chief_of_Staff___N-draft.txt", "date": "2026-03-25T17:09:53Z", "subject": "Fwd: Your Next Chief of Staff (N...)", "status": "draft"}
+    {"subject": "Fwd: Technical Business Analyst At...", "date": "2026-03-25T17:09:53Z", "status": "draft"},
+    {"subject": "Fwd: ACTION REQUIRED: How did GenA...", "date": "2026-03-25T17:09:53Z", "status": "draft"},
+    {"subject": "Fwd: Your Next Chief of Staff (N...)", "date": "2026-03-25T17:09:53Z", "status": "draft"}
   ]
 }
