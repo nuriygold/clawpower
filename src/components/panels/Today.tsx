@@ -49,15 +49,15 @@ export function Today({ onNavigate }: Props) {
   const pendingEmails = triageData?.pending_decisions ?? [];
   const recentPending = pendingEmails.slice(0, 3);
 
-  const gwOnline = systemData?.gateway.status === 'online';
-  const icloudRunning = systemData?.icloud_sync.status === 'running';
-  const uptime = systemData?.mac.uptime
+  const gwOnline = systemData?.gateway?.status === 'online';
+  const icloudRunning = systemData?.icloud_sync?.status === 'running';
+  const uptime = systemData?.mac?.uptime
     ? systemData.mac.uptime.replace(/^[\d:]+\s+/, '').split(',').slice(0, 2).join(',').trim()
     : '—';
 
   const agents = agentsData?.agents ?? [];
-  const runningAgents = agents.filter(a => a.status === 'running');
-  const stoppedAgents = agents.filter(a => a.status !== 'running');
+  const runningAgents = agents.filter(a => a.status === 'running' || a.status === 'active');
+  const stoppedAgents = agents.filter(a => a.status !== 'running' && a.status !== 'active');
   const launchAgents = cronsData?.launchagents ?? [];
   const failedLA = launchAgents.filter(la => !la.pid);
 
@@ -106,13 +106,15 @@ export function Today({ onNavigate }: Props) {
               <span className="text-foreground">Gateway</span>
               <span className="text-muted-foreground ml-auto">{gwOnline ? 'Online' : 'Offline'}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className={`h-2 w-2 rounded-full ${icloudRunning ? 'bg-success' : 'bg-destructive'}`} />
-              <span className="text-foreground">iCloud Sync</span>
-              <span className="text-muted-foreground ml-auto">
-                {icloudRunning ? `${systemData?.icloud_sync.photo_folder_count} folders` : 'Stopped'}
-              </span>
-            </div>
+            {systemData?.icloud_sync && (
+              <div className="flex items-center gap-2">
+                <span className={`h-2 w-2 rounded-full ${icloudRunning ? 'bg-success' : 'bg-destructive'}`} />
+                <span className="text-foreground">iCloud Sync</span>
+                <span className="text-muted-foreground ml-auto">
+                  {icloudRunning ? `${systemData.icloud_sync.photo_folder_count} folders` : 'Stopped'}
+                </span>
+              </div>
+            )}
             <div className="flex items-center gap-2">
               <Cloud className="h-3 w-3 text-muted-foreground" />
               <span className="text-foreground">Uptime</span>

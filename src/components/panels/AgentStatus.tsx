@@ -15,6 +15,7 @@ export function AgentStatus() {
   const gatewayAgents = agents.filter((a) => a.service === 'ai.openclaw.gateway');
   const otherAgents = agents.filter((a) => a.service !== 'ai.openclaw.gateway');
   const gatewayRunning = gatewayAgents.some((a) => a.status === 'running');
+  const allAgents = gatewayAgents.length === 0 ? agents : otherAgents;
 
   const syncLabel = dataUpdatedAt
     ? `Last synced: ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`
