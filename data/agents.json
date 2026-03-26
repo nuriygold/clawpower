@@ -1,5 +1,1 @@
-{
-  "generated_at": "2026-03-26T04:16:52Z",
-  "agents": [{"name": "main", "model": "gpt-5-nano", "status": "active", "sessions": 1, "last_active": "active", "heartbeat": "30m"}],
-  "gateway": {"status": "unreachable", "url": "ws://127.0.0.1:18789", "error": "ECONNREFUSED"}
-}
+{"generated_at":"2026-03-26T02:57:00Z","agents":[{"name":"main","model":"gpt-5-nano","status":"active","sessions":1,"last_active":"active","bootstrap_files":false,"heartbeat":"30m"}],"gateway":{"status":"unreachable","url":"ws://127.0.0.1:18789","error":"ECONNREFUSED"}}
