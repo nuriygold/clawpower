@@ -1,48 +1,19 @@
 {
-  "updated": "2026-03-25T23:11:14.800Z",
-  "gateway": {
-    "status": "reachable",
-    "latency_ms": 13,
-    "pid": 11527,
-    "host": "Claws-Mac-mini",
-    "ip": "192.168.0.179"
-  },
+  "generated_at": "2026-03-26T02:07:14Z",
   "agents": [
     {
-      "id": "main",
-      "model": "gpt-4.1",
-      "heartbeat": "30m",
-      "session_age": "12m ago",
-      "status": "active"
-    },
-    {
-      "id": "grant-agent",
-      "model": "gpt-4.1",
-      "heartbeat": "disabled",
-      "status": "idle"
-    },
-    {
-      "id": "memory-agent",
-      "model": "gpt-4.1",
-      "heartbeat": "disabled",
-      "status": "idle"
-    },
-    {
-      "id": "ops-agent",
-      "model": "gpt-4.1",
-      "heartbeat": "disabled",
-      "status": "idle"
+      "name": "main",
+      "model": "gpt-5-nano",
+      "status": "active",
+      "sessions": 1,
+      "last_active": "2h ago",
+      "bootstrap_files": false,
+      "heartbeat": "30m"
     }
   ],
-  "sessions_active": 1,
-  "telegram": {
-    "enabled": true,
-    "state": "OK"
-  },
-  "security": {
-    "critical": 1,
-    "warn": 3,
-    "info": 1
-  },
-  "update_available": "2026.3.24"
+  "gateway": {
+    "status": "unreachable",
+    "url": "ws://127.0.0.1:18789",
+    "error": "ECONNREFUSED"
+  }
 }
