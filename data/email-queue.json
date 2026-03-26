@@ -1,1 +1,19 @@
-{"generated_at":"2026-03-26T02:57:00Z","account":"adrian@nuriy.com","queue_depth":3,"drafts":[{"subject":"Fwd: Technical Business Analyst...","status":"draft"},{"subject":"Fwd: ACTION REQUIRED: How did GenA...","status":"draft"},{"subject":"Fwd: Your Next Chief of Staff...","status":"draft"}]}
+{
+  "generated_at": "2026-03-26T08:30:00Z",
+  "account": "adrian@nuriy.com",
+  "queue_depth": 3,
+  "drafts": [
+    {
+      "file": "20260325-170953-Fwd__Technical_Business_Analyst-draft.txt",
+      "status": "draft"
+    },
+    {
+      "file": "20260325-170953-Fwd___ACTION_REQUIRED-draft.txt",
+      "status": "draft"
+    },
+    {
+      "file": "20260325-170953-Fwd___Your_Next_Chief_of_Staff-draft.txt",
+      "status": "draft"
+    }
+  ]
+}
