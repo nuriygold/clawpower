@@ -1,8 +1,1 @@
-{
-  "generated_at": "2026-03-26T04:16:52Z",
-  "accounts": ["adrian@nuriy.com", "hello@nuriy.com"],
-  "triage_status": "last run 2026-03-26T01:46:05Z",
-  "emails_triaged": 0,
-  "flagged": 0,
-  "note": "SMTP auth off - migrating to IMAP-only"
-}
+{"generated_at":"2026-03-26T02:57:00Z","accounts":["adrian@nuriy.com","hello@nuriy.com"],"triage_status":"last run 2026-03-26T01:46:05Z","emails_triaged":0,"flagged":0,"smtp_auth":"ON","note":"SMTP auth enabled — himalaya operational"}
