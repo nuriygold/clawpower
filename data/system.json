@@ -1,1 +1,33 @@
-{"generated_at":"2026-03-26T02:57:00Z","openclaw_version":"2026.3.24","os":"macos 26.2 arm64","node":"25.8.0","gateway":{"status":"unreachable","type":"local","service":"LaunchAgent loaded running pid 52220","error":"ECONNREFUSED — manual restart pending"},"channels":{"telegram":{"enabled":true,"state":"OK","detail":"token configured — blocked by gateway ECONNREFUSED"}},"smtp":{"status":"ON","note":"SMTP auth enabled 2026-03-25"},"model":"gpt-5-nano","context_window":"400k","security":{"critical":2,"warn":1,"info":1},"update_available":true,"tailscale":"off"}
+{
+  "generated_at": "2026-03-26T08:30:00Z",
+  "openclaw_version": "2026.3.24",
+  "os": "macos 26.2 arm64",
+  "node": "25.8.0",
+  "gateway": {
+    "status": "unreachable",
+    "type": "local",
+    "service": "LaunchAgent loaded · running (pid 47235)",
+    "error": "ECONNREFUSED 127.0.0.1:18789 — MCP connector fixed 2026-03-26, gateway restart still needed in Terminal"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "state": "OK",
+      "detail": "token configured"
+    }
+  },
+  "smtp": {
+    "status": "ON",
+    "note": "SMTP authentication enabled 2026-03-25"
+  },
+  "mcp_connector": {
+    "status": "FIXED",
+    "updated": "2026-03-26",
+    "command": "/Users/claw/.openclaw/workspace/scripts/mcp-env/bin/python3",
+    "args": "/Users/claw/.openclaw/workspace/scripts/openclaw_mcp.py"
+  },
+  "model": "gpt-5-nano",
+  "context_window": "400k",
+  "update_available": true,
+  "tailscale": "off"
+}
