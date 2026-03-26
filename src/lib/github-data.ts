@@ -18,16 +18,24 @@ async function fetchGHJson<T>(filename: string, localFallback: string): Promise<
 
 export interface GHAgent {
   name: string;
-  role: string;
-  service: string;
-  port: number | null;
-  pid: string | null;
+  role?: string;
+  service?: string;
+  port?: number | null;
+  pid?: string | null;
   status: string;
+  model?: string;
+  sessions?: number;
+  last_active?: string;
 }
 
 export interface GHAgentsData {
   generated_at: string;
   agents: GHAgent[];
+  gateway?: {
+    status: string;
+    url?: string;
+    error?: string;
+  };
 }
 
 export interface GHCronEntry {
@@ -41,10 +49,21 @@ export interface GHLaunchAgent {
   last_exit: string;
 }
 
+export interface GHCronTask {
+  taskId: string;
+  description?: string;
+  cronExpression?: string;
+  enabled: boolean;
+}
+
 export interface GHCronsData {
   generated_at: string;
-  crontab: GHCronEntry[];
-  launchagents: GHLaunchAgent[];
+  total?: number;
+  enabled?: number;
+  disabled?: number;
+  tasks?: GHCronTask[];
+  crontab?: GHCronEntry[];
+  launchagents?: GHLaunchAgent[];
 }
 
 export interface GHEmailAccount {
@@ -63,22 +82,37 @@ export interface GHEmailQueueData {
 
 export interface GHSystemData {
   generated_at: string;
+  openclaw_version?: string;
+  os?: string;
+  node?: string;
+  model?: string;
   gateway: {
-    url: string;
-    tunnel_url: string;
-    http_status: number | string;
+    url?: string;
+    tunnel_url?: string;
+    http_status?: number | string;
     status: string;
+    type?: string;
+    error?: string;
   };
-  icloud_sync: {
+  icloud_sync?: {
     status: string;
     pid: string;
     photo_folder_count: number;
     account: string;
     destination: string;
   };
-  mac: {
+  mac?: {
     hostname: string;
     uptime: string;
+  };
+  smtp?: {
+    status: string;
+    note?: string;
+  };
+  security?: {
+    critical: number;
+    warn: number;
+    info: number;
   };
 }
 
