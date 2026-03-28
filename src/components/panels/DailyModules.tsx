@@ -14,7 +14,7 @@ const CURATED_WORDS = [
   { word: 'fortitude', phonetic: '/ˈfɔːrtɪtjuːd/', partOfSpeech: 'noun', definition: 'Courage in pain or adversity; mental strength.', example: 'It takes fortitude to build something from nothing.' },
   { word: 'paradigm', phonetic: '/ˈpærədaɪm/', partOfSpeech: 'noun', definition: 'A typical example or pattern of something; a model.', example: 'The new technology represents a paradigm shift in computing.' },
   { word: 'calibrate', phonetic: '/ˈkælɪbreɪt/', partOfSpeech: 'verb', definition: 'To adjust precisely for a particular function.', example: 'Calibrate your approach based on the data.' },
-  { word: 'momentum', phonetic: '/moʊˈmɛntəm/', partOfSpeech: 'noun', definition: 'The impetus gained by a moving object or process.', example: 'Don't lose momentum — keep shipping.' },
+  { word: 'momentum', phonetic: '/moʊˈmɛntəm/', partOfSpeech: 'noun', definition: 'The impetus gained by a moving object or process.', example: 'Do not lose momentum — keep shipping.' },
   { word: 'arbitrage', phonetic: '/ˈɑːrbɪtrɑːʒ/', partOfSpeech: 'noun', definition: 'The exploitation of price differences in different markets.', example: 'He found an arbitrage opportunity between the two platforms.' },
   { word: 'converge', phonetic: '/kənˈvɜːrdʒ/', partOfSpeech: 'verb', definition: 'To come together from different directions to eventually meet.', example: 'All our efforts converge toward this single goal.' },
   { word: 'inflection', phonetic: '/ɪnˈflɛkʃən/', partOfSpeech: 'noun', definition: 'A point of change; a turning point.', example: 'The company reached an inflection point in its growth.' },
