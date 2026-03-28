@@ -1,5 +1,87 @@
 {
-  "timestamp": "2026-03-26T11:00:48.291Z",
-  "note": "Email fetch skipped — IMAP not accessible from Cowork VM sandbox",
-  "emails": []
+  "fetched_at": "2026-03-28T05:11:29Z",
+  "account": "adrian@nuriy.com",
+  "count": 10,
+  "emails": [
+    {
+      "id": "177",
+      "subject": "Fwd: sds",
+      "from": "Aaliya Bashir",
+      "date": "2026-03-27 20:54-07:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "176",
+      "subject": "Annual Registration Notification 2026",
+      "from": "GA Secretary of State Corporations Division",
+      "date": "2026-03-27 20:39-04:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "175",
+      "subject": "Post1-Slide1-Marc... - @hello@nuriy.com @bashiraaliya@gmail....",
+      "from": "Tina Floersch (Google Docs)",
+      "date": "2026-03-27 12:49-07:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "174",
+      "subject": "BOOMERANG",
+      "from": "Nuriy",
+      "date": "2026-03-27 15:48-04:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "173",
+      "subject": "Your receipt from Anthropic, PBC #2016-0869-6506",
+      "from": "",
+      "date": "2026-03-27 17:51+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "172",
+      "subject": "Reminder - Early access to Changemaker Network is here!",
+      "from": "Kaylee Duncanson",
+      "date": "2026-03-27 16:29+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "171",
+      "subject": "Reminder: New Relic on Azure: AI Observability What the Hack @ Fri Mar 27, 2026 12:00 pm - 08:00 pm (America/Detroit)",
+      "from": "noreply@zohocalendar.com",
+      "date": "2026-03-27 08:45-07:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "170",
+      "subject": "AALIYA, read your renewal notice inside.",
+      "from": "GoDaddy Renewals",
+      "date": "2026-03-27 09:08-06:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "169",
+      "subject": "Microsoft Event Reminder: New Relic on Azure: AI Observability What the Hack is starting soon",
+      "from": "Microsoft Events",
+      "date": "2026-03-27 15:02+00:00",
+      "flags": [],
+      "flagged": false
+    },
+    {
+      "id": "168",
+      "subject": "Your receipt from Anthropic, PBC #2918-8212-7747",
+      "from": "",
+      "date": "2026-03-27 14:37+00:00",
+      "flags": [],
+      "flagged": false
+    }
+  ]
 }
