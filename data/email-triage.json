@@ -1,87 +1,199 @@
 {
-  "fetched_at": "2026-03-28T06:11:37Z",
-  "account": "adrian@nuriy.com",
-  "count": 10,
+  "fetched_at": "2026-03-28T09:23:09.443832Z",
+  "source": "imap.zoho.com / adrian@nuriy.com",
+  "total_inbox": 175,
   "emails": [
     {
-      "id": "177",
-      "subject": "Fwd: sds",
-      "from": "Aaliya Bashir",
-      "date": "2026-03-27 20:54-07:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
-      "id": "176",
-      "subject": "Annual Registration Notification 2026",
-      "from": "GA Secretary of State Corporations Division",
-      "date": "2026-03-27 20:39-04:00",
-      "flags": [],
-      "flagged": false
-    },
-    {
       "id": "175",
-      "subject": "Post1-Slide1-Marc... - @hello@nuriy.com @bashiraaliya@gmail....",
-      "from": "Tina Floersch (Google Docs)",
-      "date": "2026-03-27 12:49-07:00",
-      "flags": [],
-      "flagged": false
+      "subject": "Tickets: Co-Building Day powered by THE PIT",
+      "from": "\"Co-Building Day powered by THE PIT\" <support@eventnoire.com>",
+      "date": "Sat, 28 Mar 2026 09:22:03 +0000",
+      "body_preview": "          Tickets: Co-Building Day powered by THE PIT       Tickets:\r\nCo-Building Day powered by THE PIT                              Your\r\ntickets are ready!                           \r\n             ",
+      "risk_flags": [],
+      "is_risky": false
     },
     {
       "id": "174",
-      "subject": "BOOMERANG",
-      "from": "Nuriy",
-      "date": "2026-03-27 15:48-04:00",
-      "flags": [],
-      "flagged": false
+      "subject": "Order Confirmation: Co-Building Day powered by THE PIT",
+      "from": "\"Co-Building Day powered by THE PIT\" <support@eventnoire.com>",
+      "date": "Sat, 28 Mar 2026 09:21:15 +0000",
+      "body_preview": "          Order Confirmation: Co-Building Day powered by THE PIT      \r\nOrder Confirmation: Co-Building Day powered by THE PIT                     \r\n        Thank you for your order!             We ho",
+      "risk_flags": [],
+      "is_risky": false
     },
     {
       "id": "173",
-      "subject": "Your receipt from Anthropic, PBC #2016-0869-6506",
-      "from": "",
-      "date": "2026-03-27 17:51+00:00",
-      "flags": [],
-      "flagged": false
+      "subject": "Fwd: sds",
+      "from": "Aaliya Bashir <bashiraaliya@gmail.com>",
+      "date": "Fri, 27 Mar 2026 20:54:57 -0700",
+      "body_preview": "Thankfully,\r\n\r\n*Aaliya Bashir, MPA*\r\n\r\n*Schedule a Call with Me <https://calendar.app.google/NrhdUPPiLXXuX7d39> *\r\n*+1-678-594-1031 <678-594-1031>*\r\n\r\n\r\n---------- Forwarded message ---------\r\nFrom: O",
+      "risk_flags": [],
+      "is_risky": false
     },
     {
       "id": "172",
-      "subject": "Reminder - Early access to Changemaker Network is here!",
-      "from": "Kaylee Duncanson",
-      "date": "2026-03-27 16:29+00:00",
-      "flags": [],
-      "flagged": false
+      "subject": "Annual Registration Notification 2026",
+      "from": "\"GA Secretary of State Corporations Division\" <notifications@sos.ga.gov>",
+      "date": "Fri, 27 Mar 2026 20:39:01 -0400",
+      "body_preview": "",
+      "risk_flags": [],
+      "is_risky": false
     },
     {
       "id": "171",
-      "subject": "Reminder: New Relic on Azure: AI Observability What the Hack @ Fri Mar 27, 2026 12:00 pm - 08:00 pm (America/Detroit)",
-      "from": "noreply@zohocalendar.com",
-      "date": "2026-03-27 08:45-07:00",
-      "flags": [],
-      "flagged": false
+      "subject": "Post1-Slide1-Marc... - @hello@nuriy.com @bashiraaliya@gmail....",
+      "from": "\"Tina Floersch (Google Docs)\" <comments-noreply@docs.google.com>",
+      "date": "Fri, 27 Mar 2026 12:49:59 -0700",
+      "body_preview": "Tina Floersch (tina@visualflo.co) mentioned you in a comment in the  \r\nfollowing document\r\nPost1-Slide1-March302026.png  \r\n(https://docs.google.com/file/d/101whiYbz6gZiBEDn3Em3VnEzhvJVQaGJ/edit?disco=",
+      "risk_flags": [],
+      "is_risky": false
     },
     {
       "id": "170",
-      "subject": "AALIYA, read your renewal notice inside.",
-      "from": "GoDaddy Renewals",
-      "date": "2026-03-27 09:08-06:00",
-      "flags": [],
-      "flagged": false
+      "subject": "BOOMERANG",
+      "from": "Nuriy <hello@nuriy.com>",
+      "date": "Fri, 27 Mar 2026 15:48:59 -0400",
+      "body_preview": "I don't know what we are gonna build for this, but it's super interesting, and I'm excited. Start building out the foundation and getting the configuration we need for the minimum requirements. And gi",
+      "risk_flags": [],
+      "is_risky": false
     },
     {
       "id": "169",
-      "subject": "Microsoft Event Reminder: New Relic on Azure: AI Observability What the Hack is starting soon",
-      "from": "Microsoft Events",
-      "date": "2026-03-27 15:02+00:00",
-      "flags": [],
-      "flagged": false
+      "subject": "Your receipt from Anthropic, PBC #2016-0869-6506",
+      "from": "\"Anthropic, PBC\" <invoice+statements@mail.anthropic.com>",
+      "date": "Fri, 27 Mar 2026 17:51:24 +0000",
+      "body_preview": "Anthropic, PBC  (https://www.anthropic.com/)\r\n\r\nAnthropic, PBC\r\n\r\nReceipt from Anthropic, PBC $5.00 Paid March 27, 2026 (invoice illustration [https://stripe-images.s3.amazonaws.com/emails/invoices_in",
+      "risk_flags": [
+        "invoice"
+      ],
+      "is_risky": true
     },
     {
       "id": "168",
+      "subject": "Reminder - Early access to Changemaker Network is here!",
+      "from": "Kaylee Duncanson <membership@onepercentfortheplanet.org>",
+      "date": "Fri, 27 Mar 2026 16:29:05 +0000",
+      "body_preview": "\r\n\r\nHi Aaliya, \r\n\r\nIn case you missed it - early access to our new Changemaker Network \r\n<https://membersupport.onepercentfortheplanet.org/new-changemaker-network/changemaker-network> \r\nis here\u2014and yo",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "167",
+      "subject": "Reminder: New Relic on Azure: AI Observability What the Hack @ Fri\r\n Mar 27, 2026 12:00 pm - 08:00 pm (America/Detroit)",
+      "from": "<noreply@zohocalendar.com>",
+      "date": "Fri, 27 Mar 2026 08:45:20 -0700 (PDT)",
+      "body_preview": "<style>\r\n    .zclet__header__info a,\r\n    .zclet__header__title a,\r\n    .zclet__event__text a {\r\n        word-break: break-all !important;\r\n        overflow-wrap: anywhere;\r\n    }\r\n\r\n    .zclet__event",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "166",
+      "subject": "AALIYA, read your renewal notice inside.",
+      "from": "\"GoDaddy Renewals\" <renewals@e.godaddy.com>",
+      "date": "Fri, 27 Mar 2026 09:08:21 -0600",
+      "body_preview": "\r\n \r\n\r\n\r\n\r\n\r\n\r\n \r\n \r\n\r\n\r\n\r\n\r\n\r\n \r\n \r\n \r\nWe're just letting you know the products you set up to renew automatically will do so soon. Open this email to find out the exact dates this will happen.  &zwnj",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "165",
+      "subject": "Microsoft Event Reminder: New Relic on Azure: AI Observability What\r\n the Hack is starting soon",
+      "from": "Microsoft Events <microsoftevents@cloudlabs.ai>",
+      "date": "Fri, 27 Mar 2026 15:02:09 +0000 (UTC)",
+      "body_preview": "",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "164",
       "subject": "Your receipt from Anthropic, PBC #2918-8212-7747",
-      "from": "",
-      "date": "2026-03-27 14:37+00:00",
-      "flags": [],
-      "flagged": false
+      "from": "\"Anthropic, PBC\" <invoice+statements@mail.anthropic.com>",
+      "date": "Fri, 27 Mar 2026 14:37:01 +0000",
+      "body_preview": "Anthropic, PBC  (https://www.anthropic.com/)\r\n\r\nAnthropic, PBC\r\n\r\nReceipt from Anthropic, PBC $5.00 Paid March 27, 2026 (invoice illustration [https://stripe-images.s3.amazonaws.com/emails/invoices_in",
+      "risk_flags": [
+        "invoice"
+      ],
+      "is_risky": true
+    },
+    {
+      "id": "163",
+      "subject": "$5.00 payment to Anthropic, PBC was unsuccessful",
+      "from": "\"Anthropic, PBC\" <failed-payments@mail.anthropic.com>",
+      "date": "Fri, 27 Mar 2026 14:35:45 +0000",
+      "body_preview": "Anthropic, PBC  (https://www.anthropic.com/)\r\n\r\nAnthropic, PBC\r\n\r\n$5.00 payment to Anthropic, PBC was unsuccessful We were unable to charge your card for your Anthropic, PBC payment. Please update you",
+      "risk_flags": [
+        "payment"
+      ],
+      "is_risky": true
+    },
+    {
+      "id": "162",
+      "subject": "Google Cloud Exploration",
+      "from": "Phani sree Doppalapudi <phanisreed@xwf.google.com>",
+      "date": "Fri, 27 Mar 2026 07:15:02 -0700",
+      "body_preview": "Hi *Aaliya,*\r\n\r\nJust a quick follow-up to my introduction. I'm Phani, your new Google Cloud\r\ncontact.\r\n\r\nI'd still appreciate a brief call next week to introduce myself, understand\r\nyour Google Cloud ",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "161",
+      "subject": "System Compatibility Check - New Relic on Azure: AI Observability\r\n What the Hack",
+      "from": "Microsoft Events <microsoftevents@cloudlabs.ai>",
+      "date": "Fri, 27 Mar 2026 12:32:03 +0000 (UTC)",
+      "body_preview": "<!DOCTYPE html>\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\"\r\n    xmlns:o=\"urn:schemas-microsoft-com:office:office\">\r\n\r\n<head>\r\n    <meta http-equiv=\"Content-Typ",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "160",
+      "subject": "Microsoft Event Registration Confirmation for the New Relic on Azure:\r\n AI Observability What the Hack",
+      "from": "Microsoft Events <microsoftevents@cloudlabs.ai>",
+      "date": "Fri, 27 Mar 2026 12:32:02 +0000 (UTC)",
+      "body_preview": "<!DOCTYPE html>\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\r\n\r\n<head>\r\n    <meta http-equiv=\"Content-Type\" co",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "159",
+      "subject": "Submission to LovHack Season 2 started",
+      "from": "Devpost <support@devpost.com>",
+      "date": "Fri, 27 Mar 2026 09:44:02 +0000",
+      "body_preview": "Great job, you've started submitting to LovHack Season 2! \u00a0\r\n\r\n( http://devpost.com )\r\n\r\nHey Nuriy,\r\n\r\nGreat job, you've started submitting 'AirKeys' to LovHack Season 2 ( https://lovhack-season2.devp",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "158",
+      "subject": "\ud83d\udce3  New Feature: Offer Partial Refunds for Return/Refund Requests!",
+      "from": "TikTok Shop <sellersupport@shop.tiktok.com>",
+      "date": "Fri, 27 Mar 2026 09:35:22 +0000 (UTC)",
+      "body_preview": "<!doctypehtml><html xmlns=\"http://www.w3.org/1999/xhtml\"\r\nxmlns:o=\"urn:schemas-microsoft-com:office:office\"\r\nxmlns:v=\"urn:schemas-microsoft-com:vml\"><head><title></title>\r\n<!--[if !mso]><!--><meta con",
+      "risk_flags": [
+        "refund"
+      ],
+      "is_risky": true
+    },
+    {
+      "id": "157",
+      "subject": "Office 365 Migration for hello@nuriy.com",
+      "from": "noreply@zoho.com",
+      "date": "Fri, 27 Mar 2026 01:45:43 -0700",
+      "body_preview": "",
+      "risk_flags": [],
+      "is_risky": false
+    },
+    {
+      "id": "156",
+      "subject": "Submission confirmed: AirKeys",
+      "from": "Devpost <support@devpost.com>",
+      "date": "Fri, 27 Mar 2026 08:43:09 +0000",
+      "body_preview": "( http://devpost.com )\r\n\r\nHi Nuriy, thanks for submitting AirKeys to CodePup HackFest!\r\n\r\nThe Devpost team is always trying to improve the experience for participants.\r\n\r\nBefore you sit back and relax",
+      "risk_flags": [],
+      "is_risky": false
     }
-  ]
+  ],
+  "summary": {
+    "total_fetched": 20,
+    "risky": 4
+  }
 }
