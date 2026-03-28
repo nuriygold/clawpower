@@ -10,11 +10,11 @@ interface Props {
 
 export function PanelWrapper({ title, icon, error, children }: Props) {
   return (
-    <div className="rounded-lg border bg-card p-4 sm:p-6 space-y-4">
+    <div className="rounded-sm border border-border bg-card p-4 sm:p-6 space-y-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {icon}
-          <h2 className="font-semibold text-foreground">{title}</h2>
+          <h2 className="editorial-subheading">{title}</h2>
         </div>
         {error && (
           <span className="flex items-center gap-1 text-xs text-warning">

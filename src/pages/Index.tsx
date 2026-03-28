@@ -11,10 +11,12 @@ import { ActivityFeed } from '@/components/panels/ActivityFeed';
 import { ICloudSync } from '@/components/panels/ICloudSync';
 import { EmailTriage } from '@/components/panels/EmailTriage';
 import { Today } from '@/components/panels/Today';
+import { DeadlinesCalendar } from '@/components/panels/DeadlinesCalendar';
 
 const panels: Record<string, React.FC<any>> = {
   today: Today,
   tasks: TaskPool,
+  deadlines: DeadlinesCalendar,
   triage: EmailTriage,
   cron: CronJobs,
   agents: AgentStatus,
@@ -35,13 +37,13 @@ export default function Index() {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
+      <div className="min-h-screen flex w-full bg-background">
         <AppSidebar activePanel={activePanel} onNavigate={setActivePanel} />
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="h-12 flex items-center border-b px-4 gap-3 shrink-0">
+          <header className="h-12 flex items-center border-b border-border px-4 gap-3 shrink-0 bg-card">
             <SidebarTrigger />
-            <h1 className="font-mono font-bold text-sm text-foreground">
-              OpenClaw Command Center
+            <h1 className="font-serif font-semibold text-sm text-foreground">
+              Claw Power
             </h1>
             <div className="ml-auto flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-success status-pulse" />

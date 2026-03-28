@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchSystemGH, type GHSystemData } from '@/lib/github-data';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, differenceInMinutes } from 'date-fns';
 
 export function SystemStatusBar() {
   const { data } = useQuery<GHSystemData>({
@@ -12,8 +12,9 @@ export function SystemStatusBar() {
   if (!data) return null;
 
   const gwOnline = data.gateway?.status === 'online';
-  const icloudRunning = data.icloud_sync?.status === 'running';
   const synced = formatDistanceToNow(new Date(data.generated_at), { addSuffix: true });
+  const minutesAgo = differenceInMinutes(new Date(), new Date(data.generated_at));
+  const freshnessClass = minutesAgo < 5 ? 'text-primary' : minutesAgo < 60 ? 'text-warning' : 'text-destructive';
   const uptime = data.mac?.uptime
     ? (data.mac.uptime.includes('up')
       ? data.mac.uptime.replace(/^[\d:]+\s+/, '').split(',').slice(0, 2).join(',').trim()
@@ -21,7 +22,7 @@ export function SystemStatusBar() {
     : null;
 
   return (
-    <div className="flex items-center gap-4 px-4 py-1.5 bg-secondary/50 border-b text-xs text-muted-foreground overflow-x-auto whitespace-nowrap">
+    <div className="flex items-center gap-4 px-4 py-1.5 bg-secondary border-b border-border text-xs text-muted-foreground overflow-x-auto whitespace-nowrap">
       <span className="flex items-center gap-1.5">
         <span className={`h-1.5 w-1.5 rounded-full ${gwOnline ? 'bg-success' : 'bg-destructive'}`} />
         Gateway {gwOnline ? 'online' : data.gateway?.status || 'unknown'}
@@ -32,7 +33,7 @@ export function SystemStatusBar() {
         <>
           <span className="text-border">│</span>
           <span className="flex items-center gap-1.5">
-            <span className={`h-1.5 w-1.5 rounded-full ${icloudRunning ? 'bg-success' : 'bg-destructive'}`} />
+            <span className={`h-1.5 w-1.5 rounded-full ${data.icloud_sync.status === 'running' ? 'bg-success' : 'bg-destructive'}`} />
             iCloud {data.icloud_sync.photo_folder_count} folders
           </span>
         </>
@@ -69,7 +70,7 @@ export function SystemStatusBar() {
         </>
       )}
 
-      <span className="ml-auto text-muted-foreground/60">Synced {synced}</span>
+      <span className={`ml-auto font-medium ${freshnessClass}`}>Synced {synced}</span>
     </div>
   );
 }

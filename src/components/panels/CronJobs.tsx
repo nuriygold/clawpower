@@ -6,13 +6,13 @@ import { formatDistanceToNow } from 'date-fns';
 
 const launchAgentDescriptions: Record<string, string> = {
   'com.openclaw.cors-proxy':
-    'Node.js proxy on :18790 — adds CORS headers so the web dashboard can talk to the local gateway. Required for claw.nuriy.com to function.',
+    'Node.js proxy on :18790 — adds CORS headers so the web dashboard can talk to the local gateway.',
   'com.openclaw.tunnel':
-    'Cloudflare tunnel that exposes the CORS proxy to the internet at trycloudflare.com. Makes the gateway reachable from anywhere without port forwarding.',
+    'Cloudflare tunnel that exposes the CORS proxy to the internet at trycloudflare.com.',
   'ai.openclaw.gateway':
-    'Main OpenClaw AI gateway (Node.js, port 18789). Runs all four agents: main (Chief of Staff), ops-agent, grant-agent, and memory-agent.',
+    'Main OpenClaw AI gateway (Node.js, port 18789). Runs all four agents.',
   'com.aaliya.telegram-executive-log':
-    'Log router daemon — watches the gateway log for [telegram]-tagged activity and writes entries to dated files in the executive log directory.',
+    'Log router daemon — watches the gateway log for [telegram]-tagged activity.',
 };
 
 export function CronJobs() {
@@ -31,23 +31,22 @@ export function CronJobs() {
 
   return (
     <PanelWrapper title="Cron Jobs" icon={<Clock className="h-5 w-5 text-primary" />} error={isError}>
-      {syncLabel && <p className="text-xs text-muted-foreground/60 mb-3">{syncLabel}</p>}
+      {syncLabel && <p className="text-xs text-muted-foreground mb-3">{syncLabel}</p>}
 
       <div className="grid gap-4 lg:grid-cols-2">
-        {/* Crontab or Tasks */}
         <div>
           <h3 className="font-mono text-xs font-semibold text-foreground mb-2">Scheduled Tasks</h3>
-          <div className="rounded-md border overflow-hidden">
+          <div className="rounded-sm border overflow-hidden">
             <table className="w-full text-xs">
               <thead>
-                <tr className="bg-muted/30 text-muted-foreground">
+                <tr className="bg-secondary text-muted-foreground">
                   <th className="text-left px-3 py-1.5 font-medium">Schedule</th>
                   <th className="text-left px-3 py-1.5 font-medium">Task</th>
                 </tr>
               </thead>
               <tbody>
                 {crontab.map((c, i) => (
-                  <tr key={i} className="border-t border-border/50">
+                  <tr key={i} className="border-t border-border even:bg-secondary/50">
                     <td className="px-3 py-2 whitespace-nowrap">
                       <span className="font-mono text-foreground">{c.schedule}</span>
                       <span className="text-muted-foreground ml-2">({cronToHuman(c.schedule)})</span>
@@ -58,7 +57,7 @@ export function CronJobs() {
                   </tr>
                 ))}
                 {tasks.map((t) => (
-                  <tr key={t.taskId} className="border-t border-border/50">
+                  <tr key={t.taskId} className="border-t border-border even:bg-secondary/50">
                     <td className="px-3 py-2 whitespace-nowrap">
                       {t.cronExpression ? (
                         <>
@@ -80,7 +79,7 @@ export function CronJobs() {
                         </span>
                       </div>
                       {t.description && (
-                        <p className="text-[10px] text-muted-foreground/60 mt-0.5 truncate" title={t.description}>{t.description}</p>
+                        <p className="text-[10px] text-muted-foreground mt-0.5 truncate" title={t.description}>{t.description}</p>
                       )}
                     </td>
                   </tr>
@@ -93,13 +92,12 @@ export function CronJobs() {
           </div>
         </div>
 
-        {/* LaunchAgents */}
         <div>
           <h3 className="font-mono text-xs font-semibold text-foreground mb-2">LaunchAgents</h3>
-          <div className="rounded-md border overflow-hidden">
+          <div className="rounded-sm border overflow-hidden">
             <table className="w-full text-xs">
               <thead>
-                <tr className="bg-muted/30 text-muted-foreground">
+                <tr className="bg-secondary text-muted-foreground">
                   <th className="text-left px-3 py-1.5 font-medium">Label</th>
                   <th className="text-left px-3 py-1.5 font-medium">Description</th>
                   <th className="text-left px-3 py-1.5 font-medium">Status</th>
@@ -111,8 +109,8 @@ export function CronJobs() {
                   const running = la.pid != null;
                   const desc = launchAgentDescriptions[la.label] || '—';
                   return (
-                    <tr key={la.label} className="border-t border-border/50">
-                      <td className={`px-3 py-2 font-mono whitespace-nowrap ${running ? 'text-success' : 'text-destructive'}`}>
+                    <tr key={la.label} className="border-t border-border even:bg-secondary/50">
+                      <td className={`px-3 py-2 font-mono whitespace-nowrap ${running ? 'text-primary' : 'text-destructive'}`}>
                         {la.label}
                       </td>
                       <td className="px-3 py-2 text-muted-foreground max-w-[300px]">
