@@ -28,7 +28,7 @@ export function PasswordGate({ onAuthenticated }: Props) {
           <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center glow-green">
             <Shield className="h-8 w-8 text-primary" />
           </div>
-          <h1 className="text-2xl font-bold font-mono text-foreground">OpenClaw</h1>
+          <h1 className="text-2xl font-serif-bold text-foreground">Claw Power</h1>
           <p className="text-sm text-muted-foreground">Command Center Access</p>
         </div>
         <div className="space-y-3">
@@ -38,14 +38,14 @@ export function PasswordGate({ onAuthenticated }: Props) {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
             autoFocus
-            className={`w-full rounded-lg bg-card border px-4 py-3 text-sm font-mono text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
+            className={`w-full rounded-sm bg-card border px-4 py-3 text-sm font-mono text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
               error ? 'border-destructive ring-2 ring-destructive/30' : 'border-border'
             }`}
           />
           {error && <p className="text-xs text-destructive text-center">Invalid password</p>}
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="w-full flex items-center justify-center gap-2 rounded-sm bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             Access Dashboard <ArrowRight className="h-4 w-4" />
           </button>

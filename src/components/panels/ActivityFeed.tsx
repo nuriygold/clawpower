@@ -21,7 +21,7 @@ export function ActivityFeed() {
     <PanelWrapper title="Activity Feed" icon={<Activity className="h-5 w-5 text-primary" />} error={isError}>
       <div className="space-y-1 max-h-96 overflow-y-auto font-mono text-xs">
         {activities.slice(0, 50).map((a: any, i: number) => (
-          <div key={i} className="flex gap-3 py-1.5 border-b border-border/30">
+          <div key={i} className="flex gap-3 py-1.5 border-b border-border/50">
             <span className="text-muted-foreground shrink-0 w-16">{a.timestamp}</span>
             <span className={`shrink-0 w-24 font-semibold ${agentColorMap[a.agent] || 'text-muted-foreground'}`}>
               {a.agent}

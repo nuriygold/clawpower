@@ -8,14 +8,14 @@ import { Button } from '@/components/ui/button';
 import { formatDistanceToNow, format } from 'date-fns';
 
 const domainColors: Record<string, string> = {
-  nuriy: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-  wellstar: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  ops: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+  nuriy: 'bg-amber-50 text-amber-700 border-amber-200',
+  wellstar: 'bg-blue-50 text-blue-700 border-blue-200',
+  ops: 'bg-slate-100 text-slate-600 border-slate-200',
 };
 
 const confidenceColors: Record<string, string> = {
   high: 'bg-success',
-  medium: 'bg-amber-500',
+  medium: 'bg-warning',
   low: 'bg-destructive',
 };
 
@@ -96,7 +96,7 @@ export function EmailTriage() {
       error={isError}
     >
       <div className="flex items-center gap-3 -mt-1 mb-3">
-        <Badge className="bg-primary/20 text-primary border-primary/30 text-xs">
+        <Badge className="bg-primary/10 text-primary border-primary/30 text-xs">
           {pending.length - decidedCount} pending
         </Badge>
         {syncLabel && <span className="text-[10px] text-muted-foreground">{syncLabel}</span>}
@@ -109,12 +109,12 @@ export function EmailTriage() {
 
           if (dec) {
             return (
-              <div key={item.id} className="rounded-md border border-border/50 bg-muted/20 px-4 py-2 flex items-center gap-3 text-xs">
+              <div key={item.id} className="rounded-sm border border-border bg-secondary/50 px-4 py-2 flex items-center gap-3 text-xs">
                 <Badge className={
-                  dec.type === 'approved' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
-                  dec.type === 'denied' ? 'bg-destructive/20 text-destructive border-destructive/30' :
-                  dec.type === 'snoozed' ? 'bg-slate-500/20 text-slate-400 border-slate-500/30' :
-                  'bg-amber-500/20 text-amber-400 border-amber-500/30'
+                  dec.type === 'approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                  dec.type === 'denied' ? 'bg-red-50 text-destructive border-red-200' :
+                  dec.type === 'snoozed' ? 'bg-slate-100 text-slate-600 border-slate-200' :
+                  'bg-amber-50 text-amber-700 border-amber-200'
                 }>
                   {dec.type}
                 </Badge>
@@ -187,12 +187,12 @@ function TriageCard({
 }) {
   const domainKey = item.domain?.toLowerCase() || 'ops';
   return (
-    <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+    <div className="rounded-sm border border-border bg-card p-4 space-y-3 shadow-sm">
       {/* Top row */}
       <div className="flex flex-wrap items-center gap-2 text-xs">
         <span className="text-muted-foreground">{item.from}</span>
         {threadCount > 1 && (
-          <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded">{threadCount} threads</span>
+          <span className="text-[10px] text-muted-foreground bg-secondary px-1.5 py-0.5 rounded">{threadCount} threads</span>
         )}
         <span className="font-semibold text-foreground text-sm">{item.subject}</span>
         <span className="text-muted-foreground ml-auto text-[10px]">
@@ -209,14 +209,14 @@ function TriageCard({
       <div className="grid gap-3 md:grid-cols-2">
         <div>
           <p className="text-[10px] font-semibold text-muted-foreground mb-1">Original Email</p>
-          <div className="bg-muted/40 rounded p-2.5 text-xs font-mono text-muted-foreground leading-relaxed max-h-40 overflow-y-auto">
+          <div className="bg-secondary rounded-sm p-2.5 text-xs font-mono text-muted-foreground leading-relaxed max-h-40 overflow-y-auto">
             {item.body_snippet}
           </div>
         </div>
         <div>
           <p className="text-[10px] font-semibold text-muted-foreground mb-1">Adrian's Proposal</p>
           <p className="text-xs font-semibold text-foreground mb-1">{item.proposal.action.replace(/_/g, ' ')}</p>
-          <div className="bg-muted/40 rounded p-2.5 text-xs text-foreground leading-relaxed max-h-32 overflow-y-auto whitespace-pre-wrap">
+          <div className="bg-secondary rounded-sm p-2.5 text-xs text-foreground leading-relaxed max-h-32 overflow-y-auto whitespace-pre-wrap">
             {item.proposal.draft_response}
           </div>
           <p className="text-[10px] italic text-muted-foreground mt-1.5">{item.proposal.reasoning}</p>
@@ -231,7 +231,7 @@ function TriageCard({
             placeholder={activeInputType === 'deny' ? 'Reason for denial…' : 'Edit notes…'}
             value={inputText}
             onChange={(e) => onInputTextChange(e.target.value)}
-            className="flex-1 h-8 rounded border border-border bg-background px-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+            className="flex-1 h-8 rounded-sm border border-border bg-card px-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
             autoFocus
           />
           <Button size="sm" className="h-8 text-xs" onClick={activeInputType === 'deny' ? onDeny : onEdit}>
@@ -242,16 +242,16 @@ function TriageCard({
 
       {/* Action buttons */}
       <div className="flex gap-2">
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/10" onClick={onApprove}>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-emerald-700 border-emerald-300 hover:bg-emerald-50" onClick={onApprove}>
           <Check className="h-3 w-3" /> Approve
         </Button>
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-destructive border-destructive/30 hover:bg-destructive/10" onClick={onDeny}>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-destructive border-red-300 hover:bg-red-50" onClick={onDeny}>
           <X className="h-3 w-3" /> Deny
         </Button>
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-amber-400 border-amber-500/30 hover:bg-amber-500/10" onClick={onEdit}>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-amber-700 border-amber-300 hover:bg-amber-50" onClick={onEdit}>
           <Pencil className="h-3 w-3" /> Request Edit
         </Button>
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-muted-foreground border-border hover:bg-muted" onClick={onSnooze}>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1 text-muted-foreground border-border hover:bg-secondary" onClick={onSnooze}>
           <Clock className="h-3 w-3" /> Snooze
         </Button>
       </div>

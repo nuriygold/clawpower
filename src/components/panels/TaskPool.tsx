@@ -11,29 +11,29 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { formatDistanceToNow } from 'date-fns';
 
 const domainColors: Record<string, string> = {
-  Wellstar: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  Nuriy: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-  Ops: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-  PSE: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-  Personal: 'bg-teal-500/20 text-teal-400 border-teal-500/30',
-  Creative: 'bg-pink-500/20 text-pink-400 border-pink-500/30',
+  Wellstar: 'bg-blue-50 text-blue-700 border-blue-200',
+  Nuriy: 'bg-amber-50 text-amber-700 border-amber-200',
+  Ops: 'bg-slate-100 text-slate-700 border-slate-200',
+  PSE: 'bg-purple-50 text-purple-700 border-purple-200',
+  Personal: 'bg-teal-50 text-teal-700 border-teal-200',
+  Creative: 'bg-pink-50 text-pink-700 border-pink-200',
 };
 
 const statusColors: Record<string, string> = {
-  'In Progress': 'bg-amber-500/20 text-amber-400 border-amber-500/30',
-  Done: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-  Ready: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
-  Pending: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-  'Pending Review': 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-  Queued: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-  Backlog: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
+  'In Progress': 'bg-amber-50 text-amber-700 border-amber-200',
+  Done: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  Ready: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+  Pending: 'bg-orange-50 text-orange-700 border-orange-200',
+  'Pending Review': 'bg-orange-50 text-orange-700 border-orange-200',
+  Queued: 'bg-slate-100 text-slate-600 border-slate-200',
+  Backlog: 'bg-gray-100 text-gray-600 border-gray-200',
 };
 
 const priorityColors: Record<string, string> = {
-  'A+': 'bg-red-500/20 text-red-400 border-red-500/30',
-  A: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-  B: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-  C: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
+  'A+': 'bg-red-50 text-red-700 border-red-200',
+  A: 'bg-orange-50 text-orange-700 border-orange-200',
+  B: 'bg-amber-50 text-amber-700 border-amber-200',
+  C: 'bg-gray-100 text-gray-600 border-gray-200',
 };
 
 const allDomains = ['Wellstar', 'Nuriy', 'Ops', 'PSE', 'Personal', 'Creative'];
@@ -95,7 +95,7 @@ export function TaskPool() {
         <p className="text-[10px] text-muted-foreground -mt-2">Last synced: {lastSynced}</p>
       )}
       {isError && (
-        <div className="rounded bg-destructive/10 border border-destructive/30 px-3 py-2 text-xs text-destructive">
+        <div className="rounded-sm bg-destructive/10 border border-destructive/30 px-3 py-2 text-xs text-destructive">
           Data unavailable — retrying
         </div>
       )}
@@ -104,7 +104,7 @@ export function TaskPool() {
       <div className="flex flex-wrap items-center gap-2 text-xs">
         <button
           onClick={() => setDomainFilter(null)}
-          className={`rounded-full px-2.5 py-1 border transition-colors ${!domainFilter ? 'bg-primary/20 text-primary border-primary/40' : 'bg-secondary text-muted-foreground border-border hover:bg-muted'}`}
+          className={`rounded-full px-2.5 py-1 border transition-colors ${!domainFilter ? 'bg-primary/10 text-primary border-primary/30' : 'bg-secondary text-muted-foreground border-border hover:bg-muted'}`}
         >All Domains</button>
         {allDomains.map((d) => (
           <button key={d} onClick={() => setDomainFilter(domainFilter === d ? null : d)}
@@ -114,7 +114,7 @@ export function TaskPool() {
         <span className="text-border">|</span>
         <button
           onClick={() => setStatusFilter(null)}
-          className={`rounded-full px-2.5 py-1 border transition-colors ${!statusFilter ? 'bg-primary/20 text-primary border-primary/40' : 'bg-secondary text-muted-foreground border-border hover:bg-muted'}`}
+          className={`rounded-full px-2.5 py-1 border transition-colors ${!statusFilter ? 'bg-primary/10 text-primary border-primary/30' : 'bg-secondary text-muted-foreground border-border hover:bg-muted'}`}
         >All Status</button>
         {allStatuses.map((s) => (
           <button key={s} onClick={() => setStatusFilter(statusFilter === s ? null : s)}
@@ -202,7 +202,7 @@ function TaskRow({ t, rowKey, isExpanded, displayStatus, steps, doneCount, onTog
 }) {
   return (
     <>
-      <tr className="border-b border-border/30 hover:bg-muted/30 cursor-pointer transition-colors" onClick={onToggle}>
+      <tr className="border-b border-border/50 hover:bg-secondary/50 cursor-pointer transition-colors" onClick={onToggle}>
         <td className="py-1.5 pr-2 text-muted-foreground">
           {isExpanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
         </td>
@@ -223,15 +223,13 @@ function TaskRow({ t, rowKey, isExpanded, displayStatus, steps, doneCount, onTog
       </tr>
       {isExpanded && (
         <tr>
-          <td colSpan={5} className="py-2 px-4 bg-muted/20">
-            {/* Notes */}
+          <td colSpan={5} className="py-2 px-4 bg-secondary/30">
             <p className="text-xs text-muted-foreground font-mono whitespace-pre-wrap mb-2">
               {t.notes || 'No notes.'}
             </p>
 
-            {/* Wellstar progress steps */}
             {steps && steps.length > 0 && (
-              <div className="border-t border-border/30 pt-2 mt-1 space-y-2">
+              <div className="border-t border-border pt-2 mt-1 space-y-2">
                 <div className="flex items-center gap-2">
                   <Progress value={(doneCount / steps.length) * 100} className="h-1.5 flex-1 max-w-[200px]" />
                   <span className="text-[10px] text-muted-foreground font-mono">{doneCount}/{steps.length}</span>
@@ -240,7 +238,7 @@ function TaskRow({ t, rowKey, isExpanded, displayStatus, steps, doneCount, onTog
                   {steps.map((s) => (
                     <div key={s.step} className="flex items-center gap-2 text-xs">
                       <Checkbox checked={s.done} disabled className="h-3.5 w-3.5" />
-                      <span className={s.done ? 'text-emerald-400/70 line-through' : 'text-foreground'}>
+                      <span className={s.done ? 'text-primary/60 line-through' : 'text-foreground'}>
                         {s.step}
                       </span>
                     </div>

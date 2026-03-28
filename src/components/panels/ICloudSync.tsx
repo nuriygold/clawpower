@@ -18,7 +18,7 @@ export function ICloudSync() {
 
   return (
     <PanelWrapper title="iCloud Sync" icon={<Cloud className="h-5 w-5 text-primary" />} error={isError}>
-      {syncLabel && <p className="text-xs text-muted-foreground/60 mb-3">{syncLabel}</p>}
+      {syncLabel && <p className="text-xs text-muted-foreground mb-3">{syncLabel}</p>}
 
       {sync ? (
         <div className="space-y-3">

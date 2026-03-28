@@ -15,7 +15,6 @@ export function AgentStatus() {
   const gatewayAgents = agents.filter((a) => a.service === 'ai.openclaw.gateway');
   const otherAgents = agents.filter((a) => a.service !== 'ai.openclaw.gateway');
   const gatewayRunning = gatewayAgents.some((a) => a.status === 'running');
-  const allAgents = gatewayAgents.length === 0 ? agents : otherAgents;
 
   const syncLabel = dataUpdatedAt
     ? `Last synced: ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`
@@ -23,9 +22,8 @@ export function AgentStatus() {
 
   return (
     <PanelWrapper title="Agent Status" icon={<Bot className="h-5 w-5 text-primary" />} error={isError}>
-      {syncLabel && <p className="text-xs text-muted-foreground/60 mb-3">{syncLabel}</p>}
+      {syncLabel && <p className="text-xs text-muted-foreground mb-3">{syncLabel}</p>}
 
-      {/* Gateway group */}
       {gatewayAgents.length > 0 && (
         <div className="mb-4">
           <div className="flex items-center gap-2 mb-2">
@@ -40,14 +38,12 @@ export function AgentStatus() {
               <AgentChip key={a.name} agent={a} />
             ))}
           </div>
-
         </div>
       )}
 
-      {/* Other agents */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {otherAgents.map((a) => (
-          <div key={a.name} className="rounded-md border bg-muted/20 p-3">
+          <div key={a.name} className="rounded-sm border border-border bg-secondary/50 p-3">
             <div className="flex items-center gap-2 mb-1">
               <span className={`h-2.5 w-2.5 rounded-full ${a.status === 'running' || a.status === 'active' ? 'bg-success' : 'bg-destructive'}`} />
               <span className="font-mono font-semibold text-sm text-foreground">{a.name}</span>
@@ -70,7 +66,7 @@ export function AgentStatus() {
 
 function AgentChip({ agent }: { agent: GHAgent }) {
   return (
-    <div className="rounded border bg-muted/10 px-3 py-1.5 text-xs">
+    <div className="rounded-sm border border-border bg-card px-3 py-1.5 text-xs">
       <span className="font-mono font-medium text-foreground">{agent.name}</span>
       {(agent.role ?? agent.model) && <span className="text-muted-foreground ml-2">{agent.role ?? agent.model}</span>}
     </div>
