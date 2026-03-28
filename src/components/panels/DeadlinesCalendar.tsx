@@ -1,9 +1,10 @@
-import { CalendarClock } from 'lucide-react';
+import { CalendarClock, Calendar } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTaskPoolFromGitHub } from '@/lib/taskpool-github';
+import { fetchCalendarEvents, isCalendarConfigured } from '@/lib/google-calendar';
 import { Badge } from '@/components/ui/badge';
 import { PanelWrapper } from './PanelWrapper';
-import { format, isBefore, isToday, addDays, isAfter, startOfDay } from 'date-fns';
+import { format, isBefore, isToday, addDays, startOfDay } from 'date-fns';
 
 const domainColors: Record<string, string> = {
   Wellstar: 'bg-blue-50 text-blue-700 border-blue-200',
@@ -117,6 +118,15 @@ export function DeadlinesCalendar({ embedded = false, onNavigate }: DeadlinesCal
     refetchInterval: 60000,
   });
 
+  const calendarConfigured = isCalendarConfigured();
+  const { data: calendarEvents } = useQuery({
+    queryKey: ['google-calendar'],
+    queryFn: () => fetchCalendarEvents(14),
+    staleTime: 3600000,
+    refetchInterval: 60000,
+    enabled: calendarConfigured && !embedded,
+  });
+
   const deadlines = extractDeadlines(data?.tasks ?? []);
   const overdue = deadlines.filter(d => d.category === 'overdue');
   const todayItems = deadlines.filter(d => d.category === 'today');
@@ -135,12 +145,45 @@ export function DeadlinesCalendar({ embedded = false, onNavigate }: DeadlinesCal
           <DeadlineSection category="upcoming" items={upcoming} />
         </>
       )}
+
+      {/* 14-day calendar view (full panel only) */}
+      {!embedded && calendarConfigured && calendarEvents && calendarEvents.length > 0 && (
+        <div className="border-t border-border pt-4 mt-4">
+          <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+            Calendar — Next 14 Days
+          </h4>
+          <div className="space-y-2">
+            {calendarEvents.map(evt => (
+              <div key={evt.id} className="flex items-start gap-2 text-sm border-l-2 border-l-primary/30 pl-2 py-0.5">
+                <Calendar className="h-3 w-3 text-muted-foreground mt-0.5 shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <span className="text-foreground text-xs font-medium truncate block">{evt.summary}</span>
+                  <span className="text-[10px] text-muted-foreground">
+                    {evt.allDay
+                      ? format(evt.start, 'EEE, MMM d')
+                      : `${format(evt.start, 'EEE, MMM d')} · ${format(evt.start, 'h:mm a')}`
+                    }
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!embedded && !calendarConfigured && (
+        <div className="border-t border-border pt-4 mt-4">
+          <p className="text-xs text-muted-foreground italic">
+            Add VITE_GOOGLE_CALENDAR_API_KEY and VITE_GOOGLE_CALENDAR_ID to connect Google Calendar
+          </p>
+        </div>
+      )}
     </div>
   );
 
   if (embedded) {
     return (
-      <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
+      <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
         <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Deadlines</h3>
         {content}
       </div>

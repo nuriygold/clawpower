@@ -12,11 +12,13 @@ import { ICloudSync } from '@/components/panels/ICloudSync';
 import { EmailTriage } from '@/components/panels/EmailTriage';
 import { Today } from '@/components/panels/Today';
 import { DeadlinesCalendar } from '@/components/panels/DeadlinesCalendar';
+import { RevenuePanel } from '@/components/panels/RevenuePanel';
 
 const panels: Record<string, React.FC<any>> = {
   today: Today,
   tasks: TaskPool,
   deadlines: DeadlinesCalendar,
+  revenue: RevenuePanel,
   triage: EmailTriage,
   cron: CronJobs,
   agents: AgentStatus,

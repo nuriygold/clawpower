@@ -3,11 +3,13 @@ import { ListTodo, ChevronDown, ChevronRight } from 'lucide-react';
 import { PanelWrapper } from './PanelWrapper';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTaskPoolFromGitHub, type TaskPoolItem, type TaskPoolResult, type WellstarStep } from '@/lib/taskpool-github';
+import { fetchLinearIssues, isLinearConfigured, mapLinearPriority, mapLinearStatus, type LinearIssue } from '@/lib/linear-data';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDistanceToNow } from 'date-fns';
 
 const domainColors: Record<string, string> = {
@@ -17,6 +19,7 @@ const domainColors: Record<string, string> = {
   PSE: 'bg-purple-50 text-purple-700 border-purple-200',
   Personal: 'bg-teal-50 text-teal-700 border-teal-200',
   Creative: 'bg-pink-50 text-pink-700 border-pink-200',
+  Linear: 'bg-indigo-50 text-indigo-700 border-indigo-200',
 };
 
 const statusColors: Record<string, string> = {
@@ -38,6 +41,16 @@ const priorityColors: Record<string, string> = {
 
 const allDomains = ['Wellstar', 'Nuriy', 'Ops', 'PSE', 'Personal', 'Creative'];
 const allStatuses = ['In Progress', 'Ready', 'Pending', 'Pending Review', 'Queued', 'Backlog', 'Done'];
+
+function linearToTaskPoolItem(issue: LinearIssue): TaskPoolItem {
+  return {
+    task: issue.title,
+    domain: issue.team ?? 'Linear',
+    priority: mapLinearPriority(issue.priority),
+    status: mapLinearStatus(issue.status),
+    notes: issue.labels.join(', ') + (issue.dueDate ? ` | Due ${issue.dueDate}` : ''),
+  };
+}
 
 function findProgressMatch(taskName: string, progressMap: Record<string, WellstarStep[]>): WellstarStep[] | null {
   const lower = taskName.toLowerCase();
@@ -61,6 +74,7 @@ export function TaskPool() {
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [showCompleted, setShowCompleted] = useState(false);
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
+  const [sourceTab, setSourceTab] = useState<string>('all');
 
   const { data, isLoading, isError, dataUpdatedAt } = useQuery<TaskPoolResult>({
     queryKey: ['taskpool-github'],
@@ -70,10 +84,32 @@ export function TaskPool() {
     retryDelay: 30000,
   });
 
-  const tasks = data?.tasks ?? [];
-  const progressMap = data?.progressMap ?? {};
+  const linearConfigured = isLinearConfigured();
+  const { data: linearIssues } = useQuery({
+    queryKey: ['linear-issues'],
+    queryFn: fetchLinearIssues,
+    staleTime: 60000,
+    refetchInterval: 60000,
+    enabled: linearConfigured,
+  });
 
-  const filtered = tasks.filter((t: TaskPoolItem) => {
+  const localTasks = data?.tasks ?? [];
+  const progressMap = data?.progressMap ?? {};
+  const linearTasks = (linearIssues ?? []).map(linearToTaskPoolItem);
+
+  // Merge sources based on tab
+  let sourceTasks: TaskPoolItem[];
+  if (sourceTab === 'local') {
+    sourceTasks = localTasks;
+  } else if (sourceTab === 'linear') {
+    sourceTasks = linearTasks;
+  } else {
+    // All: merge, dedup by task name (local takes precedence)
+    const seen = new Set(localTasks.map(t => t.task.toLowerCase()));
+    sourceTasks = [...localTasks, ...linearTasks.filter(t => !seen.has(t.task.toLowerCase()))];
+  }
+
+  const filtered = sourceTasks.filter((t: TaskPoolItem) => {
     if (!showCompleted && t.status === 'Done') return false;
     if (domainFilter && t.domain !== domainFilter) return false;
     if (statusFilter && t.status !== statusFilter) return false;
@@ -91,11 +127,24 @@ export function TaskPool() {
 
   return (
     <PanelWrapper title="Task Pool" icon={<ListTodo className="h-5 w-5 text-primary" />} error={isError}>
-      {lastSynced && (
-        <p className="text-[10px] text-muted-foreground -mt-2">Last synced: {lastSynced}</p>
-      )}
+      {/* Source Tabs */}
+      <div className="flex items-center justify-between">
+        <Tabs value={sourceTab} onValueChange={setSourceTab}>
+          <TabsList className="h-8">
+            <TabsTrigger value="all" className="text-xs px-3 h-7">All</TabsTrigger>
+            <TabsTrigger value="local" className="text-xs px-3 h-7">Local</TabsTrigger>
+            {linearConfigured && (
+              <TabsTrigger value="linear" className="text-xs px-3 h-7">Linear</TabsTrigger>
+            )}
+          </TabsList>
+        </Tabs>
+        {lastSynced && (
+          <p className="text-[10px] text-muted-foreground">Synced {lastSynced}</p>
+        )}
+      </div>
+
       {isError && (
-        <div className="rounded-sm bg-destructive/10 border border-destructive/30 px-3 py-2 text-xs text-destructive">
+        <div className="rounded-lg bg-destructive/10 border border-destructive/30 px-3 py-2 text-xs text-destructive">
           Data unavailable — retrying
         </div>
       )}

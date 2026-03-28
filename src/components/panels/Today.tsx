@@ -1,13 +1,16 @@
-import { ArrowRight, Shield, Bot, Clock, CalendarDays } from 'lucide-react';
+import { ArrowRight, Shield, Bot, Clock, CalendarDays, Calendar } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTaskPoolFromGitHub } from '@/lib/taskpool-github';
 import { fetchEmailTriageGH, fetchSystemGH, fetchAgentsGH, fetchCronsGH } from '@/lib/github-data';
+import { fetchCalendarEvents, isCalendarConfigured } from '@/lib/google-calendar';
+import { fetchShopifyRevenue, isShopifyConfigured } from '@/lib/shopify-data';
 import { format, formatDistanceToNow } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DailyModules } from './DailyModules';
 import { AccomplishmentsTracker } from './AccomplishmentsTracker';
 import { DeadlinesCalendar } from './DeadlinesCalendar';
+import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
 
 interface Props {
   onNavigate: (id: string) => void;
@@ -53,6 +56,23 @@ export function Today({ onNavigate }: Props) {
     refetchInterval: 60000,
   });
 
+  const calendarConfigured = isCalendarConfigured();
+  const { data: calendarEvents } = useQuery({
+    queryKey: ['google-calendar'],
+    queryFn: () => fetchCalendarEvents(14),
+    staleTime: 3600000,
+    refetchInterval: 60000,
+    enabled: calendarConfigured,
+  });
+
+  const { data: shopifyData } = useQuery({
+    queryKey: ['shopify-revenue'],
+    queryFn: fetchShopifyRevenue,
+    staleTime: 300000,
+    refetchInterval: 300000,
+    enabled: isShopifyConfigured(),
+  });
+
   const today = new Date();
 
   const priorityTasks = (taskData?.tasks ?? [])
@@ -73,6 +93,10 @@ export function Today({ onNavigate }: Props) {
   const cronTasks = cronsData?.tasks ?? [];
   const enabledCrons = cronTasks.filter(t => t.enabled).length;
 
+  const upcomingEvents = (calendarEvents ?? []).slice(0, 5);
+  const shopifyKpi = shopifyData?.kpi;
+  const hasRevenue = shopifyKpi && shopifyKpi.totalRevenue > 0;
+
   return (
     <div className="space-y-6">
       {/* Masthead */}
@@ -91,7 +115,7 @@ export function Today({ onNavigate }: Props) {
         {/* Column 1: Focus + Accomplishments + System Health */}
         <div className="space-y-4">
           {/* Priority Tasks */}
-          <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
+          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-serif text-sm font-semibold text-muted-foreground uppercase tracking-wide">Today&apos;s Focus</h3>
               <Button variant="ghost" size="sm" className="text-xs h-7" onClick={() => onNavigate('tasks')}>
@@ -118,7 +142,7 @@ export function Today({ onNavigate }: Props) {
           <AccomplishmentsTracker />
 
           {/* System Health */}
-          <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
+          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
             <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">System Health</h3>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
@@ -163,7 +187,7 @@ export function Today({ onNavigate }: Props) {
           <DeadlinesCalendar embedded onNavigate={onNavigate} />
 
           {/* Email Triage Summary */}
-          <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
+          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-serif text-sm font-semibold text-muted-foreground uppercase tracking-wide">Email Triage</h3>
               <Button variant="ghost" size="sm" className="text-xs h-7" onClick={() => onNavigate('triage')}>
@@ -190,23 +214,51 @@ export function Today({ onNavigate }: Props) {
             )}
           </div>
 
-          {/* Revenue Signals (static placeholder) */}
-          <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
-            <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Revenue Signals</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between">
-                <span className="text-foreground">Shopify</span>
-                <span className="text-muted-foreground text-xs">Coming soon</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-foreground">AWIN</span>
-                <span className="text-xs text-primary font-medium">Active</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-foreground">TikTok Shop</span>
-                <span className="text-muted-foreground text-xs">Pending</span>
-              </div>
+          {/* Revenue Signals */}
+          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-serif text-sm font-semibold text-muted-foreground uppercase tracking-wide">Revenue Signals</h3>
+              <Button variant="ghost" size="sm" className="text-xs h-7" onClick={() => onNavigate('revenue')}>
+                Details <ArrowRight className="h-3 w-3 ml-1" />
+              </Button>
             </div>
+            {hasRevenue && shopifyKpi ? (
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <DollarSign className="h-3 w-3 text-muted-foreground" />
+                    <span className="text-foreground">Shopify (30d)</span>
+                  </div>
+                  <span className="text-foreground font-medium tabular-nums">${shopifyKpi.totalRevenue.toLocaleString()}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground text-xs pl-5">AOV</span>
+                  <span className="text-muted-foreground text-xs tabular-nums">${shopifyKpi.averageOrderValue.toFixed(2)}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground text-xs pl-5">Day/Day</span>
+                  <span className={`text-xs flex items-center gap-1 ${shopifyKpi.dayOverDayChange >= 0 ? 'text-primary' : 'text-destructive'}`}>
+                    {shopifyKpi.dayOverDayChange >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+                    {shopifyKpi.dayOverDayChange > 0 ? '+' : ''}{shopifyKpi.dayOverDayChange.toFixed(1)}%
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-foreground">Shopify</span>
+                  <span className="text-muted-foreground text-xs">Not connected</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-foreground">AWIN</span>
+                  <span className="text-xs text-primary font-medium">Active</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-foreground">TikTok Shop</span>
+                  <span className="text-muted-foreground text-xs">Pending</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -214,12 +266,34 @@ export function Today({ onNavigate }: Props) {
         <div className="space-y-4">
           <DailyModules />
 
-          {/* Calendar Snapshot (static placeholder) */}
-          <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
+          {/* Calendar Snapshot */}
+          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
             <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Calendar</h3>
-            <p className="text-sm text-muted-foreground italic py-2">
-              Google Calendar integration coming in Phase 2
-            </p>
+            {upcomingEvents.length > 0 ? (
+              <div className="space-y-2">
+                {upcomingEvents.map(evt => (
+                  <div key={evt.id} className="flex items-start gap-2 text-sm">
+                    <Calendar className="h-3 w-3 text-muted-foreground mt-0.5 shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-foreground truncate font-medium text-xs">{evt.summary}</p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {evt.allDay
+                          ? format(evt.start, 'EEE, MMM d')
+                          : `${format(evt.start, 'EEE, MMM d')} · ${format(evt.start, 'h:mm a')}`
+                        }
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground italic py-2">
+                {calendarConfigured
+                  ? 'No upcoming events'
+                  : 'Add VITE_GOOGLE_CALENDAR_API_KEY to connect'
+                }
+              </p>
+            )}
           </div>
         </div>
       </div>
