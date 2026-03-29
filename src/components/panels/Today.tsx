@@ -1,10 +1,11 @@
+import { useState, useEffect } from 'react';
 import { ArrowRight, Shield, Bot, Clock, Calendar, Cloud, Mail, Sparkles } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTaskPoolFromGitHub } from '@/lib/taskpool-github';
 import { fetchEmailTriageGH, fetchSystemGH, fetchAgentsGH, fetchCronsGH } from '@/lib/github-data';
 import { fetchCalendarEvents, isCalendarConfigured } from '@/lib/google-calendar';
 import { fetchShopifyRevenue, isShopifyConfigured } from '@/lib/shopify-data';
-import { format, formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow, isBefore } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DailyModules } from './DailyModules';
@@ -40,6 +41,12 @@ function getDayOfYear(): number {
 }
 
 export function Today({ onNavigate }: Props) {
+  const [now, setNow] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
   const { data: taskData } = useQuery({
     queryKey: ['taskpool-gh'],
     queryFn: fetchTaskPoolFromGitHub,
@@ -87,9 +94,9 @@ export function Today({ onNavigate }: Props) {
     enabled: isShopifyConfigured(),
   });
 
-  const today = new Date();
   const { greeting, emoji } = getGreeting();
   const dayAffirmation = affirmations[getDayOfYear() % affirmations.length];
+  const dayOfYear = getDayOfYear();
 
   const priorityTasks = (taskData?.tasks ?? [])
     .filter(t => ['In Progress', 'Ready'].includes(t.status) && ['A', 'A+'].includes(t.priority))
@@ -109,7 +116,10 @@ export function Today({ onNavigate }: Props) {
   const cronTasks = cronsData?.tasks ?? [];
   const enabledCrons = cronTasks.filter(t => t.enabled).length;
 
-  const upcomingEvents = (calendarEvents ?? []).slice(0, 5);
+  const allEvents = calendarEvents ?? [];
+  const futureEvents = allEvents.filter(e => !isBefore(e.start, now));
+  const nextEvent = futureEvents[0] ?? null;
+  const remainingEvents = futureEvents.slice(1, 5);
   const shopifyKpi = shopifyData?.kpi;
   const hasRevenue = shopifyKpi && shopifyKpi.totalRevenue > 0;
 
@@ -123,9 +133,13 @@ export function Today({ onNavigate }: Props) {
             {greeting}
           </h1>
         </div>
-        <p className="font-serif text-muted-foreground mt-1 ml-11">
-          {format(today, 'EEEE, MMMM d, yyyy')}
-        </p>
+        <div className="ml-11 mt-1 flex flex-wrap items-center gap-x-2 text-muted-foreground">
+          <p className="font-serif">{format(now, 'EEEE, MMMM d, yyyy')}</p>
+          <span className="hidden sm:inline text-muted-foreground/40">·</span>
+          <p className="font-serif tabular-nums">{format(now, 'h:mm a')}</p>
+          <span className="hidden sm:inline text-muted-foreground/40">·</span>
+          <p className="text-xs text-muted-foreground/60">Day {dayOfYear} of {now.getFullYear()}</p>
+        </div>
         <p className="text-sm text-muted-foreground mt-2 ml-11 italic max-w-md">
           "{dayAffirmation}"
         </p>
@@ -301,38 +315,55 @@ export function Today({ onNavigate }: Props) {
         <div className="space-y-4">
           <DailyModules />
 
-          {/* Calendar Snapshot */}
+          {/* What's Next — Calendar */}
           <div className="rounded-2xl border card-lavender p-5 card-glow">
             <h3 className="font-serif text-sm font-semibold text-foreground/70 mb-3 flex items-center gap-1.5">
-              <span className="text-base">📅</span> Calendar
+              <span className="text-base">📅</span> What&apos;s Next
             </h3>
-            {upcomingEvents.length > 0 ? (
-              <div className="space-y-1">
-                {upcomingEvents.map((evt, idx) => (
-                  <div key={evt.id} className="flex items-start gap-3 text-sm py-1.5">
-                    <div className="flex flex-col items-center mt-1">
-                      <div className="h-2.5 w-2.5 rounded-full bg-primary/60" />
-                      {idx < upcomingEvents.length - 1 && <div className="w-px h-6 bg-primary/20 mt-0.5" />}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-foreground truncate font-medium text-xs">{evt.summary}</p>
-                      <p className="text-[10px] text-muted-foreground">
-                        {evt.allDay
-                          ? format(evt.start, 'EEE, MMM d')
-                          : `${format(evt.start, 'EEE, MMM d')} · ${format(evt.start, 'h:mm a')}`
-                        }
-                      </p>
-                    </div>
+            {!calendarConfigured ? (
+              <p className="text-sm text-muted-foreground italic py-2">
+                Add VITE_GOOGLE_CALENDAR_ICAL_URL to connect
+              </p>
+            ) : nextEvent ? (
+              <div className="space-y-3">
+                {/* Spotlight: next event */}
+                <div className="bg-white/50 rounded-xl px-4 py-3 border border-primary/10">
+                  <p className="text-foreground font-semibold text-sm truncate">{nextEvent.summary}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {nextEvent.allDay
+                      ? format(nextEvent.start, 'EEEE, MMMM d')
+                      : `${format(nextEvent.start, 'EEEE, MMMM d')} · ${format(nextEvent.start, 'h:mm a')}`
+                    }
+                  </p>
+                  <Badge className="mt-2 rounded-full bg-primary/10 text-primary text-[10px] px-2 py-0.5 border-0">
+                    {formatDistanceToNow(nextEvent.start, { addSuffix: true })}
+                  </Badge>
+                </div>
+                {/* Remaining events */}
+                {remainingEvents.length > 0 && (
+                  <div className="space-y-1 pt-1">
+                    {remainingEvents.map((evt, idx) => (
+                      <div key={evt.id} className="flex items-start gap-3 text-sm py-1.5">
+                        <div className="flex flex-col items-center mt-1">
+                          <div className="h-2 w-2 rounded-full bg-primary/40" />
+                          {idx < remainingEvents.length - 1 && <div className="w-px h-5 bg-primary/15 mt-0.5" />}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-foreground truncate font-medium text-xs">{evt.summary}</p>
+                          <p className="text-[10px] text-muted-foreground">
+                            {evt.allDay
+                              ? format(evt.start, 'EEE, MMM d')
+                              : `${format(evt.start, 'EEE, MMM d')} · ${format(evt.start, 'h:mm a')}`
+                            }
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground italic py-2">
-              {calendarConfigured
-                  ? 'No upcoming events'
-                  : 'Add VITE_GOOGLE_CALENDAR_ICAL_URL to connect'
-                }
-              </p>
+              <p className="text-sm text-muted-foreground italic py-2">No upcoming events</p>
             )}
           </div>
         </div>
