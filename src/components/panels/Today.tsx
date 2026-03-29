@@ -1,4 +1,4 @@
-import { ArrowRight, Shield, Bot, Clock, CalendarDays, Calendar } from 'lucide-react';
+import { ArrowRight, Shield, Bot, Clock, Calendar, Cloud, Mail, Sparkles } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTaskPoolFromGitHub } from '@/lib/taskpool-github';
 import { fetchEmailTriageGH, fetchSystemGH, fetchAgentsGH, fetchCronsGH } from '@/lib/github-data';
@@ -11,19 +11,33 @@ import { DailyModules } from './DailyModules';
 import { AccomplishmentsTracker } from './AccomplishmentsTracker';
 import { DeadlinesCalendar } from './DeadlinesCalendar';
 import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
+import affirmations from '@/data/affirmations.json';
 
 interface Props {
   onNavigate: (id: string) => void;
 }
 
 const domainColors: Record<string, string> = {
-  Wellstar: 'bg-blue-50 text-blue-700 border-blue-200',
-  Nuriy: 'bg-amber-50 text-amber-700 border-amber-200',
-  Ops: 'bg-slate-100 text-slate-700 border-slate-200',
-  PSE: 'bg-purple-50 text-purple-700 border-purple-200',
-  Personal: 'bg-teal-50 text-teal-700 border-teal-200',
-  Creative: 'bg-pink-50 text-pink-700 border-pink-200',
+  Wellstar: 'bg-blue-100/60 text-blue-700 border-blue-200/60',
+  Nuriy: 'bg-amber-100/60 text-amber-700 border-amber-200/60',
+  Ops: 'bg-slate-100/60 text-slate-600 border-slate-200/60',
+  PSE: 'bg-purple-100/60 text-purple-700 border-purple-200/60',
+  Personal: 'bg-teal-100/60 text-teal-700 border-teal-200/60',
+  Creative: 'bg-pink-100/60 text-pink-700 border-pink-200/60',
 };
+
+function getGreeting(): { greeting: string; emoji: string } {
+  const hour = new Date().getHours();
+  if (hour < 12) return { greeting: 'Good morning, queen', emoji: '🌸' };
+  if (hour < 17) return { greeting: 'Good afternoon, queen', emoji: '✨' };
+  return { greeting: 'Good evening, queen', emoji: '🌙' };
+}
+
+function getDayOfYear(): number {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  return Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+}
 
 export function Today({ onNavigate }: Props) {
   const { data: taskData } = useQuery({
@@ -74,6 +88,8 @@ export function Today({ onNavigate }: Props) {
   });
 
   const today = new Date();
+  const { greeting, emoji } = getGreeting();
+  const dayAffirmation = affirmations[getDayOfYear() % affirmations.length];
 
   const priorityTasks = (taskData?.tasks ?? [])
     .filter(t => ['In Progress', 'Ready'].includes(t.status) && ['A', 'A+'].includes(t.priority))
@@ -99,39 +115,48 @@ export function Today({ onNavigate }: Props) {
 
   return (
     <div className="space-y-6">
-      {/* Masthead */}
-      <div className="border-b border-border pb-4">
-        <h1 className="font-serif-bold text-3xl sm:text-4xl text-foreground tracking-tight">
-          The Ivory Ledger
-        </h1>
-        <p className="font-serif text-muted-foreground mt-1">
+      {/* Greeting Masthead */}
+      <div className="pb-4">
+        <div className="flex items-center gap-2">
+          <span className="text-3xl">{emoji}</span>
+          <h1 className="font-serif-bold text-3xl sm:text-4xl text-foreground tracking-tight">
+            {greeting}
+          </h1>
+        </div>
+        <p className="font-serif text-muted-foreground mt-1 ml-11">
           {format(today, 'EEEE, MMMM d, yyyy')}
+        </p>
+        <p className="text-sm text-muted-foreground mt-2 ml-11 italic max-w-md">
+          "{dayAffirmation}"
         </p>
       </div>
 
       {/* 3-Column Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
         {/* Column 1: Focus + Accomplishments + System Health */}
         <div className="space-y-4">
           {/* Priority Tasks */}
-          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
+          <div className="rounded-2xl border card-pink p-5 card-glow">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-serif text-sm font-semibold text-muted-foreground uppercase tracking-wide">Today&apos;s Focus</h3>
-              <Button variant="ghost" size="sm" className="text-xs h-7" onClick={() => onNavigate('tasks')}>
+              <h3 className="font-serif text-sm font-semibold text-foreground/70 flex items-center gap-1.5">
+                <span className="text-base">🎯</span> Today&apos;s Focus
+              </h3>
+              <Button variant="ghost" size="sm" className="text-xs h-7 rounded-full" onClick={() => onNavigate('tasks')}>
                 View all <ArrowRight className="h-3 w-3 ml-1" />
               </Button>
             </div>
             {priorityTasks.length === 0 ? (
               <p className="text-sm text-muted-foreground py-2">No high-priority tasks right now ✓</p>
             ) : (
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {priorityTasks.map((t, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
-                    <Badge variant="outline" className="text-[10px] px-1.5 py-0 shrink-0 font-bold">{t.priority}</Badge>
-                    <Badge className={`text-[10px] px-1.5 py-0 ${domainColors[t.domain] || 'bg-muted text-muted-foreground'}`}>{t.domain}</Badge>
+                  <div key={i} className="flex items-center gap-2 text-sm group hover:bg-white/40 rounded-xl px-2 py-1.5 transition-colors">
+                    <div className="h-4 w-4 rounded-full border-2 border-primary/40 shrink-0" />
+                    <Badge variant="outline" className="text-[10px] px-1.5 py-0 shrink-0 font-bold rounded-full">{t.priority}</Badge>
+                    <Badge className={`text-[10px] px-2 py-0 rounded-full ${domainColors[t.domain] || 'bg-muted text-muted-foreground'}`}>{t.domain}</Badge>
                     <span className="truncate text-foreground">{t.task}</span>
-                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 ml-auto shrink-0">{t.status}</Badge>
+                    <Badge variant="secondary" className="text-[10px] px-2 py-0 ml-auto shrink-0 rounded-full">{t.status}</Badge>
                   </div>
                 ))}
               </div>
@@ -142,40 +167,46 @@ export function Today({ onNavigate }: Props) {
           <AccomplishmentsTracker />
 
           {/* System Health */}
-          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-            <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">System Health</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2">
-                <span className={`h-2 w-2 rounded-full ${gwOnline ? 'bg-success' : 'bg-destructive'}`} />
+          <div className="rounded-2xl border card-mint p-5 card-glow">
+            <h3 className="font-serif text-sm font-semibold text-foreground/70 mb-3 flex items-center gap-1.5">
+              <span className="text-base">💚</span> System Health
+            </h3>
+            <div className="space-y-2.5 text-sm">
+              <div className="flex items-center gap-2 bg-white/40 rounded-xl px-3 py-2">
+                <Shield className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-foreground">Gateway</span>
-                <span className="text-muted-foreground ml-auto">{gwOnline ? 'Online' : 'Offline'}</span>
+                <span className={`ml-auto text-xs font-medium px-2 py-0.5 rounded-full ${gwOnline ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                  {gwOnline ? '● Online' : '● Offline'}
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Bot className="h-3 w-3 text-muted-foreground" />
+              <div className="flex items-center gap-2 bg-white/40 rounded-xl px-3 py-2">
+                <Bot className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-foreground">Agents</span>
-                <span className="text-muted-foreground ml-auto">{runningAgents.length}/{agents.length} running</span>
+                <span className="text-muted-foreground ml-auto text-xs">{runningAgents.length}/{agents.length} running</span>
               </div>
               {stoppedAgents.length > 0 && stoppedAgents.map((a, i) => (
-                <span key={i} className="text-xs text-destructive block pl-5">{a.name} stopped</span>
+                <span key={i} className="text-xs text-destructive block pl-8">{a.name} stopped</span>
               ))}
-              <div className="flex items-center gap-2">
-                <Clock className="h-3 w-3 text-muted-foreground" />
+              <div className="flex items-center gap-2 bg-white/40 rounded-xl px-3 py-2">
+                <Clock className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-foreground">Crons</span>
-                <span className="text-muted-foreground ml-auto">{enabledCrons}/{cronTasks.length} enabled</span>
+                <span className="text-muted-foreground ml-auto text-xs">{enabledCrons}/{cronTasks.length} enabled</span>
               </div>
               {failedLA.length > 0 && (
-                <span className="text-xs text-destructive block pl-5">{failedLA.length} LaunchAgent{failedLA.length !== 1 ? 's' : ''} not running</span>
+                <span className="text-xs text-destructive block pl-8">{failedLA.length} LaunchAgent{failedLA.length !== 1 ? 's' : ''} not running</span>
               )}
-              <div className="flex items-center gap-2">
-                <Shield className="h-3 w-3 text-muted-foreground" />
+              <div className="flex items-center gap-2 bg-white/40 rounded-xl px-3 py-2">
+                <Mail className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-foreground">Email</span>
-                <span className="text-muted-foreground ml-auto">{pendingEmails.length === 0 ? 'Clear' : `${pendingEmails.length} pending`}</span>
+                <span className={`ml-auto text-xs font-medium px-2 py-0.5 rounded-full ${pendingEmails.length === 0 ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                  {pendingEmails.length === 0 ? '✓ Clear' : `${pendingEmails.length} pending`}
+                </span>
               </div>
               {systemData?.icloud_sync && (
-                <div className="flex items-center gap-2">
-                  <span className={`h-2 w-2 rounded-full ${systemData.icloud_sync.status === 'running' ? 'bg-success' : 'bg-destructive'}`} />
+                <div className="flex items-center gap-2 bg-white/40 rounded-xl px-3 py-2">
+                  <Cloud className="h-3.5 w-3.5 text-muted-foreground" />
                   <span className="text-foreground">iCloud</span>
-                  <span className="text-muted-foreground ml-auto">{systemData.icloud_sync.photo_folder_count} folders</span>
+                  <span className="text-muted-foreground ml-auto text-xs">{systemData.icloud_sync.photo_folder_count} folders</span>
                 </div>
               )}
             </div>
@@ -187,10 +218,12 @@ export function Today({ onNavigate }: Props) {
           <DeadlinesCalendar embedded onNavigate={onNavigate} />
 
           {/* Email Triage Summary */}
-          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
+          <div className="rounded-2xl border card-sky p-5 card-glow">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-serif text-sm font-semibold text-muted-foreground uppercase tracking-wide">Email Triage</h3>
-              <Button variant="ghost" size="sm" className="text-xs h-7" onClick={() => onNavigate('triage')}>
+              <h3 className="font-serif text-sm font-semibold text-foreground/70 flex items-center gap-1.5">
+                <span className="text-base">📬</span> Email Triage
+              </h3>
+              <Button variant="ghost" size="sm" className="text-xs h-7 rounded-full" onClick={() => onNavigate('triage')}>
                 View all <ArrowRight className="h-3 w-3 ml-1" />
               </Button>
             </div>
@@ -200,7 +233,7 @@ export function Today({ onNavigate }: Props) {
             {recentPending.length > 0 ? (
               <div className="space-y-2">
                 {recentPending.map(item => (
-                  <div key={item.id} className="flex items-center gap-2 text-sm">
+                  <div key={item.id} className="flex items-center gap-2 text-sm bg-white/40 rounded-xl px-3 py-2">
                     <span className="truncate text-foreground font-medium">{item.from.split('<')[0].trim()}</span>
                     <span className="text-muted-foreground truncate text-xs flex-1">{item.subject}</span>
                     <span className="text-[10px] text-muted-foreground shrink-0">
@@ -215,29 +248,31 @@ export function Today({ onNavigate }: Props) {
           </div>
 
           {/* Revenue Signals */}
-          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
+          <div className="rounded-2xl border card-peach p-5 card-glow">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-serif text-sm font-semibold text-muted-foreground uppercase tracking-wide">Revenue Signals</h3>
-              <Button variant="ghost" size="sm" className="text-xs h-7" onClick={() => onNavigate('revenue')}>
+              <h3 className="font-serif text-sm font-semibold text-foreground/70 flex items-center gap-1.5">
+                <span className="text-base">💰</span> Revenue Signals
+              </h3>
+              <Button variant="ghost" size="sm" className="text-xs h-7 rounded-full" onClick={() => onNavigate('revenue')}>
                 Details <ArrowRight className="h-3 w-3 ml-1" />
               </Button>
             </div>
             {hasRevenue && shopifyKpi ? (
               <div className="space-y-2 text-sm">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between bg-white/40 rounded-xl px-3 py-2">
                   <div className="flex items-center gap-2">
-                    <DollarSign className="h-3 w-3 text-muted-foreground" />
+                    <DollarSign className="h-3.5 w-3.5 text-muted-foreground" />
                     <span className="text-foreground">Shopify (30d)</span>
                   </div>
-                  <span className="text-foreground font-medium tabular-nums">${shopifyKpi.totalRevenue.toLocaleString()}</span>
+                  <span className="text-foreground font-semibold tabular-nums">${shopifyKpi.totalRevenue.toLocaleString()}</span>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between px-3">
                   <span className="text-muted-foreground text-xs pl-5">AOV</span>
                   <span className="text-muted-foreground text-xs tabular-nums">${shopifyKpi.averageOrderValue.toFixed(2)}</span>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between px-3">
                   <span className="text-muted-foreground text-xs pl-5">Day/Day</span>
-                  <span className={`text-xs flex items-center gap-1 ${shopifyKpi.dayOverDayChange >= 0 ? 'text-primary' : 'text-destructive'}`}>
+                  <span className={`text-xs flex items-center gap-1 font-medium ${shopifyKpi.dayOverDayChange >= 0 ? 'text-green-600' : 'text-red-500'}`}>
                     {shopifyKpi.dayOverDayChange >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                     {shopifyKpi.dayOverDayChange > 0 ? '+' : ''}{shopifyKpi.dayOverDayChange.toFixed(1)}%
                   </span>
@@ -245,15 +280,15 @@ export function Today({ onNavigate }: Props) {
               </div>
             ) : (
               <div className="space-y-2 text-sm">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between bg-white/40 rounded-xl px-3 py-2">
                   <span className="text-foreground">Shopify</span>
                   <span className="text-muted-foreground text-xs">Not connected</span>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between bg-white/40 rounded-xl px-3 py-2">
                   <span className="text-foreground">AWIN</span>
-                  <span className="text-xs text-primary font-medium">Active</span>
+                  <span className="text-xs text-green-600 font-medium">Active</span>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between bg-white/40 rounded-xl px-3 py-2">
                   <span className="text-foreground">TikTok Shop</span>
                   <span className="text-muted-foreground text-xs">Pending</span>
                 </div>
@@ -267,13 +302,18 @@ export function Today({ onNavigate }: Props) {
           <DailyModules />
 
           {/* Calendar Snapshot */}
-          <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-            <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Calendar</h3>
+          <div className="rounded-2xl border card-lavender p-5 card-glow">
+            <h3 className="font-serif text-sm font-semibold text-foreground/70 mb-3 flex items-center gap-1.5">
+              <span className="text-base">📅</span> Calendar
+            </h3>
             {upcomingEvents.length > 0 ? (
-              <div className="space-y-2">
-                {upcomingEvents.map(evt => (
-                  <div key={evt.id} className="flex items-start gap-2 text-sm">
-                    <Calendar className="h-3 w-3 text-muted-foreground mt-0.5 shrink-0" />
+              <div className="space-y-1">
+                {upcomingEvents.map((evt, idx) => (
+                  <div key={evt.id} className="flex items-start gap-3 text-sm py-1.5">
+                    <div className="flex flex-col items-center mt-1">
+                      <div className="h-2.5 w-2.5 rounded-full bg-primary/60" />
+                      {idx < upcomingEvents.length - 1 && <div className="w-px h-6 bg-primary/20 mt-0.5" />}
+                    </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-foreground truncate font-medium text-xs">{evt.summary}</p>
                       <p className="text-[10px] text-muted-foreground">

@@ -7,19 +7,19 @@ import { PanelWrapper } from './PanelWrapper';
 import { format, isBefore, isToday, addDays, startOfDay } from 'date-fns';
 
 const domainColors: Record<string, string> = {
-  Wellstar: 'bg-blue-50 text-blue-700 border-blue-200',
-  Nuriy: 'bg-amber-50 text-amber-700 border-amber-200',
-  Ops: 'bg-slate-100 text-slate-700 border-slate-200',
-  PSE: 'bg-purple-50 text-purple-700 border-purple-200',
-  Personal: 'bg-teal-50 text-teal-700 border-teal-200',
-  Creative: 'bg-pink-50 text-pink-700 border-pink-200',
+  Wellstar: 'bg-blue-100/60 text-blue-700 border-blue-200/60',
+  Nuriy: 'bg-amber-100/60 text-amber-700 border-amber-200/60',
+  Ops: 'bg-slate-100/60 text-slate-600 border-slate-200/60',
+  PSE: 'bg-purple-100/60 text-purple-700 border-purple-200/60',
+  Personal: 'bg-teal-100/60 text-teal-700 border-teal-200/60',
+  Creative: 'bg-pink-100/60 text-pink-700 border-pink-200/60',
 };
 
 const priorityColors: Record<string, string> = {
-  'A+': 'bg-red-50 text-red-700 border-red-200',
-  A: 'bg-orange-50 text-orange-700 border-orange-200',
-  B: 'bg-amber-50 text-amber-700 border-amber-200',
-  C: 'bg-gray-100 text-gray-600 border-gray-200',
+  'A+': 'bg-red-100/60 text-red-700 border-red-200/60',
+  A: 'bg-orange-100/60 text-orange-700 border-orange-200/60',
+  B: 'bg-amber-100/60 text-amber-700 border-amber-200/60',
+  C: 'bg-gray-100/60 text-gray-600 border-gray-200/60',
 };
 
 interface DeadlineItem {
@@ -77,10 +77,10 @@ function extractDeadlines(tasks: { task: string; domain: string; priority: strin
 }
 
 const categoryConfig = {
-  overdue: { label: 'Overdue', color: 'text-destructive', borderColor: 'border-l-destructive' },
-  today: { label: 'Today', color: 'text-primary', borderColor: 'border-l-primary' },
-  thisWeek: { label: 'This Week', color: 'text-warning', borderColor: 'border-l-warning' },
-  upcoming: { label: 'Upcoming', color: 'text-muted-foreground', borderColor: 'border-l-muted' },
+  overdue: { label: '🔴 Overdue', color: 'text-destructive', borderColor: 'border-l-destructive' },
+  today: { label: '🟢 Today', color: 'text-primary', borderColor: 'border-l-primary' },
+  thisWeek: { label: '🟡 This Week', color: 'text-warning', borderColor: 'border-l-warning' },
+  upcoming: { label: '⚪ Upcoming', color: 'text-muted-foreground', borderColor: 'border-l-muted' },
 };
 
 function DeadlineSection({ category, items }: { category: keyof typeof categoryConfig; items: DeadlineItem[] }) {
@@ -89,15 +89,15 @@ function DeadlineSection({ category, items }: { category: keyof typeof categoryC
 
   return (
     <div className="space-y-1.5">
-      <h4 className={`text-xs font-semibold uppercase tracking-wide ${config.color}`}>{config.label}</h4>
+      <h4 className={`text-xs font-semibold tracking-wide ${config.color}`}>{config.label}</h4>
       {items.map((item, i) => (
-        <div key={i} className={`flex items-center gap-2 text-sm border-l-2 ${config.borderColor} pl-2 py-0.5`}>
-          <Badge className={`text-[10px] px-1.5 py-0 ${domainColors[item.domain] || 'bg-muted text-muted-foreground'}`}>
+        <div key={i} className={`flex items-center gap-2 text-sm border-l-2 ${config.borderColor} pl-2 py-1 rounded-r-xl hover:bg-white/30 transition-colors`}>
+          <Badge className={`text-[10px] px-2 py-0 rounded-full ${domainColors[item.domain] || 'bg-muted text-muted-foreground'}`}>
             {item.domain}
           </Badge>
           <span className="truncate text-foreground">{item.task}</span>
           <span className="text-xs text-muted-foreground ml-auto shrink-0">{item.dueDateStr}</span>
-          <Badge className={`text-[10px] px-1 py-0 ${priorityColors[item.priority] || ''}`}>
+          <Badge className={`text-[10px] px-1.5 py-0 rounded-full ${priorityColors[item.priority] || ''}`}>
             {item.priority}
           </Badge>
         </div>
@@ -146,15 +146,14 @@ export function DeadlinesCalendar({ embedded = false, onNavigate }: DeadlinesCal
         </>
       )}
 
-      {/* 14-day calendar view (full panel only) */}
       {!embedded && calendarConfigured && calendarEvents && calendarEvents.length > 0 && (
         <div className="border-t border-border pt-4 mt-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
-            Calendar — Next 14 Days
+          <h4 className="text-xs font-semibold tracking-wide text-muted-foreground mb-2 flex items-center gap-1.5">
+            <span>📅</span> Calendar — Next 14 Days
           </h4>
           <div className="space-y-2">
             {calendarEvents.map(evt => (
-              <div key={evt.id} className="flex items-start gap-2 text-sm border-l-2 border-l-primary/30 pl-2 py-0.5">
+              <div key={evt.id} className="flex items-start gap-2 text-sm border-l-2 border-l-primary/30 pl-2 py-0.5 rounded-r-xl hover:bg-white/30 transition-colors">
                 <Calendar className="h-3 w-3 text-muted-foreground mt-0.5 shrink-0" />
                 <div className="min-w-0 flex-1">
                   <span className="text-foreground text-xs font-medium truncate block">{evt.summary}</span>
@@ -183,8 +182,10 @@ export function DeadlinesCalendar({ embedded = false, onNavigate }: DeadlinesCal
 
   if (embedded) {
     return (
-      <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-        <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Deadlines</h3>
+      <div className="rounded-2xl border card-sky p-5 card-glow">
+        <h3 className="font-serif text-sm font-semibold text-foreground/70 mb-3 flex items-center gap-1.5">
+          <span className="text-base">⏰</span> Deadlines
+        </h3>
         {content}
       </div>
     );

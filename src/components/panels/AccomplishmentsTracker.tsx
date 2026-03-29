@@ -5,19 +5,19 @@ import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 
 const domainColors: Record<string, string> = {
-  Wellstar: 'bg-blue-50 text-blue-700 border-blue-200',
-  Nuriy: 'bg-amber-50 text-amber-700 border-amber-200',
-  Ops: 'bg-slate-100 text-slate-700 border-slate-200',
-  PSE: 'bg-purple-50 text-purple-700 border-purple-200',
-  Personal: 'bg-teal-50 text-teal-700 border-teal-200',
-  Creative: 'bg-pink-50 text-pink-700 border-pink-200',
+  Wellstar: 'bg-blue-100/60 text-blue-700 border-blue-200/60',
+  Nuriy: 'bg-amber-100/60 text-amber-700 border-amber-200/60',
+  Ops: 'bg-slate-100/60 text-slate-600 border-slate-200/60',
+  PSE: 'bg-purple-100/60 text-purple-700 border-purple-200/60',
+  Personal: 'bg-teal-100/60 text-teal-700 border-teal-200/60',
+  Creative: 'bg-pink-100/60 text-pink-700 border-pink-200/60',
 };
 
 export function AccomplishmentsTracker() {
   const { data: taskData } = useQuery({
     queryKey: ['taskpool-github'],
     queryFn: fetchTaskPoolFromGitHub,
-    refetchInterval: 300000, // 5 min
+    refetchInterval: 300000,
   });
 
   const todayStr = format(new Date(), 'yyyy-MM-dd');
@@ -25,14 +25,15 @@ export function AccomplishmentsTracker() {
 
   const completedTasks = (taskData?.tasks ?? []).filter(t => {
     if (t.status !== 'Done') return false;
-    // Check if notes contain today's date in various formats
     return t.notes.includes(todayStr) || t.notes.includes(todayShort) || t.notes.toLowerCase().includes('today');
   });
 
   return (
-    <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
+    <div className="rounded-2xl border card-mint p-5 card-glow">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-serif text-sm font-semibold text-muted-foreground uppercase tracking-wide">Accomplishments</h3>
+        <h3 className="font-serif text-sm font-semibold text-foreground/70 flex items-center gap-1.5">
+          <span className="text-base">🏆</span> Accomplishments
+        </h3>
         <span className="text-[10px] text-muted-foreground">
           {completedTasks.length} item{completedTasks.length !== 1 ? 's' : ''} today
         </span>
@@ -43,9 +44,9 @@ export function AccomplishmentsTracker() {
       ) : (
         <div className="space-y-2">
           {completedTasks.map((t, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm">
-              <CheckCircle className="h-3.5 w-3.5 text-primary shrink-0" />
-              <Badge className={`text-[10px] px-1.5 py-0 ${domainColors[t.domain] || 'bg-muted text-muted-foreground'}`}>
+            <div key={i} className="flex items-center gap-2 text-sm bg-white/40 rounded-xl px-3 py-1.5">
+              <CheckCircle className="h-3.5 w-3.5 text-accent shrink-0" />
+              <Badge className={`text-[10px] px-2 py-0 rounded-full ${domainColors[t.domain] || 'bg-muted text-muted-foreground'}`}>
                 {t.domain}
               </Badge>
               <span className="text-foreground/70 line-through truncate">{t.task}</span>

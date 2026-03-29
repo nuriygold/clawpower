@@ -5,12 +5,21 @@ interface Props {
   title: string;
   icon: ReactNode;
   error?: boolean;
+  tint?: 'pink' | 'lavender' | 'mint' | 'peach' | 'sky';
   children: ReactNode;
 }
 
-export function PanelWrapper({ title, icon, error, children }: Props) {
+const tintClasses: Record<string, string> = {
+  pink: 'card-pink',
+  lavender: 'card-lavender',
+  mint: 'card-mint',
+  peach: 'card-peach',
+  sky: 'card-sky',
+};
+
+export function PanelWrapper({ title, icon, error, tint, children }: Props) {
   return (
-    <div className="rounded-lg border border-border bg-card p-4 sm:p-6 space-y-4 shadow-sm">
+    <div className={`rounded-2xl border p-4 sm:p-6 space-y-4 card-glow ${tint ? tintClasses[tint] : 'bg-card border-border'}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {icon}

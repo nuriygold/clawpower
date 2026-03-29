@@ -76,6 +76,13 @@ export default {
           grant: "hsl(var(--agent-grant))",
           memory: "hsl(var(--agent-memory))",
         },
+        claw: {
+          pink: "hsl(var(--claw-pink))",
+          lavender: "hsl(var(--claw-lavender))",
+          mint: "hsl(var(--claw-mint))",
+          peach: "hsl(var(--claw-peach))",
+          sky: "hsl(var(--claw-sky))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

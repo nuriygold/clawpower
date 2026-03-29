@@ -42,18 +42,18 @@ export default function Index() {
       <div className="min-h-screen flex w-full bg-background">
         <AppSidebar activePanel={activePanel} onNavigate={setActivePanel} />
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="h-12 flex items-center border-b border-border px-4 gap-3 shrink-0 bg-card">
+          <header className="h-12 flex items-center border-b border-border px-4 gap-3 shrink-0 bg-card rounded-b-2xl">
             <SidebarTrigger />
             <h1 className="font-serif font-semibold text-sm text-foreground">
-              Claw Power
+              🐾 Claw Power
             </h1>
             <div className="ml-auto flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-success status-pulse" />
-              <span className="text-xs text-muted-foreground">Live</span>
+              <span className="h-2.5 w-2.5 rounded-full bg-success status-pulse" />
+              <span className="text-xs text-muted-foreground">All systems go</span>
             </div>
           </header>
           <SystemStatusBar />
-          <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
+          <main className="flex-1 p-4 sm:p-6 overflow-y-auto dot-grid">
             <ActiveComponent onNavigate={setActivePanel} />
           </main>
         </div>
