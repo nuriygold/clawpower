@@ -50,7 +50,8 @@ async function apiFetch<T>(path: string): Promise<T> {
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const separator = path.includes('?') ? '&' : '?';
+    const res = await fetch(`${API_URL}${path}${separator}token=${TOKEN}`, {
       headers: { Authorization: `Bearer ${TOKEN}` },
       signal: controller.signal,
     });
@@ -66,7 +67,7 @@ export async function isGatewayAvailable(): Promise<boolean> {
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 4000);
-    const res = await fetch(`${API_URL}/status`, {
+    const res = await fetch(`${API_URL}/status?token=${TOKEN}`, {
       headers: { Authorization: `Bearer ${TOKEN}` },
       signal: controller.signal,
     });
@@ -113,7 +114,7 @@ export async function markEmailDone(id: string) {
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
   try {
-    const res = await fetch(`${API_URL}/email/queue/${id}/done`, {
+    const res = await fetch(`${API_URL}/email/queue/${id}/done?token=${TOKEN}`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${TOKEN}` },
       signal: controller.signal,

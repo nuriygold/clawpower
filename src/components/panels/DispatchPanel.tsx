@@ -20,7 +20,7 @@ interface Message {
 async function sendToGateway(message: string): Promise<string> {
   if (!API_URL) throw new Error('Gateway not configured');
 
-  const res = await fetch(`${API_URL}/chat`, {
+  const res = await fetch(`${API_URL}/chat?token=${TOKEN}`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${TOKEN}`,
