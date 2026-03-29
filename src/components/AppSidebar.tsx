@@ -32,7 +32,7 @@ export function AppSidebar({ activePanel, onNavigate }: Props) {
       <SidebarContent>
         <div className={`p-4 ${collapsed ? 'px-2' : ''}`}>
           <div className="flex items-center gap-2">
-            <Terminal className="h-5 w-5 text-primary shrink-0" />
+            <span className="text-lg shrink-0">👑</span>
             {!collapsed && (
               <span className="font-serif-bold text-sm text-foreground">Claw Power</span>
             )}
@@ -45,7 +45,11 @@ export function AppSidebar({ activePanel, onNavigate }: Props) {
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton
                     onClick={() => onNavigate(item.id)}
-                    className={activePanel === item.id ? 'bg-sidebar-accent text-primary font-medium' : ''}
+                    className={`rounded-xl transition-all ${
+                      activePanel === item.id
+                        ? 'bg-primary/10 text-primary font-medium'
+                        : 'hover:bg-claw-pink/60'
+                    }`}
                   >
                     <item.icon className="h-4 w-4 shrink-0" />
                     {!collapsed && (

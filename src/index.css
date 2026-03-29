@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
 
-    --primary: 120 38% 31%;
+    --primary: 340 45% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 40 20% 94%;
@@ -38,18 +38,18 @@
 
     --border: 40 15% 87%;
     --input: 40 15% 87%;
-    --ring: 120 38% 31%;
+    --ring: 340 45% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 40 20% 94%;
     --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 120 38% 31%;
+    --sidebar-primary: 340 45% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 20% 92%;
+    --sidebar-accent: 340 30% 95%;
     --sidebar-accent-foreground: 0 0% 10%;
     --sidebar-border: 40 15% 87%;
-    --sidebar-ring: 120 38% 31%;
+    --sidebar-ring: 340 45% 55%;
 
     --priority-a: 357 80% 50%;
     --priority-b: 41 100% 53%;
@@ -59,6 +59,12 @@
     --agent-ops: 200 80% 55%;
     --agent-grant: 280 65% 60%;
     --agent-memory: 41 100% 53%;
+
+    --claw-pink: 340 60% 94%;
+    --claw-lavender: 260 50% 94%;
+    --claw-mint: 150 40% 93%;
+    --claw-peach: 25 70% 93%;
+    --claw-sky: 200 60% 93%;
   }
 }
 
@@ -91,11 +97,21 @@
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
+  .glow-pink {
+    box-shadow: 0 0 24px -6px hsl(340 45% 55% / 0.2);
+  }
   .glow-green {
     box-shadow: 0 0 20px -5px hsl(120 38% 31% / 0.2);
   }
   .status-pulse {
     animation: pulse-dot 2s ease-in-out infinite;
+  }
+  .card-glow {
+    box-shadow: 0 2px 16px -4px hsl(0 0% 0% / 0.06), 0 1px 4px -1px hsl(0 0% 0% / 0.04);
+  }
+  .dot-grid {
+    background-image: radial-gradient(circle, hsl(0 0% 0% / 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }
 
@@ -108,6 +124,26 @@
   .editorial-subheading {
     font-family: 'Playfair Display', serif;
     @apply text-lg text-foreground;
+  }
+  .card-pink {
+    background-color: hsl(var(--claw-pink));
+    border-color: hsl(340 40% 88%);
+  }
+  .card-lavender {
+    background-color: hsl(var(--claw-lavender));
+    border-color: hsl(260 35% 88%);
+  }
+  .card-mint {
+    background-color: hsl(var(--claw-mint));
+    border-color: hsl(150 30% 87%);
+  }
+  .card-peach {
+    background-color: hsl(var(--claw-peach));
+    border-color: hsl(25 50% 87%);
+  }
+  .card-sky {
+    background-color: hsl(var(--claw-sky));
+    border-color: hsl(200 40% 87%);
   }
 }
 

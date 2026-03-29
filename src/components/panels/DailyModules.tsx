@@ -134,8 +134,10 @@ export function DailyModules() {
   return (
     <div className="space-y-4">
       {/* Word of the Day */}
-      <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
-        <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Word of the Day</h3>
+      <div className="rounded-2xl border card-peach p-5 card-glow">
+        <h3 className="font-serif text-sm font-semibold text-foreground/70 mb-3 flex items-center gap-1.5">
+          <span className="text-base">📖</span> Word of the Day
+        </h3>
         {wordLoading ? (
           <div className="space-y-2">
             <Skeleton className="h-6 w-32" />
@@ -157,17 +159,25 @@ export function DailyModules() {
       </div>
 
       {/* Bible Verse */}
-      <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
-        <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Verse of the Day</h3>
-        <p className="font-serif font-semibold text-foreground text-sm mb-1">{verse.ref}</p>
-        <p className="text-sm text-foreground leading-relaxed italic">"{verse.text}"</p>
+      <div className="rounded-2xl border card-lavender p-5 card-glow">
+        <h3 className="font-serif text-sm font-semibold text-foreground/70 mb-3 flex items-center gap-1.5">
+          <span className="text-base">✝️</span> Verse of the Day
+        </h3>
+        <div className="text-center py-2">
+          <p className="font-serif font-semibold text-foreground text-sm mb-2">{verse.ref}</p>
+          <p className="font-serif text-sm text-foreground leading-relaxed italic">
+            &ldquo;{verse.text}&rdquo;
+          </p>
+        </div>
       </div>
 
       {/* Affirmation */}
-      <div className="rounded-sm border border-border bg-card p-4 shadow-sm">
-        <h3 className="font-serif text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Affirmation</h3>
+      <div className="rounded-2xl border card-pink p-5 card-glow">
+        <h3 className="font-serif text-sm font-semibold text-foreground/70 mb-3 flex items-center gap-1.5">
+          <span className="text-base">💫</span> Affirmation
+        </h3>
         <p className="font-serif text-lg text-foreground text-center leading-relaxed py-2">
-          "{affirmation}"
+          &ldquo;{affirmation}&rdquo;
         </p>
       </div>
     </div>
