@@ -1,5 +1,5 @@
 import {
-  ListTodo, Clock, Bot, Mail, Activity, Terminal, FileCheck, CalendarDays, CalendarClock, DollarSign
+  ListTodo, Clock, Bot, Mail, Activity, Terminal, FileCheck, CalendarDays, CalendarClock, DollarSign, MessageCircle
 } from 'lucide-react';
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
@@ -16,6 +16,7 @@ const items = [
   { id: 'agents', title: 'Agents', icon: Bot },
   { id: 'email', title: 'Email Queue', icon: Mail },
   { id: 'activity', title: 'Activity', icon: Activity },
+  { id: 'dispatch', title: 'Dispatch', icon: MessageCircle },
 ];
 
 interface Props {

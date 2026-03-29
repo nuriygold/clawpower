@@ -328,9 +328,9 @@ export function Today({ onNavigate }: Props) {
               </div>
             ) : (
               <p className="text-sm text-muted-foreground italic py-2">
-                {calendarConfigured
+              {calendarConfigured
                   ? 'No upcoming events'
-                  : 'Add VITE_GOOGLE_CALENDAR_API_KEY to connect'
+                  : 'Add VITE_GOOGLE_CALENDAR_ICAL_URL to connect'
                 }
               </p>
             )}
