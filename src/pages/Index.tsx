@@ -13,6 +13,7 @@ import { EmailTriage } from '@/components/panels/EmailTriage';
 import { Today } from '@/components/panels/Today';
 import { DeadlinesCalendar } from '@/components/panels/DeadlinesCalendar';
 import { RevenuePanel } from '@/components/panels/RevenuePanel';
+import { DispatchPanel } from '@/components/panels/DispatchPanel';
 
 const panels: Record<string, React.FC<any>> = {
   today: Today,
@@ -25,6 +26,7 @@ const panels: Record<string, React.FC<any>> = {
   email: EmailQueue,
   activity: ActivityFeed,
   icloud: ICloudSync,
+  dispatch: DispatchPanel,
 };
 
 export default function Index() {
