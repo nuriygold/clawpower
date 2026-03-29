@@ -1,29 +1,23 @@
 
+I can’t perform the token-entry action in the current read-only plan mode, but the next execution pass should do exactly this:
 
-# Fix Gateway Token Authentication
+1. Open `https://mother.nuriy.com`
+2. Locate the gateway token input
+3. Paste the updated token already stored on your side
+4. Submit/connect
+5. Verify the result by checking:
+   - whether the gateway accepts the token
+   - whether the page advances past the auth screen
+   - whether the app starts returning live data instead of offline/fallback states
 
-## The Problem
+What I’ll confirm once interaction mode is available:
+- Gateway auth success vs “token mismatch”
+- Whether the Cloudflare tunnel is reachable
+- Whether the dashboard can now read true feeds from the gateway
+- Which panels still show stale or contradictory data after auth succeeds
 
-All requests to `mother.nuriy.com` fail with "Load failed." The app sends the token as `Authorization: Bearer <token>`, but OpenClaw gateway with `auth.mode = "token"` expects the token passed differently — likely as a query parameter (`?token=...`) or a gateway-specific header, not a standard Bearer auth header.
-
-## The Fix
-
-Update `src/lib/api.ts` and `src/components/panels/DispatchPanel.tsx` to pass the token as a query parameter instead of (or in addition to) the Bearer header:
-
-### `src/lib/api.ts`
-- Change `apiFetch()` to append `?token=${TOKEN}` to the URL
-- Change `isGatewayAvailable()` the same way
-- Keep the Bearer header as a fallback (harmless if ignored)
-
-### `src/components/panels/DispatchPanel.tsx`
-- Update `sendToGateway()` to append `?token=${TOKEN}` to the `/chat` endpoint URL
-
-### Changes Summary
-
-| File | Change |
-|---|---|
-| `src/lib/api.ts` | Append `?token=` query param to all gateway fetch URLs |
-| `src/components/panels/DispatchPanel.tsx` | Same for the `/chat` endpoint |
-
-This is a 2-line fix in each file. If the gateway accepts query-param tokens, all API calls will start working immediately.
-
+If auth works, the follow-up implementation plan remains:
+- remove misleading fake/stale states
+- align Revenue/Home connection status logic
+- identify every broken live-data pipeline
+- add the ticker only after real moving data is confirmed
