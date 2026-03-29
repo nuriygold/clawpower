@@ -1,47 +1,92 @@
 
 
-# Today Panel: Add Date/Time Display + Calendar "What's Next" Section
+# Cleanup: Remove Stale Data, Fix Inconsistencies, Add Ticker
 
-## GitHub Data Status — No Action Needed
+## Current Pipeline Status (what's actually working)
 
-Your screenshots confirm `data/` folder exists on `main` branch at `nuriygold/clawpower` with all expected files: `agents.json`, `crons.json`, `email-queue.json`, `email-triage.json`, `system.json`, `task-pool.json`, `task-pool.md`. The fetch URL in `github-data.ts` already points to `https://raw.githubusercontent.com/nuriygold/clawpower/main/data/` — this should work. No folders need to be moved.
+| Pipeline | Status | Evidence |
+|---|---|---|
+| **Linear API** | LIVE | 200 OK, returning 8 real issues |
+| **Dictionary API** | LIVE | Word-of-the-day working |
+| **OpenClaw Gateway** (`mother.nuriy.com`) | DOWN | "Load failed" on all requests — tunnel not responding |
+| **GitHub data polling** | DOWN | All `data/*.json` files return 404 from `nuriygold/clawpower/main/data/` |
+| **iCal Calendar** | DOWN | `api.allorigins.win` proxy failing (Load failed) |
+| **Shopify Revenue** | DOWN | Depends on gateway (`/shopify/revenue`), which is unreachable |
 
----
+## What's Currently Misleading
 
-## Changes to Today Panel
+1. **"Synced 3 days ago"** in SystemStatusBar — comes from local `data/system.json` fallback (dated March 26). This looks like a stale connection when really there's no connection at all.
+2. **System Health card** — shows Gateway "Offline", Agents "0/0", Crons "0/0" from stale local JSON. Looks like a real reading but it's 3-day-old static data.
+3. **Revenue tab** says Shopify "Connected" (because env vars exist), but **Today panel** says "Not connected" (because no revenue data came back). Contradictory.
+4. **AWIN "Active"** and **TikTok Shop "Pending"** — completely hardcoded, not connected to anything real.
+5. **Email Triage** — falls back to local `data/email-triage.json`, showing stale decisions as if they're live.
 
-### 1. Enhanced Greeting with Live Date and Time
+## Plan
 
-Replace the current greeting section (lines 118-132) with a richer header that shows:
-- Time-aware greeting (already exists)
-- **Full date**: "Saturday, March 29, 2026"
-- **Live clock**: "10:03 PM" — updates every minute via `setInterval`
-- **Day progress**: "Day 88 of 2026" (already computed, just not prominently displayed)
+### 1. Remove GitHub Polling Entirely
+The `data/*.json` files don't exist on the remote repo. Every 60 seconds, 6+ requests 404. Remove the GitHub fetch layer and use gateway API as the only live source, with local JSON as a clearly-labeled static fallback.
 
-```text
-🌙 Good evening, queen
-   Saturday, March 29, 2026 · 10:03 PM
-   "Today's affirmation..."
-```
+**Files**: `src/lib/github-data.ts`, `src/lib/taskpool-github.ts`
+- Remove `fetch()` calls to `raw.githubusercontent.com`
+- Import local JSON directly and return it, labeled as "offline snapshot"
+- Add a `source: 'live' | 'snapshot'` field so the UI can distinguish
 
-### 2. "What's Next" Calendar Section
+### 2. Fix SystemStatusBar — Show Real Connection State
+Instead of displaying stale "Synced 3 days ago", show whether live sources are reachable right now.
 
-Replace the generic "Calendar" card (column 3, lines 304-337) with a "What's Next" card that highlights the **immediately upcoming event** prominently, then lists the rest:
+**File**: `src/components/panels/SystemStatusBar.tsx`
+- Probe `mother.nuriy.com/status` on mount with a short timeout
+- If unreachable: show "Gateway: Unreachable" with red dot — no misleading "synced" timestamp
+- If reachable: show live status and real sync time
+- Show Linear as green (confirmed working)
+- Show Calendar status (configured but proxy failing)
 
-- **Next event spotlight**: Large display of the next calendar event with countdown ("in 2 hours", "tomorrow at 9 AM")
-- **Remaining events**: Compact timeline list (already exists, keep as-is)
-- **Empty state**: When no iCal URL is configured, show "Add VITE_GOOGLE_CALENDAR_ICAL_URL to connect your calendar" (already exists)
-- **Waiting state**: When configured but no events loaded yet, show a subtle loading indicator
+### 3. Fix Shopify/Revenue Inconsistency
+The Revenue panel's `ChannelCards` checks `isShopifyConfigured()` (env vars exist = "Connected"), but `Today` checks `hasRevenue` (actual data returned). These need to agree.
 
-### Files Modified
+**Files**: `src/components/panels/RevenuePanel.tsx`, `src/components/panels/Today.tsx`
+- Change ChannelCards to show "Configured" (not "Connected") when env vars exist but no data flows
+- Show "Connected" only when `fetchShopifyRevenue` returns real data
+- Today panel: match the same logic
+
+### 4. Remove Hardcoded AWIN and TikTok Shop
+These are fake entries with no backing integration.
+
+**File**: `src/components/panels/RevenuePanel.tsx`
+- Remove AWIN "Active" and TikTok Shop "Pending" rows
+- Only show channels that have real env vars or API connections
+
+### 5. Add Stock-Style Ticker
+A horizontal scrolling ticker bar showing live data points from working integrations.
+
+**File**: New `src/components/panels/Ticker.tsx`, added to `src/pages/Index.tsx`
+- Positioned below the SystemStatusBar
+- CSS `@keyframes ticker-scroll` animation, horizontal marquee
+- Data points pulled from working feeds:
+  - Linear: "8 issues · 2 Todo · 6 Backlog"
+  - Gateway: "● Online" or "● Offline"
+  - Calendar: next event summary (when iCal works)
+  - Shopify: revenue number (when gateway works)
+- Pauses on hover
+- Only shows items with real data; empty items hidden
+
+### 6. Gateway Connection — What You Need to Do
+The tunnel at `mother.nuriy.com` is not responding from the browser. This is either:
+- **Tunnel not running**: Tell Adrian to run `cloudflared tunnel run` on the Mac mini
+- **CORS headers missing**: The OpenClaw gateway needs to return `Access-Control-Allow-Origin: *` (or `https://clawpower.lovable.app`) on all responses including OPTIONS preflight
+
+You can test by visiting `https://mother.nuriy.com/status` in your browser directly. If it loads JSON, it's a CORS issue (fixable in gateway config). If it doesn't load at all, the tunnel process needs to be started.
+
+## Files Modified
 
 | File | Change |
 |---|---|
-| `src/components/panels/Today.tsx` | Add live clock state, enhance greeting with time, redesign Calendar card as "What's Next" with spotlight |
-
-### Technical Details
-
-- Add `useState` + `useEffect` with `setInterval(60000)` for live clock
-- Use `formatDistanceToNow` from date-fns for "in 2 hours" countdown on next event
-- No new dependencies needed — all date-fns functions already imported
+| `src/lib/github-data.ts` | Remove GitHub fetch, return local JSON directly with `source` label |
+| `src/lib/taskpool-github.ts` | Same — remove GitHub fetch, use local directly |
+| `src/components/panels/SystemStatusBar.tsx` | Show real connection state, not stale timestamps |
+| `src/components/panels/RevenuePanel.tsx` | Fix "Connected" vs real state, remove fake AWIN/TikTok |
+| `src/components/panels/Today.tsx` | Match revenue display logic, remove stale system health numbers |
+| `src/components/panels/Ticker.tsx` | New — stock-style scrolling ticker |
+| `src/pages/Index.tsx` | Add Ticker below SystemStatusBar |
+| `src/index.css` | Add `@keyframes ticker-scroll` animation |
 
