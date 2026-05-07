@@ -1,19 +1,80 @@
 {
-  "generated_at": "2026-03-26T08:30:00Z",
+  "generated_at": "2026-05-07T08:06:57Z",
+  "default_model": "litellm/gpt-5.4",
+  "max_concurrent": 4,
+  "subagent_max_concurrent": 8,
+  "compaction_mode": "safeguard",
+  "sandbox_mode": null,
   "agents": [
     {
+      "id": "main",
       "name": "main",
-      "model": "gpt-5-nano",
-      "status": "active",
-      "sessions": 1,
-      "last_active": "9h ago",
-      "bootstrap_files": false,
-      "heartbeat": "30m"
+      "model": "litellm/gpt-5.4",
+      "workspace": "/Users/claw/.openclaw/workspace",
+      "agent_dir": "/Users/claw/.openclaw/agents/main/agent"
+    },
+    {
+      "id": "ruby",
+      "name": "ruby",
+      "model": "litellm/gpt-5.3-chat",
+      "workspace": "/Users/claw/.openclaw/workspace",
+      "agent_dir": "/Users/claw/.openclaw/agents/ruby/agent"
+    },
+    {
+      "id": "emerald",
+      "name": "emerald",
+      "model": "litellm/gpt-5.3-chat",
+      "workspace": "/Users/claw/.openclaw/workspace",
+      "agent_dir": "/Users/claw/.openclaw/agents/emerald/agent"
+    },
+    {
+      "id": "adobe",
+      "name": "adobe",
+      "model": {
+        "primary": "litellm/gpt-image-2",
+        "fallbacks": [
+          "litellm/gpt-5.3-chat"
+        ]
+      },
+      "workspace": "/Users/claw/.openclaw/workspace",
+      "agent_dir": "/Users/claw/.openclaw/agents/adobe/agent"
+    },
+    {
+      "id": "anchor",
+      "name": "anchor",
+      "model": "litellm/gpt-5.3-chat",
+      "workspace": "/Users/claw/.openclaw/workspace",
+      "agent_dir": "/Users/claw/.openclaw/agents/anchor/agent"
+    },
+    {
+      "id": "iceman",
+      "name": "iceman",
+      "model": "litellm/gpt-5.3-codex",
+      "workspace": "/Users/claw/.openclaw/jobsite-iceman",
+      "agent_dir": "/Users/claw/.openclaw/agents/iceman/agent"
     }
   ],
-  "gateway": {
-    "status": "unreachable",
-    "url": "ws://127.0.0.1:18789",
-    "error": "ECONNREFUSED — MCP connector fixed, gateway restart pending"
-  }
+  "agent_count": 6,
+  "bindings": [
+    {
+      "agent_id": "ruby",
+      "channel": "telegram",
+      "account_id": "ruby"
+    },
+    {
+      "agent_id": "emerald",
+      "channel": "telegram",
+      "account_id": "emerald"
+    },
+    {
+      "agent_id": "adobe",
+      "channel": "telegram",
+      "account_id": "adobe"
+    },
+    {
+      "agent_id": "anchor",
+      "channel": "telegram",
+      "account_id": "anchor"
+    }
+  ]
 }
