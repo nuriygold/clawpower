@@ -1,33 +1,27 @@
 {
-  "generated_at": "2026-03-26T08:30:00Z",
-  "openclaw_version": "2026.3.24",
-  "os": "macos 26.2 arm64",
-  "node": "25.8.0",
+  "generated_at": "2026-05-07T08:06:57Z",
+  "hostname": "Claws-Mac-mini",
+  "os": {
+    "platform": "macos",
+    "version": "26.4.1",
+    "build": "25E253",
+    "arch": "arm64",
+    "kernel": "25.4.0"
+  },
+  "uptime": "8d 15h 32m",
+  "disk": {
+    "total": "228Gi",
+    "used": "135Gi",
+    "available": "65Gi"
+  },
+  "memory": {
+    "total_gb": 24
+  },
+  "runtime": {
+    "node_version": "v25.8.0"
+  },
   "gateway": {
-    "status": "unreachable",
-    "type": "local",
-    "service": "LaunchAgent loaded · running (pid 47235)",
-    "error": "ECONNREFUSED 127.0.0.1:18789 — MCP connector fixed 2026-03-26, gateway restart still needed in Terminal"
-  },
-  "channels": {
-    "telegram": {
-      "enabled": true,
-      "state": "OK",
-      "detail": "token configured"
-    }
-  },
-  "smtp": {
-    "status": "ON",
-    "note": "SMTP authentication enabled 2026-03-25"
-  },
-  "mcp_connector": {
-    "status": "FIXED",
-    "updated": "2026-03-26",
-    "command": "/Users/claw/.openclaw/workspace/scripts/mcp-env/bin/python3",
-    "args": "/Users/claw/.openclaw/workspace/scripts/openclaw_mcp.py"
-  },
-  "model": "gpt-5-nano",
-  "context_window": "400k",
-  "update_available": true,
-  "tailscale": "off"
+    "mode": "local",
+    "auth_mode": "token"
+  }
 }
